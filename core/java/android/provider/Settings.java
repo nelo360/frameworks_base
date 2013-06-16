@@ -3497,9 +3497,7 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_CONFIG = "navigation_bar_config";
 
-        /**
-         * Custom navring intent and action configuration
-         *
+        /** Sprint MWI Quirk: Show message wait indicator notifications
          * @hide
          */
         public static final String NAVRING_CONFIG = "navring_config";

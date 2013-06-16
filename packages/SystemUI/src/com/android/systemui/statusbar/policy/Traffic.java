@@ -233,9 +233,8 @@ public class Traffic extends TextView {
                 Settings.System.STATUS_BAR_TRAFFIC_SUMMARY, 3000);
         int defaultColor = Settings.System.getInt(resolver,
                 Settings.System.STATUS_BAR_TRAFFIC_COLOR, 0xFFFFFFFF);
-
         int mStatusBarTrafficColor = Settings.System.getInt(resolver,
-                    Settings.System.STATUS_BAR_TRAFFIC_COLOR, -2);
+                Settings.System.STATUS_BAR_TRAFFIC_COLOR, -2);
 
         if (mStatusBarTrafficColor == Integer.MIN_VALUE
             || mStatusBarTrafficColor == -2) {
