@@ -59,6 +59,7 @@ import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
 import static com.android.internal.util.slim.QSConstants.TILE_NETWORKSPEED;
 import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
 import static com.android.internal.util.slim.QSConstants.TILE_HOVER;
+import static com.android.internal.util.slim.QSConstants.TILE_CAMERA;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
@@ -95,6 +96,7 @@ import com.android.systemui.quicksettings.BatteryTile;
 import com.android.systemui.quicksettings.BluetoothTile;
 import com.android.systemui.quicksettings.BrightnessTile;
 import com.android.systemui.quicksettings.BugReportTile;
+import com.android.systemui.quicksettings.CameraTile;
 import com.android.systemui.quicksettings.CompassTile;
 import com.android.systemui.quicksettings.ContactTile;
 import com.android.systemui.quicksettings.CustomTile;
@@ -194,6 +196,7 @@ public class QuickSettingsController {
     void loadTiles() {
         // Filter items not compatible with device
         boolean bluetoothSupported = DeviceUtils.deviceSupportsBluetooth();
+        boolean cameraSupported = DeviceUtils.hasCamera(mContext);
         boolean mobileDataSupported = DeviceUtils.deviceSupportsMobileData(mContext);
         boolean lteSupported = DeviceUtils.deviceSupportsLte(mContext);
         boolean torchSupported = DeviceUtils.deviceSupportsTorch(mContext);
@@ -214,6 +217,10 @@ public class QuickSettingsController {
 
         if (!torchSupported) {
             TILES_DEFAULT.remove(TILE_TORCH);
+        }
+
+        if (!cameraSupported) {
+            TILES_DEFAULT.remove(TILE_CAMERA);
         }
 
         // Read the stored list of tiles
@@ -303,6 +310,8 @@ public class QuickSettingsController {
                 WeatherDialog();
             } else if (tile.equals(TILE_HOVER)) {
                 qs = new HoverTile(mContext, this);
+            } else if (tile.equals(TILE_CAMERA)) {
+                qs = new CameraTile(mContext, this, mHandler);
             }
 
             if (qs != null) {
@@ -322,7 +331,6 @@ public class QuickSettingsController {
         // Load the dynamic tiles
         // These toggles must be the last ones added to the view, as they will show
         // only when they are needed
-        // Read the stored list of dynamic tiles
         String dynamicTiles = Settings.System.getStringForUser(resolver,
                 Settings.System.QUICK_SETTINGS_DYNAMIC_TILES,
                 UserHandle.USER_CURRENT);

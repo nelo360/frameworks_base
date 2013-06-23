@@ -98,6 +98,11 @@ public class DeviceUtils {
         return false;
     }
 
+    public static boolean hasCamera(final Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
     public static FilteredDeviceFeaturesArray filterUnsupportedDeviceFeatures(Context context,
             String[] valuesArray, String[] entriesArray) {
         if (valuesArray == null || entriesArray == null || context == null) {
