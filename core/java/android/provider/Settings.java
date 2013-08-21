@@ -4127,6 +4127,18 @@ public final class Settings {
          */
         public static final String RECENT_PANEL_SHOW_TOPMOST = "recent_panel_show_topmost";
 
+	/**
+         * Show the pending notification counts as overlays on the status bar
+         * @hide
+         */
+        public static final String SYSTEM_PROFILES_ENABLED = "system_profiles_enabled";
+
+        /**
+         * Whether power menu profiles switcher is enabled
+         * @hide
+         */
+        public static final String POWER_MENU_PROFILES_ENABLED = "power_menu_profiles_enabled";
+
         /**
          * Recent panel background color
          *
@@ -4245,6 +4257,9 @@ public final class Settings {
             TELO_RADIO_LTE,
             TELO_RADIO_2G_SCREENOFF,
             TELO_RADIO_GO3G_UNLOCK,
+            LOCKSCREEN_ALWAYS_SHOW_BATTERY,
+	    SYSTEM_PROFILES_ENABLED,
+	    POWER_MENU_PROFILES_ENABLED
         };
 
         // Settings moved to Settings.Secure
