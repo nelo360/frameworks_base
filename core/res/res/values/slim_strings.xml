@@ -60,9 +60,6 @@
     <!-- label for item that reboots the phone in phone options dialog -->
     <string name="global_action_reboot">Reboot</string>
 
-    <!-- label for item that opens the profile choosing dialog -->
-    <string name="global_action_choose_profile">Profile</string>
-
     <!-- In WiFi AP notification -->
     <string name="notify_turn_wifi_ap_off_title">Turn Wi-Fi AP off</string>
 
@@ -103,5 +100,31 @@
     <string name="permlab_preventpower">prevent power key</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_preventpower">Allows an application to override the power key</string>
+
+    <!-- label for item that opens the profile choosing dialog -->
+    <string name="global_action_choose_profile">Profile</string>
+
+    <!-- The title of the profile picker dialog. -->
+    <string name="profile_picker_title">Profiles</string>
+
+    <!-- The item label for the no profile selection item. -->
+    <string name="profile_none">None</string>
+
+    <!-- Names of default profiles. -->
+    <string name="profileNameDefault">Default</string>
+    <string name="profileNameWork">Work</string>
+    <string name="profileNameHome">Home</string>
+    <string name="profileNameSilent">Silent</string>
+    <string name="profileNameNight">Night</string>
+
+    <!-- Names of application groups. -->
+    <string name="profileGroupPhone">Phone</string>
+    <string name="profileGroupCalendar">Calendar</string>
+    <string name="profileGroupGmail">Gmail</string>
+    <string name="profileGroupEmail">Email</string>
+    <string name="profileGroupSMS">SMS</string>
+
+    <!-- Name of wildcard profile. -->
+    <string name="wildcardProfile">Other</string>
 
 </resources>

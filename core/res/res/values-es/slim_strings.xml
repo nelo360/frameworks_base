@@ -54,9 +54,6 @@
     <!-- label for item that reboots the phone in phone options dialog -->
     <string name="global_action_reboot">Reiniciar</string>
 
-    <!-- label for item that opens the profile choosing dialog -->
-    <string name="global_action_choose_profile">Perfil</string>
-
     <!-- In WiFi AP notification -->
     <string name="notify_turn_wifi_ap_off_title">Desactivar AP Wi-Fi</string>
 
@@ -79,5 +76,31 @@
     <string name="permlab_preventpower">Prevenir pulsación de botón de encendido</string>
     <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_preventpower">Permite a una aplicación utilizar el botón de encendido</string>
+
+    <!-- label for item that opens the profile choosing dialog -->
+    <string name="global_action_choose_profile">Perfil</string>
+
+    <!-- The title of the profile picker dialog. -->
+    <string name="profile_picker_title">Perfiles</string>
+
+    <!-- The item label for the no profile selection item. -->
+    <string name="profile_none">Ningún</string>
+
+    <!-- Names of default profiles. -->
+    <string name="profileNameDefault">Normal</string>
+    <string name="profileNameWork">Trabajo</string>
+    <string name="profileNameHome">Casa</string>
+    <string name="profileNameSilent">Silencio</string>
+    <string name="profileNameNight">Noche</string>
+
+    <!-- Names of application groups. -->
+    <string name="profileGroupPhone">Teléfono</string>
+    <string name="profileGroupCalendar">Calendario</string>
+    <string name="profileGroupGmail">Gmail</string>
+    <string name="profileGroupEmail">Email</string>
+    <string name="profileGroupSMS">SMS</string>
+
+    <!-- Name of wildcard profile. -->
+    <string name="wildcardProfile">Otro</string>
 
 </resources>
