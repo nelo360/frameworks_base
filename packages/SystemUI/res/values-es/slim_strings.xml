@@ -219,6 +219,9 @@
     <!-- Title shown in recents popup for showing app in floating mode -->
     <string name="status_bar_recent_floating_item_title">Ventana flotante</string>
 
+    <!-- Title shown in notification popup for launching notification in floating mode -->
+    <string name="status_bar_notification_floating_item_title">Ventana flotante</string>
+
         <!-- App sidebar -->
     <string name="default_folder_text">Carpeta</string>
     <string name="title_activity_sidebar_configuration">Configurar contenido de la barra</string>
