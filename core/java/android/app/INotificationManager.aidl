@@ -62,4 +62,8 @@ interface INotificationManager
     boolean isPackageAllowedForPeek(String pkg);
     boolean isPackageAllowedForFloatingMode(String pkg);
     boolean isPackageAllowedForHover(String pkg);
+
+    StatusBarNotification[] getActiveNotificationsFromSystemListener(in INotificationListener token);
+    void cancelNotificationFromSystemListener(in INotificationListener token, String pkg, String tag, int id);
+
 }

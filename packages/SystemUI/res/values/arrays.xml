@@ -73,4 +73,8 @@
         <item>NW</item> <!-- North west -->
     </string-array>
 
+    <array name="ad_targets_unlock_only">
+        <item>@drawable/ic_ad_target_unlock</item>
+    </array>
+
 </resources>
