@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.systemui.mahdi;
+package com.android.systemui.chaos;
 
 import android.app.KeyguardManager;
 import android.content.Context;
