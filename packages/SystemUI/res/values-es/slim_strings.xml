@@ -199,4 +199,9 @@
     <string name="accessibility_ime_navigation_left">Cursor izquierda</string>
     <string name="accessibility_ime_navigation_right">Cursor derecha</string>
 
+    <!-- Title shown in recents popup for locking an app from being cleared -->
+    <string name="status_bar_recent_lock_item_title">Bloquear</string>
+    <!-- Title shown in recents popup for unlocking an app from being cleared -->
+    <string name="status_bar_recent_unlock_item_title">Desbloquear</string>
+
 </resources>
