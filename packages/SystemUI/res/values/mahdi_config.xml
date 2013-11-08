@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-/* //device/apps/common/assets/res/any/dimens.xml
-**
-** Copyright 2013, The Android Open Source Project
+/*
+** Copyright 2013, The Mahdi-Rom Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -18,13 +17,8 @@
 */
 -->
 <resources>
-    <!-- Height of the sliding KeyguardSecurityContainer
-        (includes 2x keyguard_security_view_margin) -->
-    <dimen name="keyguard_security_height">500dp</dimen>
 
-    <!-- quick settings text color -->
-    <color name="quick_settings_text_color">#cccccc</color>
-    <color name="quick_settings_alarm_text_color">#ff3a3b39</color>
-    <color name="quick_settings_clock_text_color">#ff33b5e5</color>  
+    <!-- configurable width dimension for the app sidebar trigger area -->
+    <dimen name="config_app_sidebar_trigger_width">8dip</dimen>
 
 </resources>
