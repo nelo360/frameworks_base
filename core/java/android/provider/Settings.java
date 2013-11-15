@@ -3240,6 +3240,12 @@ public final class Settings {
          */
         public static final String PIE_BUTTON_LONG_PRESSED_COLOR = "pie_button_long_pressed_color";
 
+	/**
+         * Whether power menu screen record is enabled
+         * @hide
+         */
+        public static final String POWER_MENU_SCREENRECORD_ENABLED = "power_menu_screenrecord_enabled";
+
         /**
          * Pie button outline color
          * @hide
