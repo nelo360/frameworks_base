@@ -218,4 +218,8 @@
     <!-- Hide notification icons -->
     <string name="status_bar_notification_hide_icon_packages">Hide app\'s notification icon(s)</string>
 
+    <!-- Network Speed Tile -->
+    <string name="quick_settings_network_speed_on">Net-speed on</string>
+    <string name="quick_settings_network_speed_off">Net-speed off</string>
+
 </resources>

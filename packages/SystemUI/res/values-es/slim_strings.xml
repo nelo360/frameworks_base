@@ -212,4 +212,8 @@
     <!-- Hide notification icons -->
     <string name="status_bar_notification_hide_icon_packages">Ocultar icono notificación</string>
 
+    <!-- Network Speed Tile -->
+    <string name="quick_settings_network_speed_on">Velocidad red on</string>
+    <string name="quick_settings_network_speed_off">Velocidad red off</string>
+
 </resources>

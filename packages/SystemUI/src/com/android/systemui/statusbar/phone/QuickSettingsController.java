@@ -56,6 +56,7 @@ import static com.android.internal.util.slim.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.slim.QSConstants.TILE_REBOOT;
 import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
 import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
+import static com.android.internal.util.slim.QSConstants.TILE_NETWORKSPEED;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -112,6 +113,7 @@ import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.RebootTile;
 import com.android.systemui.quicksettings.ProfileTile;
+import com.android.systemui.quicksettings.NetworkSpeedTile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -274,7 +276,9 @@ public class QuickSettingsController {
                 mTileStatusUris.add(Settings.System.getUriFor(Settings.System.SYSTEM_PROFILES_ENABLED));
                 if (QSUtils.systemProfilesEnabled(resolver)) {
                     qs = new ProfileTile(mContext, this);
-                }
+		}
+	    } else if (tile.equals(TILE_NETWORKSPEED)) {
+                qs = new NetworkSpeedTile(mContext, this, mHandler);
             } else if (tile.equals(TILE_COMPASS)) {
                 qs = new CompassTile(mContext, this);
             }

@@ -94,4 +94,8 @@ public class QSUtils {
             return (sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null
                     && sm.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null);
         }
+	
+	public static boolean NetworkSpeedEnabled(ContentResolver resolver) {
+            return (Settings.System.getInt(resolver, Settings.System.STATUS_BAR_TRAFFIC_ENABLE, 1) == 1);
+        }
 }
