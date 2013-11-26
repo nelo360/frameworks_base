@@ -126,4 +126,29 @@
     <string name="pie_phone_status_no_service">Sin servicio</string>
     <string name="pie_phone_status_airplane_mode">Modo avión activado</string>
     <string name="pie_phone_status_emergency_only">Solo llamadas emergencia</string>
+
+    <!-- Content description of the halo button in the notification panel for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_halo">Crear notificación Halo</string>
+
+    <!-- HALO -->
+    <string name="halo_dismiss">Descartar notificación</string>
+    <string name="halo_hide">Ocultar</string>
+    <string name="halo_clear_all">Descartar todas las notificaciones</string>
+    <string name="halo_silence">Ocultar &amp; silenciar hasta despertar</string>
+    <string name="halo_tutorial1">Esto es HALO</string>
+    <string name="halo_tutorial2">Para moverme: pulsar 2 veces &amp; arrastrar</string>
+    <string name="halo_tutorial3">Cambiar tarea: arrastra horizontal</string>
+    <string name="halo_battery_plugged">CARGANDO</string>
+    <string name="halo_battery_unplugged">RESTANTE</string>
+    <string name="halo_battery_full">LLENA</string>
+    <string name="halo_aeroplane1">AVIÓN</string>
+    <string name="halo_aeroplane2">MODO</string>
+    <string name="halo_wifi_on">WI-FI ENCENDIDO</string>
+    <string name="halo_wifi_off">WI-FI APAGADO</string>
+    <string name="halo_signal_bars_4">LLENA</string>
+    <string name="halo_signal_bars_3">TRES BARRAS</string>
+    <string name="halo_signal_bars_2">DOS BARRAS</string>
+    <string name="halo_signal_bars_1">UNA BARRA</string>
+    <string name="halo_signal_bars_none">SIN BARRAS</string>
+
 </resources>
