@@ -200,7 +200,12 @@
     <string name="accessibility_ime_navigation_right">Cursor right</string>
 
     <!-- Title shown in recents popup for locking an app from being cleared -->
-    <string name="status_bar_recent_lock_item_title">Lock</string>
+    <string name="status_bar_recent_lock_item_title">Lock to recents list</string>
     <!-- Title shown in recents popup for unlocking an app from being cleared -->
-    <string name="status_bar_recent_unlock_item_title">Unlock</string>
+    <string name="status_bar_recent_unlock_item_title">Unlock from recents list</string>
+
+    <!-- Development shortcut -->
+    <string name="advanced_dev_option_wipe_app">Wipe app data</string>
+    <string name="advanced_dev_option_force_stop">Force stop</string>
+
 </resources>
