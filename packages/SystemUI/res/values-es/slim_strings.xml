@@ -141,4 +141,11 @@
   <string name="status_bar_notification_heads_up_disable_title">Deshabilitar \"heads up\"</string>
   <string name="heads_up_snooze_message">Heads up deshabilitado durante <xliff:g id="number">%d</xliff:g> minutos.</string>
 
+     <!-- Recents Ram Bar -->
+    <string name="memory">RAM</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
+    <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> libre</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
+    <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> usada</string>
+
 </resources>
