@@ -152,4 +152,11 @@
     <string name="halo_signal_bars_1">UNA BARRA</string>
     <string name="halo_signal_bars_none">SIN BARRAS</string>
 
+     <!-- Recents Ram Bar -->
+    <string name="memory">RAM</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
+    <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> libre</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
+    <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> usada</string>
+
 </resources>
