@@ -85,6 +85,9 @@ public class QuickRecordTile extends QuickSettingsTile {
                         stopPlaying();
                         break;
                 }
+                if (isFlipTilesEnabled()) {
+                    flipTile(0);
+                }
             }
         };
 

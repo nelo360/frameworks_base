@@ -3064,10 +3064,6 @@ public final class Settings {
 
         /**
          * Locations of the pie in the screen.
-         * (1<<0) = LEFT
-         * (1<<1) = BOTTOM
-         * (1<<2) = RIGHT
-         * (1<<3) = TOP
          * Default: LEFT
          * @hide
          */
@@ -3263,10 +3259,11 @@ public final class Settings {
         public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
 
         /**
-         * QuickSettings ring modes to switch
+         * Animate-flip Quick Settings Panel Tiles on click
+         *
          * @hide
          */
-        public static final String EXPANDED_RING_MODE = "expanded_ring_mode";
+        public static final String QUICK_SETTINGS_TILES_FLIP = "quick_settings_tiles_flip";
 
         /**
          * Quick Settings Quick Pulldown
@@ -3276,13 +3273,6 @@ public final class Settings {
         public static final String QS_QUICK_PULLDOWN = "qs_quick_pulldown";
 
         /**
-         * Quick Settings Collapse Pane
-         *
-         * @hide
-         */
-        public static final String QS_COLLAPSE_PANEL = "qs_collapse_panel";
-
-        /**
          * Quick Settings Smart Pulldown
          *
          * @hide
@@ -3290,8 +3280,21 @@ public final class Settings {
         public static final String QS_SMART_PULLDOWN = "qs_smart_pulldown";
 
         /**
-         * Display style of the status bar battery information
-         * default: 0
+         * Quick Settings Collapse Pane
+         *
+         * @hide
+         */
+        public static final String QS_COLLAPSE_PANEL = "qs_collapse_panel";
+
+	   /**
+        * Custom Ring Mode
+        * @hide
+        */
+        public static final String EXPANDED_RING_MODE = "expanded_ring_mode";        
+
+	   /**
+         * Use the Notification Power Widget? (Who wouldn't!)
+         *
          * @hide
          */
         public static final String STATUS_BAR_BATTERY = "status_bar_battery";
