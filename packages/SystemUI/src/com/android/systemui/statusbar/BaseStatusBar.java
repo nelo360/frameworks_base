@@ -70,6 +70,9 @@ import android.widget.PopupMenu;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.ContentResolver;
+import android.view.Gravity;
+import android.graphics.PixelFormat;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.StatusBarIcon;
