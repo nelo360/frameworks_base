@@ -61,8 +61,8 @@ public class NotificationHostView extends FrameLayout {
     private static final int MSG_NOTIFICATION_REMOVE = 1;
 
     private static final float SWIPE = 0.2f;
-    private static final int ANIMATION_MAX_DURATION = 500;
-    private static final int PPS = 3000;
+    private static final int ANIMATION_MAX_DURATION = 300;
+    private static final int PPS = 2000;
     private static final int MAX_ALPHA = 150;
 
     //Here we store dimissed notifications so we don't add them again in onFinishInflate
@@ -306,16 +306,19 @@ public class NotificationHostView extends FrameLayout {
     }
 
     public void addNotifications() {
-        try {
-            StatusBarNotification[] sbns = mNotificationManager.getActiveNotificationsFromListener(NotificationViewManager.NotificationListener);
-            StatusBarNotification dismissedSbn;
-            for (StatusBarNotification sbn : sbns) {
-                if ((dismissedSbn = mDismissedNotifications.get(describeNotification(sbn))) == null || dismissedSbn.getPostTime() != sbn.getPostTime())
-                    addNotification(sbn);
+        if (NotificationViewManager.NotificationListener != null) {
+            try {
+                StatusBarNotification[] sbns = mNotificationManager.getActiveNotificationsFromListener(NotificationViewManager.NotificationListener);
+                StatusBarNotification dismissedSbn;
+                for (StatusBarNotification sbn : sbns) {
+
+                    if ((dismissedSbn = mDismissedNotifications.get(describeNotification(sbn))) == null || dismissedSbn.getPostTime() != sbn.getPostTime())
+                        addNotification(sbn);
+                }
+                bringToFront();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to get active notifications!");
             }
-            bringToFront();
-        } catch (RemoteException e) {
-            Log.e(TAG, "Failed to get active notifications!");
         }
     }
 
