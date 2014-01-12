@@ -27,6 +27,7 @@
 
     <!--ScreenShot Trash-->
     <string name="screenshot_notification_delete">Delete</string>
+    <string name="screenshot_delete_confirmation">Screenshot deleted</string>
 
     <!-- Content description of the data connection type HSPA+ for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_data_connection_HP">HSPA+</string>
@@ -46,6 +47,7 @@
     <string name="shortcut_reboot">Reboot (instant)</string>
     <string name="shortcut_last_app">Last App</string>
     <string name="shortcut_screenshot">Screenshot</string>
+    <string name="shortcut_screensleep">Sleep Screen</string>
     <string name="shortcut_chamber">Chamber of Secrets</string>
     <string name="chamber_disabled">Chamber of secrets is closed</string>
     <string name="chamber_title">Input Settings string</string>

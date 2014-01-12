@@ -65,9 +65,15 @@
     <string name="global_actions_expanded_desktop_mode_on_status">Kiterjesztett képernyő BE</string>
 
     <!-- status message in phone options dialog for when expanded desktop is off -->
-    <string name="global_actions_expanded_desktop_mode_off_status">Kiterjeszett képernyő KI</string>
+    <string name="global_actions_expanded_desktop_mode_off_status">Kiterjeszett képernyő Ki</string>
 
     <!-- Description of accessibility direction for targets [CHAR LIMIT=NONE] -->
     <string name="accessibility_target_direction">Húzásra aktiválja az elemet</string>
+
+    <!-- stylus gestures support -->
+    <string name="stylus_app_not_installed">%s nincs telepítve</string>
+
+    <!-- Error description on theme switch with ligtsensor mode enabled -->
+    <string name="theme_auto_switch_mode_error">Automatikus fényviszonyok állítása engedélyezve. Kézi állítás nem lehetséges.</string>
 
 </resources>
