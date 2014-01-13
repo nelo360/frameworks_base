@@ -46,14 +46,6 @@
     <string name="shortcut_reboot">Reinicio (Rápido)</string>
     <string name="shortcut_last_app">Ultima App</string>
     <string name="shortcut_screenshot">Captura pantalla</string>
-    <string name="shortcut_picker">Accesos Directos Slim</string>
-    <string name="shortcut_immersive">Int. Modo Immersivo</string>
-    <string name="shortcut_quiethours">Int. Horas de tranquilidad</string>
-    <string name="shortcut_rotation">Int. Bloqueo Rotación</string>
-    <string name="shortcut_torch">Int. Linterna</string>
-    <string name="shortcut_reboot">Reiniciar (instantáneo)</string>
-    <string name="shortcut_last_app">Ultima ap.</string>
-    <string name="shortcut_screenshot">Captura Pantalla</string>
     <string name="shortcut_chamber">Chamber of Secrets</string>
     <string name="chamber_disabled">Chamber of secrets está cerrado</string>
     <string name="chamber_title">Input Settings string</string>
