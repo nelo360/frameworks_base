@@ -4175,7 +4175,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         }
                     } else {
                         mVolumeDownKeyTriggered = false;
-                        cancelPendingScreenRecordChordAction();
+                        cancelPendingScreenshotChordAction();
                     }
                 } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
                     if (down) {
@@ -4189,7 +4189,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         }
                     } else {
                         mVolumeUpKeyTriggered = false;
-                        cancelPendingScreenshotChordAction();
+                        cancelPendingScreenRecordChordAction();
                     }
                 }
                 if (down) {
