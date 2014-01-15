@@ -15,6 +15,7 @@
 
 package com.android.internal.policy.impl;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.app.ActivityManagerNative;
 import android.app.AppOpsManager;
@@ -41,7 +42,6 @@ import android.content.res.TypedArray;
 import android.database.ContentObserver;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
-import android.Manifest;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.media.IAudioService;
@@ -452,24 +452,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // What we do when the user double-taps on home
     private int mDoubleTapOnHomeBehavior;
 
-    // Screenshot/screen record trigger states
+    // Screenshot/Screen record trigger states
     // Time to volume and power must be pressed within this interval of each other.
     private static final long SCREENSHOT_CHORD_DEBOUNCE_DELAY_MILLIS = 150;
     // Increase the chord delay when taking a screenshot from the keyguard
     private static final float KEYGUARD_SCREENSHOT_CHORD_DELAY_MULTIPLIER = 2.5f;
     private boolean mScreenshotChordEnabled;
-    private boolean mScreenRecordChordEnabled = true;
     private boolean mVolumeDownKeyTriggered;
     private long mVolumeDownKeyTime;
     private boolean mVolumeDownKeyConsumedByScreenshotChord;
     private boolean mVolumeUpKeyTriggered;
-    private long mVolumeUpKeyTime;
-    private boolean mVolumeUpKeyConsumedByScreenRecordChord;
     private boolean mPowerKeyTriggered;
     private long mPowerKeyTime;
     private boolean mVolumeWakeScreen;
     private boolean mVolumeMusicControls;
     private boolean mIsLongPress;
+
+    private boolean mScreenRecordChordEnabled = true;
+    private long mVolumeUpKeyTime;
+    private boolean mVolumeUpKeyConsumedByScreenRecordChord;
 
     /* The number of steps between min and max brightness */
     private static final int BRIGHTNESS_STEPS = 10;
@@ -825,13 +826,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     };
 
-    private final Runnable mScreenshotRunnable = new Runnable() {
-        @Override
-        public void run() {
-            takeScreenshot();
-        }
-    };
-
     private final Runnable mScreenRecordRunnable = new Runnable() {
         @Override
         public void run() {
@@ -839,47 +833,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     };
 
-    Runnable mBackLongPress = new Runnable() {
+    private final Runnable mScreenshotRunnable = new Runnable() {
+        @Override
         public void run() {
-            try {
-                final Intent intent = new Intent(Intent.ACTION_MAIN);
-                String defaultHomePackage = "com.android.launcher";
-                intent.addCategory(Intent.CATEGORY_HOME);
-                final ResolveInfo res = mContext.getPackageManager().resolveActivity(intent, 0);
-                if (res.activityInfo != null && !res.activityInfo.packageName.equals("android")) {
-                    defaultHomePackage = res.activityInfo.packageName;
-                }
-                boolean targetKilled = false;
-                IActivityManager am = ActivityManagerNative.getDefault();
-                List<RunningAppProcessInfo> apps = am.getRunningAppProcesses();
-                for (RunningAppProcessInfo appInfo : apps) {
-                    int uid = appInfo.uid;
-                    // Make sure it's a foreground user application (not system,
-                    // root, phone, etc.)
-                    if (uid >= Process.FIRST_APPLICATION_UID && uid <= Process.LAST_APPLICATION_UID
-                            && appInfo.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                        if (appInfo.pkgList != null && (appInfo.pkgList.length > 0)) {
-                            for (String pkg : appInfo.pkgList) {
-                                if (!pkg.equals("com.android.systemui") && !pkg.equals(defaultHomePackage)) {
-                                    am.forceStopPackage(pkg, UserHandle.USER_CURRENT);
-                                    targetKilled = true;
-                                    break;
-                                }
-                            }
-                        } else {
-                            Process.killProcess(appInfo.pid);
-                            targetKilled = true;
-                        }
-                    }
-                    if (targetKilled) {
-                        performHapticFeedbackLw(null, HapticFeedbackConstants.LONG_PRESS, false);
-                        Toast.makeText(mContext, R.string.app_killed_message, Toast.LENGTH_SHORT).show();
-                        break;
-                    }
-                }
-            } catch (RemoteException remoteException) {
-                // Do nothing; just let it go.
-            }
+            takeScreenshot();
         }
     };
 
@@ -2195,10 +2152,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                 }
                 return -1;
             }
-        }
-
-        if (keyCode == KeyEvent.KEYCODE_BACK && !down) {
-            mHandler.removeCallbacks(mBackLongPress);
         }
 
         // First we always handle the home key here, so applications
@@ -4222,7 +4175,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         }
                     } else {
                         mVolumeDownKeyTriggered = false;
-                        cancelPendingScreenshotChordAction();
+                        cancelPendingScreenRecordChordAction();
                     }
                 } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
                     if (down) {
@@ -4236,7 +4189,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                         }
                     } else {
                         mVolumeUpKeyTriggered = false;
-                        cancelPendingScreenRecordChordAction();
+                        cancelPendingScreenshotChordAction();
                     }
                 }
                 if (down) {
