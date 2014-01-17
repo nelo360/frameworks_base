@@ -222,7 +222,7 @@
     <!-- Title shown in notification popup for launching notification in floating mode -->
     <string name="status_bar_notification_floating_item_title">Ventana flotante</string>
 
-        <!-- App sidebar -->
+    <!-- App sidebar -->
     <string name="default_folder_text">Carpeta</string>
     <string name="title_activity_sidebar_configuration">Configurar contenido de la barra</string>
     <string name="action_save">Guardar</string>
@@ -230,5 +230,56 @@
     <string name="content_setup_instructions">Para agregar elementos a la barra mantenga pulsado un icono y arrástrelo dentro de la zona azul. Para quitarlos, arrástrelos fuera de ella.</string>
     <string name="content_setup_dismiss">Continuar</string>
     <string name="toast_not_installed">La aplicación no está instalada</string>
+
+    <!-- Weather tile panel String -->
+    <string name="need_to_update_weather">Pulsa para actualizar</string>
+    <string name="no_weather_file">No se encuentra el fichero del tiempo</string>
+    <string name="weather_notify">Notificación</string>
+    <string name="weather_ok">OK</string>
+    <string name="weather_link">Acceso directo</string>
+    <string name="weather_dialog_msg">Es posible que tengas desactivado el tiempo en el widget cLock o no puedes guardar los datos del tiempo\nNecesitas activar el tiempo en el widget pulsando prolongadamente sobre el tile del tiempo.</string>
+
+    <!-- Weather - Weather codes -->
+    <string name="weather_0">Tornado</string>
+    <string name="weather_1">Torm. tropical</string>
+    <string name="weather_2">Huracán</string>
+    <string name="weather_3">Torm. severas</string>
+    <string name="weather_4">Tormentas</string>
+    <string name="weather_5">Agua y nieve</string>
+    <string name="weather_6">Agua y aguanieve</string>
+    <string name="weather_7">Nieve y aguanieve</string>
+    <string name="weather_8">Llovizna helada</string>
+    <string name="weather_9">Llovizna</string>
+    <string name="weather_10">Lluvia helada</string>
+    <string name="weather_11">Lluvias</string>
+    <string name="weather_12">Lluvias</string>
+    <string name="weather_13">Copos de nieve</string>
+    <string name="weather_14">Nevadas ligeras</string>
+    <string name="weather_15">Chub. de nieve</string>
+    <string name="weather_16">Nieve</string>
+    <string name="weather_17">Granizo</string>
+    <string name="weather_18">Aguanieve</string>
+    <string name="weather_19">Polvo</string>
+    <string name="weather_20">Niebla</string>
+    <string name="weather_21">Neblina</string>
+    <string name="weather_22">Humo</string>
+    <string name="weather_23">Borrascoso</string>
+    <string name="weather_24">Ventoso</string>
+    <string name="weather_25">Frío</string>
+    <string name="weather_26">Nublado</string>
+    <string name="weather_32">Soleado</string>
+    <string name="weather_35">Lluvia y granizo</string>
+    <string name="weather_36">Caluroso</string>
+    <string name="weather_37">Torm. eléctricas</string>
+    <string name="weather_38">Torm. eléc. aisladas</string>
+    <string name="weather_39">Torm. eléc. aisladas</string>
+    <string name="weather_40">Parc. Nublado</string>
+    <string name="weather_41">Fuertes Nevadas</string>
+    <string name="weather_42">Chub. de nieve</string>
+    <string name="weather_43">Fuertes nevadas</string>
+    <string name="weather_44">Parc. nublado</string>
+    <string name="weather_45">Chaparrones</string>
+    <string name="weather_46">Nieve</string>
+    <string name="weather_47">Chap. aislados</string>
 
 </resources>
