@@ -164,6 +164,8 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
    // Whether the direction arrows are enabled by the user
    boolean mDirectionArrowsEnabled = false;
 
+    private UpdateUIListener mUpdateUIListener = null;
+
     public interface SignalCluster {
         void setWifiIndicators(boolean visible, int strengthIcon, int activityIcon,
                 String contentDescription);
@@ -1204,6 +1206,11 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
             }
         }
 
+        // Cleanup the double quotes
+        if (wifiLabel.length() > 0) {
+            wifiLabel = wifiLabel.replaceAll("^\"|\"$", "");
+        }
+
         if (DEBUG) {
             Log.d(TAG, "refreshViews connected={"
                     + (mWifiConnected?" wifi":"")
@@ -1229,6 +1236,18 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                     + " mWifiIconId=0x" + Integer.toHexString(mWifiIconId)
                     + " mQSWifiIconId=0x" + Integer.toHexString(mQSWifiIconId)
                     + " mBluetoothTetherIconId=0x" + Integer.toHexString(mBluetoothTetherIconId));
+        }
+
+        int hideLabels = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.NOTIFICATION_HIDE_LABELS, 0, UserHandle.USER_CURRENT);
+
+        switch (hideLabels) {
+            case 1 : mobileLabel = "";
+                combinedLabel = wifiLabel;
+                break;
+            case 2 : wifiLabel = "";
+                combinedLabel = mobileLabel;
+                break;
         }
 
         // update QS
@@ -1336,6 +1355,11 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                 v.setText(mobileLabel); // comes from the telephony stack
                 v.setVisibility(View.VISIBLE);
             }
+        }
+
+        // Update the dependency UI
+        if (mUpdateUIListener != null) {
+            mUpdateUIListener.onUpdateUI();
         }
     }
 
@@ -1567,5 +1591,16 @@ public class NetworkController extends BroadcastReceiver implements DemoMode {
                 }
             }
         }
+    }
+
+    /**
+     * Let others listen for UI updates in NetworkController.
+     */
+    public static interface UpdateUIListener {
+        void onUpdateUI();
+    }
+
+    public void setListener(UpdateUIListener listener) {
+        mUpdateUIListener = listener;
     }
 }

@@ -2627,6 +2627,12 @@ public final class Settings {
                 "lockscreen_use_widget_container_carousel";
 
         /**
+         * Whether double-tap and hold on the lock glowpad starts the torch
+         * @hide
+         */
+        public static final String LOCKSCREEN_GLOWPAD_TORCH = "lockscreen_glowpad_torch";
+
+        /**
          * @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
          * instead
          * @hide
@@ -3242,10 +3248,10 @@ public final class Settings {
 
 
         /**
-         * Hide carrier information on notification drawer
+         * Hide network labels in the notification drawer
          * @hide
          */
-        public static final String NOTIFICATION_HIDE_CARRIER = "notification_hide_carrier";
+        public static final String NOTIFICATION_HIDE_LABELS = "notification_hide_labels";
 
 
         /**
@@ -5607,6 +5613,12 @@ public final class Settings {
         public static final String PAYMENT_SERVICE_SEARCH_URI = "payment_service_search_uri";
 
         /**
+         * Whether to include options in power menu for rebooting into recovery and bootloader
+         * @hide
+         */
+        public static final String ADVANCED_REBOOT = "advanced_reboot";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
@@ -5658,7 +5670,8 @@ public final class Settings {
             UI_THEME_MODE,
             UI_THEME_AUTO_MODE,
             PRIVACY_GUARD_DEFAULT,
-            PRIVACY_GUARD_NOTIFICATION
+            PRIVACY_GUARD_NOTIFICATION,
+            ADVANCED_REBOOT
         };
 
         /**
