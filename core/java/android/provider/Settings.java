@@ -1307,6 +1307,21 @@ public final class Settings {
             }
         }
 
+        /** @hide */
+        public static boolean getBooleanForUser(ContentResolver cr, String name, boolean def,
+                                                int userHandle) {
+            final String v = getStringForUser(cr, name, userHandle);
+            try {
+                if (v != null) {
+                    return "1".equals(v);
+                } else {
+                    return def;
+                }
+            } catch (NumberFormatException e) {
+                return def;
+            }
+        }
+
         /**
          * Convenience function for updating a single settings value as an
          * integer. This will either create a new entry in the table if the
@@ -4355,6 +4370,13 @@ public final class Settings {
          * @hide
          */
         public static final String HFM_DISABLE_ADS = "hfm_disable_ads";
+
+        /**
+         * Show brightness slider in notification panel
+         * @hide
+         */
+        public static final String NOTIFICATION_BRIGHTNESS_SLIDER = "notification_brightness_slider";
+
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
