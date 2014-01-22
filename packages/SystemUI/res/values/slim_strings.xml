@@ -128,4 +128,6 @@
     <!-- Custom Quick Settings toggles -->
     <string name="quick_settings_custom_toggle">Custom</string>
 
+    <string name="quick_settings_contact_toggle">Contact</string>
+
 </resources>
