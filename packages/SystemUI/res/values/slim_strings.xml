@@ -302,4 +302,7 @@
     <!-- Title shown when app provides no interface -->
     <string name="status_bar_floating_no_interface">App provides no interface</string>
 
+    <!-- Active Display -->
+    <string name="active_display_privacy_content">Content message not showing because privacy mode enabled</string>
+
 </resources>
