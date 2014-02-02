@@ -4005,7 +4005,18 @@ public final class Settings {
         public static final String SCREEN_RECORDER_OUTPUT_DIMENSIONS = "screen_recorder_output_dimensions";
 
         /**
+<<<<<<< HEAD
          * Screen recorder framerate in bits per second
+=======
+         * Set a custom notification background color
+         * @hide
+         */
+        public static final String LOCKSCREEN_NOTIFICATIONS_COLOR = "lockscreen_notifications_color";
+
+        /**
+         * Should call status sounds be player
+         *
+>>>>>>> 1d15bf1... Lockscreen Notifications: Custom background color [1/2]
          * @hide
          */
         public static final String SCREEN_RECORDER_BITRATE = "screen_recorder_bitrate";
