@@ -2474,6 +2474,15 @@ public abstract class Context {
     public static final String TORCH_SERVICE = "torch";
 
     /**
+     * {@link android.content.res.ThemeManager} for accessing theme service.
+     *
+     * @see #getSystemService
+     * @see android.content.res.ThemeManager
+     * @hide
+     */
+    public static final String THEME_SERVICE = "themes";
+
+    /**
      * Determine whether the given permission is allowed for a particular
      * process and user ID running in the system.
      *

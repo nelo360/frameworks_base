@@ -18,6 +18,7 @@ package android.app;
 
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
@@ -58,8 +59,6 @@ import android.view.Display;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 /*package*/
@@ -773,9 +772,10 @@ final class ApplicationPackageManager extends PackageManager {
         if (app.packageName.equals("system")) {
             return mContext.mMainThread.getSystemContext().getResources();
         }
+
         Resources r = mContext.mMainThread.getTopLevelResources(
                 app.uid == Process.myUid() ? app.sourceDir : app.publicSourceDir,
-                app.resourceDirs, Display.DEFAULT_DISPLAY, null, mContext.mPackageInfo);
+                app.resourceDirs, Display.DEFAULT_DISPLAY, null, mContext.mPackageInfo, mContext);
         if (r != null) {
             return r;
         }
@@ -1386,4 +1386,16 @@ final class ApplicationPackageManager extends PackageManager {
             = new ArrayMap<ResourceName, WeakReference<Drawable.ConstantState>>();
     private static ArrayMap<ResourceName, WeakReference<CharSequence>> sStringCache
             = new ArrayMap<ResourceName, WeakReference<CharSequence>>();
+
+    /**
+     * @hide
+     */
+    @Override
+    public void updateIconMaps(String pkgName) {
+        try {
+            mPM.updateIconMapping(pkgName);
+        } catch (RemoteException re) {
+            Log.e(TAG, "Failed to update icon maps", re);
+        }
+    }
 }
