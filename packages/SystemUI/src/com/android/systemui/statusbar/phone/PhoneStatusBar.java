@@ -4172,12 +4172,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     toggleReminderFlipper(true);
                 }
             }
-        } else {
-            if (mQS != null) {
-                mQS.updateResources();
-            }
         }
 
+        // Update the QuickSettings container
+        if (mQS != null) mQS.updateResources();
     }
 
     protected void loadDimens() {
