@@ -99,6 +99,8 @@ import android.view.WindowManagerPolicy;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.VolumePanel;
+import android.media.AudioService;
 
 import com.android.internal.R;
 import com.android.internal.policy.PolicyManager;
