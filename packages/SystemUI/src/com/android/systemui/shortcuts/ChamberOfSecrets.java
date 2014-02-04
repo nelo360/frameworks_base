@@ -18,7 +18,6 @@ package com.android.systemui.shortcuts;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -69,7 +68,7 @@ public class ChamberOfSecrets extends Activity  {
                                 setting, getNewInt(array, current));
                         break;
                     case SYSTEM_LONG:
-                        curLong= Settings.System.getIntForUser(getContentResolver(),
+                        curLong= Settings.System.getLongForUser(getContentResolver(),
                                 setting, 0, UserHandle.USER_CURRENT);
                         Settings.System.putLong(getContentResolver(),
                                 setting, getNewLong(array, curLong));
@@ -81,7 +80,7 @@ public class ChamberOfSecrets extends Activity  {
                                 setting, getNewLong(array, curLong));
                         break;
                     case SYSTEM_FLOAT:
-                        curFloat= Settings.System.getLongForUser(getContentResolver(),
+                        curFloat= Settings.System.getFloatForUser(getContentResolver(),
                                 setting, 0, UserHandle.USER_CURRENT);
                         Settings.System.putFloat(getContentResolver(),
                                 setting, getNewFloat(array, curFloat));
@@ -110,12 +109,8 @@ public class ChamberOfSecrets extends Activity  {
             try {
                 intArray[i] = Integer.parseInt(strArray[i]);
             } catch (NumberFormatException e) {
-                try {
-                    intArray[i] = Color.parseColor(strArray[i]);
-                } catch (IllegalArgumentException ex) {
-                    // We already checked this string
-                    // parse won't fail
-                }
+                // We already checked this string
+                // parse won't fail
             }
         }
         for (int i = 0; i < intArray.length; i++) {

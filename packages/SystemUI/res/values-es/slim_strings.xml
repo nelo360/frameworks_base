@@ -37,7 +37,13 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
 
+    <!-- Off/On/Toggle -->
+    <string name="off">Apagar</string>
+    <string name="on">Encender</string>
+    <string name="toggle">Interruptor</string>
+
     <!-- Slim Shortcut Actions -->
+
     <string name="shortcut_picker">Accesos directos</string>
     <string name="shortcut_immersive">Escritorio expandido</string>
     <string name="shortcut_quiethours">Horas silencio</string>
@@ -46,15 +52,24 @@
     <string name="shortcut_reboot">Reinicio (Rápido)</string>
     <string name="shortcut_last_app">Ultima App</string>
     <string name="shortcut_screenshot">Captura pantalla</string>
+    <string name="shortcut_power_menu">Menú de apagado</string>
+    <string name="shortcut_screenshot">Captura Pantalla</string>
+    <string name="shortcut_screensleep">Apagar pantalla</string>
+    <string name="shortcut_volume">Volumen</string>
+    <string name="shortcut_toggle_title">Acción a realizar</string>
     <string name="shortcut_chamber">Chamber of Secrets</string>
     <string name="chamber_disabled">Chamber of secrets está cerrado</string>
-    <string name="chamber_title">Input Settings string</string>
-    <string name="chamber_message">Input a Settings string that is either an on and off (checkbox) function or possibly a list-preference. For example, quiet_hours_ringer or similar. Settings can be found in the Settings.java file. WARNING: This process is dangerous!</string>
-    <string name="chamber_invalid">This is an invalid input. Be careful.</string>
+    <string name="chamber_title">Introduce parámetros de configuración</string>
+    <string name="chamber_message">Introducir un parámetro de configuración que cuyo valor sea una función "on" o "off" (checkbox) o una lista de opciones. Por ejemplo, quiet_hours_ringer o similar. Los parámtros de configuración a usar están el fichero Settings.java. CUIDADO: Esto es peligroso!</string>
+    <string name="chamber_invalid">No es un parámetro correcto. Tenga cuidado.</string>
     <string name="chamber_checkbox">Checkbox</string>
-    <string name="chamber_chk_message">Is this setting a checkbox setting?</string>
-    <string name="chamber_int">Input values</string>
-    <string name="chamber_int_message">Input the values you\'d like the setting to toggle between. Separate each value with a comma. Color settings accept hex-values such as #FF00aacc or basic color values like red, green, and yellow.</string>
+    <string name="chamber_chk_message">Es esto un ajuste con valor "checkbox"?</string>
+    <string name="chamber_int">Introducir valores</string>
+    <string name="chamber_int_message">Introducir los valores entre los que desea avanzar. Separar cada valor con una coma. Los parámetros de coloraceptan valores hexadecimales como #FF00aacc o colores básicos como red, green, y yellow.</string>
+    <string name="chamber_name_title">Nombre del acceso directo</string>
+    <string name="chamber_name_message">Nombre del acceso directo que se mostrará junto al icono.</string>
+    <string name="chamber_name_toast">Se usará el nombre predeterminado</string>
+
 
     <!-- Quick Settings -->
     <string name="quick_settings_gps">GPS</string>
@@ -72,15 +87,16 @@
     <string name="quick_settings_screen_timeout">Tiempo espera pantalla</string>
     <string name="quick_settings_network_type">Modo de Red</string>
     <string name="quick_settings_sync">Sincr.</string>
-    <string name="quick_settings_sync_off">Sincr. off</string>
+    <string name="quick_settings_sync_off">Sincr. desactivada</string>
     <string name="quick_settings_torch">Linterna</string>
-    <string name="quick_settings_torch_off">Linterna off</string>
+    <string name="quick_settings_torch_off">Linterna apagada</string>
     <string name="quick_settings_nfc">NFC</string>
     <string name="quick_settings_nfc_off">NFC off</string>
     <string name="quick_settings_screen_timeout_summary" translatable="false">%1$d %2$s</string>
+    <string name="quick_settings_screen_timeout">Tiempo de espera</string>
     <string name="quick_settings_screen_timeout_summary_never">Nunca</string>
     <string name="quick_settings_usb_tether_off_label">Desconectado</string>
-    <string name="quick_settings_usb_tether_connected_label">Tethering off</string>
+    <string name="quick_settings_usb_tether_connected_label">Tethering desactivado</string>
     <string name="quick_settings_usb_tether_on_label">Tethering</string>
     <string name="quick_settings_wifiap">Wi-Fi AP</string>
     <string name="quick_settings_wifiap_off">Wi-Fi AP</string>
@@ -102,4 +118,6 @@
     <string name="quick_settings_quick_record_rec">Grabando...</string>
     <string name="quick_settings_quick_record_save">Guardado</string>
     <string name="quick_settings_quick_record_play">Reproduciendo...</string>
+    <string name="quick_settings_custom_toggle">Personalizado</string>
+    <string name="quick_settings_contact_toggle">Contacto</string>
 </resources>

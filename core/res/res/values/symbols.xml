@@ -1300,7 +1300,6 @@
   <java-symbol type="bool" name="config_annoy_dianne" />
   <java-symbol type="bool" name="config_carDockEnablesAccelerometer" />
   <java-symbol type="bool" name="config_deskDockEnablesAccelerometer" />
-  <java-symbol type="bool" name="config_disableMenuKeyInLockScreen" />
   <java-symbol type="bool" name="config_enableLockBeforeUnlockScreen" />
   <java-symbol type="bool" name="config_enableLockScreenRotation" />
   <java-symbol type="bool" name="config_enableLockScreenTranslucentDecor" />
@@ -1762,6 +1761,7 @@
 
   <!-- Config.xml entries -->
   <java-symbol type="bool" name="config_samsung_stk" />
+  <java-symbol type="string" name="config_legacyUmsLunFile" />
   <java-symbol type="bool" name="config_smsSamsungCdmaAlternateMessageIDEncoding" />
 
 </resources>
