@@ -26,7 +26,7 @@
     <string name="weather_notify">Notificación</string>
     <string name="weather_ok">OK</string>
     <string name="weather_link">Acceso directo</string>
-    <string name="weather_dialog_msg">Es posible que tengas desactivado el tiempo en el widget cLock o no puedes guardar los datos del tiempo\nNecesitas activar el tiempo en el widget pulsando prolongadamente sobre el tile del tiempo.</string>
+    <string name="weather_dialog_msg">Es posible que tengas desactivado el tiempo en el widget cLock o no puedes guardar los datos del tiempo\nNecesitas activar el tiempo en el widget pulsando prolongadamente sobre el botón del tiempo.</string>
 
     <!-- Weather - Weather codes -->
     <string name="weather_0">Tornado</string>
@@ -77,5 +77,48 @@
     <string name="weather_45">Chaparrones</string>
     <string name="weather_46">Nieve</string>
     <string name="weather_47">Chap. aislados</string>
+
+    <!-- Recents Ram Bar -->
+    <string name="memory">RAM</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
+    <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> libre</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
+    <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> usada</string>
+
+    <!-- battery saver mode -->
+    <string name="quick_settings_battery_saver_label">Ahorro energia encendido</string>
+    <string name="quick_settings_battery_saver_off_label">Ahorro energia apagado</string>
+    <string name="quick_settings_network_type">Estado</string>
+    <string name="quick_settings_network_unknown">Desconocido</string>
+    <string name="quick_settings_network_disable">Sin internet</string>
+
+    <!-- Network Strings for battery saver mode -->
+    <string name="network_4G">4G/LTE</string>
+    <string name="network_3G_only">Solo 3G</string>
+    <string name="network_3G_auto">2G/3G Auto</string>
+    <string name="network_3G">2G/3G Pref</string>
+    <string name="network_2G">Solo 2G</string>
+
+    <string name="battery_saver_start">Ahorro energia activo</string>
+    <string name="battery_saver_stop">Ahorro energia inactivo</string>
+    <string name="battery_saver_change">Cambio de red a</string>
+    <string name="battery_saver_network">Red restaurada</string>
+    <string name="battery_saver_data">Datos restaurados</string>
+    <string name="battery_saver_brightness">Brillo pantalla restaurado</string>
+    <string name="battery_saver_bluetooth">Bluetooth restaurado</string>
+    <string name="battery_saver_location">Gps restaurado</string>
+    <string name="battery_saver_wifi">Wi-Fi restaurado</string>
+    <string name="battery_saver_cpu">CPU restaurado</string>
+    <string name="battery_saver_cpu_change">Ahorro energia cambia la freqüéncia de la CPU a</string>
+    <string name="battery_saver_sync">Sincronización restaurada</string>
+    <string name="battery_saver_led">LED restaurado</string>
+    <string name="battery_saver_vibrate">Vibración restaurada</string>
+    <string name="battery_saver_no_changes">Sin cambios</string>
+    <string name="battery_saver_all">Todas la configuraciones han sido restauradas</string>
+    <string name="battery_saver_enable_ticker">Ahorro energia activo...</string>
+    <string name="battery_saver_enable_title">Modo ahorro energia</string>
+    <string name="battery_saver_airplane_ticker">Modo avión activado por el Ahorro de energia</string>
+    <string name="battery_saver_airplane_text">Modo avión activado por el Ahorro de energia porque hace mas de 5 minutos que no hay señal de red</string>
+    <string name="battery_saver_disable">Desactivar</string>
 
 </resources>
