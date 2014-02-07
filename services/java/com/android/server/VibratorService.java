@@ -262,6 +262,10 @@ public class VibratorService extends IVibratorService.Stub
                 0, UserHandle.USER_CURRENT_OR_SELF) == 2) {
             return;
         }
+        if (Settings.Global.getInt(mContext.getContentResolver(),
+                    Settings.Global.BATTERY_SAVER_VIBRATE_DISABLE, 0) != 0) {
+            return;
+        }
         verifyIncomingUid(uid);
         // so wakelock calls will succeed
         long identity = Binder.clearCallingIdentity();
