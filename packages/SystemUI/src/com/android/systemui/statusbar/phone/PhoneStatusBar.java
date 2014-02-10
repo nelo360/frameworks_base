@@ -471,7 +471,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QUICK_TILES_BG_ALPHA),
                     false, this, UserHandle.USER_ALL);
-
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.PIE_CONTROLS), false, this,
+                    UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.EXPANDED_DESKTOP_STATE), false, this,
+                    UserHandle.USER_ALL);
             update();
         }
 
@@ -560,6 +565,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 if (mNotificationShortcutsLayout != null) {
                     mNotificationShortcutsLayout.updateShortcuts();
                 }
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.PIE_CONTROLS))) {
+                attachPieContainer(isPieEnabled());
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.EXPANDED_DESKTOP_STATE))) {
+                mNavigationBarOverlay.setIsExpanded(isExpanded());
             }
 
             update();
@@ -591,6 +602,18 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
             updateBatteryIcons();
         }
+    }
+
+    private boolean isPieEnabled() {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.PIE_CONTROLS, 0,
+                UserHandle.USER_CURRENT) == 1;
+    }
+
+    private boolean isExpanded() {
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.EXPANDED_DESKTOP_STATE, 0,
+                UserHandle.USER_CURRENT) == 1;
     }
 
     private void updateBatteryIcons() {
@@ -777,6 +800,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
             mNavigationBarView.setDisabledFlags(mDisabled);
             mNavigationBarView.setBar(this);
+            addNavigationBarCallback(mNavigationBarView);
             mNavigationBarView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
@@ -785,6 +809,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
             });
         }
+
+        // Setup pie container if enabled
+        attachPieContainer(isPieEnabled());
 
         // figure out which pixel-format to use for the status bar.
         mPixelFormat = PixelFormat.OPAQUE;
@@ -1280,6 +1307,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         prepareNavigationBarView();
 
         mWindowManager.addView(mNavigationBarView, getNavigationBarLayoutParams());
+        mNavigationBarOverlay.setNavigationBar(mNavigationBarView);
+        mNavigationBarOverlay.setIsExpanded(isExpanded());
     }
 
     private void repositionNavigationBar() {
@@ -1872,8 +1901,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         | StatusBarManager.DISABLE_RECENT
                         | StatusBarManager.DISABLE_BACK
                         | StatusBarManager.DISABLE_SEARCH)) != 0) {
-            // the nav bar will take care of these
-            if (mNavigationBarView != null) mNavigationBarView.setDisabledFlags(state);
+
+            // All navigation bar listeners will take care of these
+            propagateDisabledFlags(state);
 
             if ((state & StatusBarManager.DISABLE_RECENT) != 0) {
                 // close recents if it's visible
@@ -2560,9 +2590,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         mNavigationIconHints = hints;
 
-        if (mNavigationBarView != null) {
-            mNavigationBarView.setNavigationIconHints(hints);
-        }
+        propagateNavigationIconHints(hints);
+
         checkBarModes();
     }
 
@@ -2680,6 +2709,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         int msg = (mExpandedVisible)
                 ? ((mQSPanelIsOpen) ? MSG_FLIP_TO_NOTIFICATION_PANEL : MSG_CLOSE_PANELS)
                 : MSG_OPEN_NOTIFICATION_PANEL;
+        if (msg == MSG_OPEN_NOTIFICATION_PANEL) {
+            try {
+                mWindowManagerService.toggleStatusBar();
+            } catch (RemoteException ex) {
+            }
+        }
         mHandler.removeMessages(msg);
         mHandler.sendEmptyMessage(msg);
     }
@@ -2697,6 +2732,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         } else {
             msg = (mExpandedVisible)
                 ? MSG_CLOSE_PANELS : MSG_OPEN_QS_PANEL;
+        }
+        if (msg == MSG_OPEN_QS_PANEL) {
+            try {
+                mWindowManagerService.toggleStatusBar();
+            } catch (RemoteException ex) {
+            }
         }
         mHandler.removeMessages(msg);
         mHandler.sendEmptyMessage(msg);
@@ -2826,9 +2867,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (DEBUG) {
             Log.d(TAG, (showMenu?"showing":"hiding") + " the MENU button");
         }
-        if (mNavigationBarView != null) {
-            mNavigationBarView.setMenuVisibility(showMenu);
-        }
+
+        propagateMenuVisibility(showMenu);
 
         // See above re: lights-out policy for legacy apps.
         if (showMenu) setLightsOn(true);
@@ -3099,9 +3139,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     public void updateExpandedViewPos(int thingy) {
         if (SPEW) Log.v(TAG, "updateExpandedViewPos");
 
+        final int minHeight = (int)(mNotificationPanelMinHeightFrac * mCurrentDisplaySize.y);
         // on larger devices, the notification panel is propped open a bit
-        mNotificationPanel.setMinimumHeight(
-                (int)(mNotificationPanelMinHeightFrac * mCurrentDisplaySize.y));
+        mNotificationPanel.setIsDynamicHeight(minHeight > 0);
+        mNotificationPanel.setContainerMinimumHeight(minHeight);
 
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) mNotificationPanel.getLayoutParams();
         lp.gravity = mNotificationPanelGravity;
@@ -3113,6 +3154,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             lp.gravity = mSettingsPanelGravity;
             lp.setMarginEnd(mNotificationPanelMarginPx);
             mSettingsPanel.setLayoutParams(lp);
+            mSettingsPanel.setIsDynamicHeight(minHeight > 0);
         }
 
         if (ENABLE_HEADS_UP && mHeadsUpNotificationView != null) {
@@ -3512,6 +3554,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mStatusBarContainer.addView(mStatusBarWindow);
 
         updateExpandedViewPos(EXPANDED_LEAVE_ALONE);
+        restorePieTriggerMask();
 
         mRecreating = false;
     }
