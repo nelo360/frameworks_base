@@ -118,4 +118,14 @@
     <string name="quick_settings_quick_record_play">Reproduciendo...</string>
     <string name="quick_settings_custom_toggle">Personalizado</string>
     <string name="quick_settings_contact_toggle">Contacto</string>
+
+    <!-- Battery status in pie controls -->
+    <string name="pie_battery_status_charging">Cargando (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Cargada</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% restante</string>
+
+    <!-- Phone status in pie controls -->
+    <string name="pie_phone_status_no_service">Sin servicio</string>
+    <string name="pie_phone_status_airplane_mode">Modo avión activado</string>
+    <string name="pie_phone_status_emergency_only">Solo llamadas emergencia</string>
 </resources>
