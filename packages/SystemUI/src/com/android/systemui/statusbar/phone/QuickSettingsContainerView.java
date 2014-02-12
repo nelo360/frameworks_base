@@ -203,7 +203,7 @@ public class QuickSettingsContainerView extends FrameLayout {
                 // Offset the position by the cell gap or reset the position and cursor when we
                 // reach the end of the row
 
-                cursor += v.getColumnSpan();
+                cursor += child.getColumnSpan();
                 if (cursor < (((row + 1) * mNumFinalColumns)) || mSingleRow) {
                     x += lp.width + cellGap;
                 } else {

@@ -131,6 +131,7 @@ import com.android.systemui.statusbar.policy.NetworkController;
 import com.android.systemui.statusbar.policy.NotificationRowLayout;
 import com.android.systemui.statusbar.policy.OnSizeChangedListener;
 import com.android.systemui.statusbar.policy.RotationLockController;
+import com.android.systemui.statusbar.phone.QuickSettingsController;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -257,6 +258,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     View mFlipSettingsView;
     QuickSettingsContainerView mSettingsContainer;
     int mSettingsPanelGravity;
+    private TilesChangedObserver mTilesChangedObserver;
 
     // Ribbon settings
     private boolean mHasQuickAccessSettings;
@@ -995,11 +997,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             QuickSettingsContainerView mRibbonContainer = (QuickSettingsContainerView)
                     mStatusBarWindow.findViewById(R.id.quick_settings_ribbon_container);
             if (mRibbonContainer != null) {
+                String settingsKey = mQuickAccessLayoutLinked
+                        ? Settings.System.QUICK_SETTINGS_TILES
+                        : Settings.System.QUICK_SETTINGS_RIBBON_TILES;
                 mRibbonQS = new QuickSettingsController(mContext, mRibbonContainer, this,
-                        mQuickAccessLayoutLinked ? Settings.System.QUICK_SETTINGS_TILES
-                            : Settings.System.QUICK_SETTINGS_RIBBON_TILES);
-                mRibbonQS.hideLiveTiles(true);
-                mRibbonQS.hideLiveTileLabels(true);
+                        settingsKey, true);
                 mRibbonQS.setService(this);
                 mRibbonQS.setBar(mStatusBarView);
                 mRibbonQS.setupQuickSettings();
@@ -1391,6 +1393,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
             }
 
+            if (mQS != null) {
+                mQS.shutdown();
+                mQS = null;
+            }
+
             // wherever you find it, Quick Settings needs a container to survive
             mSettingsContainer = (QuickSettingsContainerView)
                     mStatusBarWindow.findViewById(R.id.quick_settings_container);
@@ -1408,6 +1415,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mQS.setService(this);
                 mQS.setBar(mStatusBarView);
                 mQS.setupQuickSettings();
+                // Start observing for changes
+                if (mTilesChangedObserver == null) {
+                    mTilesChangedObserver = new TilesChangedObserver(mHandler);
+                    mTilesChangedObserver.startObserving();
+                }
+
             } else {
                 mQS = null; // fly away, be free
             }
@@ -2458,6 +2471,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         return a;
     }
 
+    public Animator setVisibilityOnStart(
+            final Animator a, final View v, final int vis) {
+        a.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                v.setVisibility(vis);
+            }
+        });
+        return a;
+    }
+
     public Animator interpolator(TimeInterpolator ti, Animator a) {
         a.setInterpolator(ti);
         return a;
@@ -2525,14 +2549,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     ObjectAnimator.ofFloat(mScrollView, View.SCALE_X, 1f)
                         .setDuration(FLIP_DURATION_IN)
                     )));
-        if (mRibbonView != null && mHasQuickAccessSettings) {
-            mRibbonView.setVisibility(View.VISIBLE);
+    if (mRibbonView != null && mHasQuickAccessSettings) {
             mRibbonViewAnim = start(
-                    startDelay(FLIP_DURATION_OUT * zeroOutDelays,
-                            interpolator(mDecelerateInterpolator,
-                                    ObjectAnimator.ofFloat(mRibbonView, View.SCALE_X, 1f)
-                                    .setDuration(FLIP_DURATION_IN)
-                                    )));
+                startDelay(FLIP_DURATION_OUT * zeroOutDelays,
+                    setVisibilityOnStart(
+                        interpolator(mDecelerateInterpolator,
+                            ObjectAnimator.ofFloat(mRibbonView, View.SCALE_X, 1f)
+                                .setDuration(FLIP_DURATION_IN)),
+                        mRibbonView, View.VISIBLE)));
         }
         mFlipSettingsViewAnim = start(
             setVisibilityWhenDone(

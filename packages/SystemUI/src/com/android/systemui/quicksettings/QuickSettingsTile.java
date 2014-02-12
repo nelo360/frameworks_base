@@ -106,6 +106,21 @@ public class QuickSettingsTile implements OnClickListener {
         mTile.setOnLongClickListener(mOnLongClick);
     }
 
+     public void switchToRibbonMode() {
+        TextView tv = (TextView) mTile.findViewById(R.id.text);
+        if (tv != null) {
+            tv.setVisibility(View.GONE);
+        }
+        View image = mTile.findViewById(R.id.image);
+        if (image != null) {
+            MarginLayoutParams params = (MarginLayoutParams) image.getLayoutParams();
+            int margin = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.qs_tile_ribbon_icon_margin);
+            params.topMargin = params.bottomMargin = margin;
+            image.setLayoutParams(params);
+        }
+    }
+
     public void setLabelVisibility(boolean visible) {
         TextView tv = (TextView) mTile.findViewById(R.id.text);
         if (tv != null) {
