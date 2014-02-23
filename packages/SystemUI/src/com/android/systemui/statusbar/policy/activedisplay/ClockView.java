@@ -180,15 +180,15 @@ public class ClockView extends RelativeLayout {
         }
 
         public void update() {
-            final ContentResolver resolver = mContext.getContentResolver();
-            showAmPm = (Settings.System.getIntForUser(
-                    resolver, Settings.System.ACTIVE_DISPLAY_SHOW_AMPM, 0,
-                    UserHandle.USER_CURRENT_OR_SELF) == 1);
-            boolean showDate = (Settings.System.getIntForUser(
-                    resolver, Settings.System.ACTIVE_DISPLAY_SHOW_DATE, 0,
-                    UserHandle.USER_CURRENT_OR_SELF) == 1);
+            ContentResolver resolver =
+                    ClockView.this.mContext.getContentResolver();
 
-            mAmPm.setShowAmPm(showAmPm);
+            showAmPm = Settings.System.getInt(
+                    resolver, Settings.System.ACTIVE_DISPLAY_SHOW_AMPM, 0) == 1;
+            boolean showDate = Settings.System.getInt(
+                    resolver, Settings.System.ACTIVE_DISPLAY_SHOW_DATE, 0) == 1;
+
+            setDateFormat();
             mDateView.setVisibility(showDate ? View.VISIBLE : View.INVISIBLE);
         }
     }
@@ -281,7 +281,7 @@ public class ClockView extends RelativeLayout {
     }
 
     private void setDateFormat() {
-        mFormat = DateFormat.is24HourFormat(mContext) ? M24 : M12;
+        mFormat = android.text.format.DateFormat.is24HourFormat(getContext()) ? M24 : M12;
         mAmPm.setShowAmPm(mFormat.equals(M12) && showAmPm);
     }
 }
