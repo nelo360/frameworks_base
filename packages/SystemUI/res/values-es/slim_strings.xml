@@ -43,7 +43,6 @@
     <string name="toggle">Interruptor</string>
 
     <!-- Slim Shortcut Actions -->
-
     <string name="shortcut_picker">Accesos directos</string>
     <string name="shortcut_immersive">Escritorio expandido</string>
     <string name="shortcut_quiethours">Horas silencio</string>
@@ -68,7 +67,6 @@
     <string name="chamber_name_title">Nombre del acceso directo</string>
     <string name="chamber_name_message">Nombre del acceso directo que se mostrará junto al icono.</string>
     <string name="chamber_name_toast">Se usará el nombre predeterminado</string>
-
 
     <!-- Quick Settings -->
     <string name="quick_settings_gps">GPS</string>
