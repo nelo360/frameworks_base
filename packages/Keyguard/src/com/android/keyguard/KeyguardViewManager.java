@@ -57,6 +57,7 @@ import android.view.ViewGroup;
 import android.view.ViewManager;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.provider.Settings;
 
 /**
  * Manages creating, showing, hiding and resetting the keyguard.  Calls back
