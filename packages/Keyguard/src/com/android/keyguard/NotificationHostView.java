@@ -77,6 +77,7 @@ public class NotificationHostView extends FrameLayout {
     private int mNotificationMaxHeight, mNotificationMaxRowHeight;
     private int mDisplayWidth, mDisplayHeight;
     private int mShownNotifications = 0;
+    private boolean mDynamicWidth;
 
     private ViewMediatorCallback mViewMediatorCallback;
     private LinearLayout mNotifView;
