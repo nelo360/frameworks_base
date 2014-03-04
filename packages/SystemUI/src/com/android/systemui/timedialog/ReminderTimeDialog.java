@@ -95,6 +95,7 @@ public class ReminderTimeDialog extends Activity  {
         .setPositiveButton(R.string.dlg_ok,
             new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                shared.edit().putBoolean("updated", true).commit();
                 shared.edit().putString("title", title.getText().toString()).commit();
                 shared.edit().putString("message", message.getText().toString()).commit();
                 startTimerDialog();
@@ -174,6 +175,7 @@ public class ReminderTimeDialog extends Activity  {
                     shared.edit().putInt("minutes", -1).commit();
                     shared.edit().putInt("day", -1).commit();
                 }
+                updateView();
                 ReminderTimeDialog.this.finish();
             };
         }, hour, minutes, DateFormat.is24HourFormat(this));
