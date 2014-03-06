@@ -63,6 +63,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.content.pm.IPackageDataObserver;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.BaseStatusBar;
