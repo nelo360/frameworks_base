@@ -56,6 +56,7 @@ import static com.android.internal.util.slim.QSConstants.TILE_WIFI;
 import static com.android.internal.util.slim.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.slim.QSConstants.TILE_REBOOT;
 import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
+import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -72,6 +73,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import com.android.internal.util.slim.QSUtils;
 
 import com.android.internal.util.slim.DeviceUtils;
 import com.android.systemui.quicksettings.AirplaneModeTile;
@@ -111,6 +113,7 @@ import com.android.systemui.quicksettings.RemoteDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.RebootTile;
+import com.android.systemui.quicksettings.ProfileTile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -267,6 +270,10 @@ public class QuickSettingsController {
                 mTileStatusUris.add(Settings.Global.getUriFor(Settings.Global.ADB_ENABLED));
                 if (DeviceUtils.adbEnabled(resolver)) {
                     qs = new NetworkAdbTile(mContext, this);
+            } else if (tile.equals(TILE_PROFILE)) {
+                mTileStatusUris.add(Settings.System.getUriFor(Settings.System.SYSTEM_PROFILES_ENABLED));
+                if (QSUtils.systemProfilesEnabled(resolver)) {
+                    qs = new ProfileTile(mContext, this);
                 }
             }
 
