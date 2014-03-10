@@ -85,6 +85,7 @@ public class SlimActions {
             if (collapseShade) {
                 if (!action.equals(ButtonsConstants.ACTION_QS)
                         && !action.equals(ButtonsConstants.ACTION_NOTIFICATIONS)
+                        && !action.equals(ButtonsConstants.ACTION_SMART_PULLDOWN)
                         && !action.equals(ButtonsConstants.ACTION_THEME_SWITCH)
                         && !action.equals(ButtonsConstants.ACTION_TORCH)) {
                     try {
@@ -247,6 +248,15 @@ public class SlimActions {
                 } catch (RemoteException e) {
                 }
                 return;
+            } else if (action.equals(ButtonsConstants.ACTION_SMART_PULLDOWN)) {
+                if (isKeyguardShowing && isKeyguardSecure) {
+                    return;
+                }
+                try {
+                    barService.toggleSmartPulldown();
+                } catch (RemoteException e) {
+                }
+                return;
             } else if (action.equals(ButtonsConstants.ACTION_ASSIST)
                     || action.equals(ButtonsConstants.ACTION_KEYGUARD_SEARCH)) {
                 Intent intent = ((SearchManager) context.getSystemService(Context.SEARCH_SERVICE))
@@ -398,7 +408,7 @@ public class SlimActions {
         return false;
     }
 
-    private static void triggerVirtualKeypress(final int keyCode, boolean longpress) {
+    public static void triggerVirtualKeypress(final int keyCode, boolean longpress) {
         InputManager im = InputManager.getInstance();
         long now = SystemClock.uptimeMillis();
 
