@@ -685,13 +685,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     resolver, Settings.System.STATUS_BAR_BRIGHTNESS_CONTROL,
                     0, UserHandle.USER_CURRENT) == 1;
 
-            int sidebarPosition = Settings.System.getInt(
-                resolver, Settings.System.APP_SIDEBAR_POSITION, AppSidebar.SIDEBAR_POSITION_LEFT);
-            if (sidebarPosition != mSidebarPosition) {
-                mSidebarPosition = sidebarPosition;
-                mWindowManager.updateViewLayout(mAppSidebar, getAppSidebarLayoutParams(sidebarPosition));
-            }
-
             String notificationShortcutsIsActive = Settings.System.getStringForUser(resolver,
                     Settings.System.NOTIFICATION_SHORTCUTS_CONFIG, UserHandle.USER_CURRENT);
             mNotificationShortcutsIsActive = !(notificationShortcutsIsActive == null
