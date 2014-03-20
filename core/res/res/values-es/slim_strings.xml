@@ -113,4 +113,11 @@
     <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
     <string name="permdesc_resetBatteryStats">Permitir a una aplicación reiniciar las estadísticas del uso de la batería.</string>
 
+    <!-- Floating Window -->
+    <string name="floating_window_snap_top">Acoplar arriba</string>
+    <string name="floating_window_snap_bottom">Acoplar abajo</string>
+    <string name="floating_window_snap_left">Acoplar izquierda</string>
+    <string name="floating_window_snap_right">Acoplar derecha</string>
+    <string name="floating_window_minimize">Minimizar</string>
+
 </resources>
