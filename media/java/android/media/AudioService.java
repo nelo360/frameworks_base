@@ -481,6 +481,11 @@ public class AudioService extends IAudioService.Stub {
             "ro.config.vc_call_vol_steps",
            MAX_STREAM_VOLUME[AudioSystem.STREAM_VOICE_CALL]);
 
+       // Value to set different steps amount for music output (default 15)
+        MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC] = SystemProperties.getInt(
+            "ro.config.vc_music_vol_steps",
+           MAX_STREAM_VOLUME[AudioSystem.STREAM_MUSIC]);
+
         sSoundEffectVolumeDb = context.getResources().getInteger(
                 com.android.internal.R.integer.config_soundEffectVolumeDb);
 
@@ -516,6 +521,9 @@ public class AudioService extends IAudioService.Stub {
 
         mUseFixedVolume = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_useFixedVolume);
+
+        mLinkNotificationWithVolume = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
 
         // must be called before readPersistedSettings() which needs a valid mStreamVolumeAlias[]
         // array initialized by updateStreamVolumeAlias()
@@ -739,9 +747,6 @@ public class AudioService extends IAudioService.Stub {
                     Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM, 0, UserHandle.USER_CURRENT) == 1;
         }
 
-        mLinkNotificationWithVolume = Settings.System.getIntForUser(cr,
-                Settings.System.VOLUME_LINK_NOTIFICATION, 1, UserHandle.USER_CURRENT) == 1;
-
         mMuteAffectedStreams = System.getIntForUser(cr,
                 System.MUTE_STREAMS_AFFECTED,
                 ((1 << AudioSystem.STREAM_MUSIC)|
@@ -863,7 +868,9 @@ public class AudioService extends IAudioService.Stub {
         int streamTypeAlias = mStreamVolumeAlias[streamType];
         VolumeStreamState streamState = mStreamStates[streamTypeAlias];
 
-        final int device = getDeviceForStream(streamTypeAlias);
+        // when adjuststreamvolume, it should be applied on the device that
+        // chosen for the stream being updated, but not the alias one.
+        final int device = getDeviceForStream(streamType);
 
         int aliasIndex = streamState.getIndex(device);
         boolean adjustVolume = true;
@@ -1039,8 +1046,6 @@ public class AudioService extends IAudioService.Stub {
 
             oldIndex = streamState.getIndex(device);
 
-            index = rescaleIndex(index * 10, streamType, streamTypeAlias);
-
             if (streamTypeAlias == AudioSystem.STREAM_MUSIC &&
                 (device & AudioSystem.DEVICE_OUT_ALL_A2DP) != 0 &&
                 (flags & AudioManager.FLAG_BLUETOOTH_ABS_VOLUME) == 0) {
@@ -1050,6 +1055,8 @@ public class AudioService extends IAudioService.Stub {
                     }
                 }
             }
+
+            index = rescaleIndex(index * 10, streamType, streamTypeAlias);
 
             flags &= ~AudioManager.FLAG_FIXED_VOLUME;
             if ((streamTypeAlias == AudioSystem.STREAM_MUSIC) &&
