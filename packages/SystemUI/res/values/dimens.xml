@@ -276,6 +276,7 @@
     <dimen name="recent_favorite_icon_size">18dp</dimen>
     <dimen name="recent_thumbnail_width">198dp</dimen>
     <dimen name="recent_thumbnail_height">140dp</dimen>
+    <dimen name="recent_thumbnail_bottom_padding">4dp</dimen>
 
     <!-- Network stats text size -->
     <dimen name="network_stats_text_size">10dp</dimen>
