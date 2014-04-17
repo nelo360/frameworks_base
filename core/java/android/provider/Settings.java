@@ -3439,7 +3439,14 @@ public final class Settings {
         public static final String EXPANDED_SCREENTIMEOUT_MODE = "expanded_screentimeout_mode";
 
         /**
-         * Quick Settings Quick access ribbon
+         * Quick Settings Quick access ribbon - size
+         *
+         * @hide
+         */
+        public static final String QS_QUICK_ACCESS_SIZE = "qs_quick_access_size";
+
+        /**
+	 * Quick Settings Quick access ribbon
          *
          * @hide
          */
