@@ -219,4 +219,13 @@
     <!-- Title shown in recents popup for showing app in floating mode -->
     <string name="status_bar_recent_floating_item_title">Ventana flotante</string>
 
+        <!-- App sidebar -->
+    <string name="default_folder_text">Carpeta</string>
+    <string name="title_activity_sidebar_configuration">Configurar contenido de la barra</string>
+    <string name="action_save">Guardar</string>
+    <string name="toast_items_saved">Los elementos han sido guardados</string>
+    <string name="content_setup_instructions">Para agregar elementos a la barra mantenga pulsado un icono y arrástrelo dentro de la zona azul. Para quitarlos, arrástrelos fuera de ella.</string>
+    <string name="content_setup_dismiss">Continuar</string>
+    <string name="toast_not_installed">La aplicación no está instalada</string>
+
 </resources>
