@@ -86,8 +86,7 @@
     <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> usada</string>
 
     <!-- battery saver mode -->
-    <string name="quick_settings_battery_saver_label">Ahorro energia encendido</string>
-    <string name="quick_settings_battery_saver_off_label">Ahorro energia apagado</string>
+    <string name="quick_settings_battery_saver_label">Ahorro energía</string>
     <string name="quick_settings_network_type">Estado</string>
     <string name="quick_settings_network_unknown">Desconocido</string>
     <string name="quick_settings_network_disable">Sin internet</string>
