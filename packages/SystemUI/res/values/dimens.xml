@@ -264,4 +264,8 @@
     <dimen name="recent_header_width">120dp</dimen>
     <dimen name="recent_text_size">20dp</dimen>
     <dimen name="recent_thumbnail_bottom_padding">4dp</dimen>
+
+    <!-- Quick Settings tile geometry: interior margin, above and below icon (ribbon mode) -->
+    <dimen name="qs_tile_ribbon_icon_margin">16dp</dimen>
+
 </resources>
