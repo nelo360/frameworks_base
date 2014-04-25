@@ -268,4 +268,7 @@
     <!-- Quick Settings tile geometry: interior margin, above and below icon (ribbon mode) -->
     <dimen name="qs_tile_ribbon_icon_margin">16dp</dimen>
 
+    <!-- Network stats text size -->
+    <dimen name="network_stats_text_size">10dp</dimen>
+
 </resources>

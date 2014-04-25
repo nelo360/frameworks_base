@@ -44,6 +44,9 @@
     <drawable name="notification_item_background_color_pressed">#ffaaaaaa</drawable>
     <color name="notification_shortcut_color">#FFFFFFFF</color>
 
+    <!-- Network speed indicator -->
+    <color name="status_bar_traffic_color">#FFFFFFFF</color>
+
     <!-- Navigation bar -->
     <color name="navigationbar_button_default_color">#FFFFFFFF</color>
     <color name="navigationbar_button_glow_default_color">#FFFFFFFF</color>
