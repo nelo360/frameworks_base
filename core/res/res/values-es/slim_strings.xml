@@ -54,4 +54,5 @@
   <string name="permdesc_preventpower">Permite a una aplicación utilizar el botón de encendido</string>
   <string name="permlab_changeHeadsUpState">habilitar o deshabilitar \"heads up\"</string>
   <string name="permdesc_changeHeadsUpState">Permite a la aplicación cambiar si tiene permisos para mostrar notificaciones normales como \"heads up\".</string>
+
 </resources>
