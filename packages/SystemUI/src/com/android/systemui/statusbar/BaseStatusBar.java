@@ -270,6 +270,10 @@ public abstract class BaseStatusBar extends SystemUI implements
         return mDeviceProvisioned;
     }
 
+    public int getNotificationCount() {
+        return mNotificationData.size();
+    }
+
     public NotificationData getNotifications() {
         return mNotificationData;
     }
@@ -1052,13 +1056,13 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     public class NotificationClicker implements View.OnClickListener {
-        private KeyguardTouchDelegate mKeyguard;
-        private PendingIntent mPendingIntent;
-        private Intent mIntent;
-        private String mPkg;
-        private String mTag;
-        private int mId;
-        private boolean mFloat;
+        public KeyguardTouchDelegate mKeyguard;
+        public PendingIntent mPendingIntent;
+        public Intent mIntent;
+        public String mPkg;
+        public String mTag;
+        public int mId;
+        public boolean mFloat;
 
         public NotificationClicker(PendingIntent intent, String pkg, String tag, int id) {
             this();
@@ -1094,7 +1098,8 @@ public abstract class BaseStatusBar extends SystemUI implements
             } catch (RemoteException e) {
             }
 
-            if (mIntent != null) {
+            //int flags = Intent.FLAG_FLOATING_WINDOW | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            if (mPendingIntent != null) {
 
                  if (mFloat && !"android".equals(mPkg)) {
                     Intent transparent = new Intent(mContext, com.android.systemui.Transparent.class);
