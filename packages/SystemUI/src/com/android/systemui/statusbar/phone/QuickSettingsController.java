@@ -57,8 +57,12 @@ import static com.android.internal.util.slim.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.slim.QSConstants.TILE_REBOOT;
 import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
 import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
+<<<<<<< HEAD
 import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
 import static com.android.internal.util.slim.QSConstants.TILE_BATTERYSAVER;
+=======
+import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
+>>>>>>> 07236b9... framework: Add compass tile (1/2)
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
@@ -98,6 +102,7 @@ import com.android.systemui.quicksettings.BatterySaverTile;
 import com.android.systemui.quicksettings.BluetoothTile;
 import com.android.systemui.quicksettings.BrightnessTile;
 import com.android.systemui.quicksettings.BugReportTile;
+import com.android.systemui.quicksettings.CompassTile;
 import com.android.systemui.quicksettings.ContactTile;
 import com.android.systemui.quicksettings.CustomTile;
 import com.android.systemui.quicksettings.ExpandedDesktopTile;
@@ -310,6 +315,8 @@ public class QuickSettingsController {
                 WeatherDialog();
             } else if (tile.equals(TILE_BATTERYSAVER)) {
                 qs = new BatterySaverTile(mContext, this);
+            } else if (tile.equals(TILE_COMPASS)) {
+                qs = new CompassTile(mContext, this);
             }
 
             if (qs != null) {

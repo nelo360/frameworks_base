@@ -128,6 +128,7 @@
   <string name="quick_settings_reminder_help_message">Tocar aquí para crear un recordatorio. Pulsación larga para eliminarlo.</string>
   <string name="quick_settings_network_adb_disabled_label">Deshabilitado</string>
   <string name="quick_settings_network_adb_enabled_label">Habilitado</string>
+  <string name="quick_settings_compass_off">Brújula off</string>
   <string name="pie_battery_status_charging">Cargando (<xliff:g id="percent">%d</xliff:g>%%)</string>
   <string name="pie_battery_status_full">Cargado</string>
   <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% remaining</string>
@@ -140,5 +141,6 @@
   <string name="status_bar_notification_heads_up_enable_title">Habilitar \"heads up\"</string>
   <string name="status_bar_notification_heads_up_disable_title">Deshabilitar \"heads up\"</string>
   <string name="heads_up_snooze_message">Heads up deshabilitado durante <xliff:g id="number">%d</xliff:g> minutos.</string>
+
 
 </resources>
