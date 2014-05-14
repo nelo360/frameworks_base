@@ -151,6 +151,7 @@
     <string name="quick_settings_quick_record_dialog_cancel">Close</string>
     <string name="quick_settings_quick_record_dialog">Play Recording\nLongpress to delete</string>
     <string name="quick_settings_profile_label">Profile</string>
+    <string name="quick_settings_compass_off">Compass off</string>
 
     <!-- App sidebar -->
     <string name="default_folder_text">Folder</string>
