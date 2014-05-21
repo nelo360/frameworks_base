@@ -101,6 +101,7 @@ class WallpaperManagerService extends IWallpaperManager.Stub {
     static final String WALLPAPER_INFO_TMP = "wallpaper_info.xml.tmp";
     static final String KEYGUARD_WALLPAPER = "keyguard_wallpaper";
     static final String KEYGUARD_WALLPAPER_INFO = "keyguard_wallpaper_info.xml";
+    static final String WALLPAPER_INFO_TMP = "wallpaper_info.xml.tmp";
 
     /**
      * Name of the component used to display bitmap wallpapers from either the gallery or
