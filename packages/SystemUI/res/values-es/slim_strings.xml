@@ -282,4 +282,7 @@
     <string name="weather_46">Nieve</string>
     <string name="weather_47">Chap. aislados</string>
 
+    <!-- Blacklisted app for floating mode -->
+    <string name="floating_mode_blacklisted_app">La aplicación actual está en la lista negra y no podrá usarse en modo flotante</string>
+
 </resources>

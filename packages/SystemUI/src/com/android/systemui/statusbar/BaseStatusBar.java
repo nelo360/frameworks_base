@@ -1208,9 +1208,14 @@ public abstract class BaseStatusBar extends SystemUI implements
             } catch (RemoteException e) {
             }
 
-            //int flags = Intent.FLAG_FLOATING_WINDOW | Intent.FLAG_ACTIVITY_CLEAR_TASK;
-            if (mPendingIntent != null) {
-
+            int flags = Intent.FLAG_FLOATING_WINDOW | Intent.FLAG_ACTIVITY_CLEAR_TASK;
+            boolean allowed = true; // default on, except for preloaded false
+            try {
+                // preloaded apps are added to the blacklist array when is recreated, handled in the notification manager
+                allowed = mNotificationManager.isPackageAllowedForFloatingMode(mPkg);
+            } catch (android.os.RemoteException ex) {
+                // System is dead
+            }
                  if (mFloat && !"android".equals(mPkg)) {
                     Intent transparent = new Intent(mContext, com.android.systemui.Transparent.class);
                     transparent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FLOATING_WINDOW);
@@ -1221,6 +1226,7 @@ public abstract class BaseStatusBar extends SystemUI implements
                 v.getLocationOnScreen(pos);
                 Intent overlay = new Intent();
                 if (mFloat) overlay.addFlags(Intent.FLAG_FLOATING_WINDOW | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                 overlay.setSourceBounds(
                         new Rect(pos[0], pos[1], pos[0] + v.getWidth(), pos[1] + v.getHeight()));
                 try {
@@ -1230,7 +1236,7 @@ public abstract class BaseStatusBar extends SystemUI implements
                     Log.w(TAG, "Sending contentIntent failed: " + e);
                 }
             } else if(mIntent != null) {
-                //mIntent.addFlags(flags);
+                if (mFloat && allowed) mIntent.addFlags(flags);
                 mContext.startActivity(mIntent);
             }
 
