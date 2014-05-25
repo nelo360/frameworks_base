@@ -47,4 +47,6 @@
     <dimen name="clock_padding">10dp</dimen>
     <dimen name="clock_size">15dp</dimen>
 
+    <!-- Wifi -->
+    <dimen name="wifi_combo_margin_end">-6dp</dimen>
 </resources>
