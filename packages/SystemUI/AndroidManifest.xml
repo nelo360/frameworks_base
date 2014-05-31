@@ -209,6 +209,20 @@
             android:taskAffinity="com.android.systemui.net"
             android:excludeFromRecents="true" />
 
+        <!-- Quick Record Tile Recordings -->
+        <activity
+            android:name="com.android.systemui.quicksettings.QuickRecordingsDialog"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.android.systemui.quicksettings.QuickRecordingsDialog"
+            android:launchMode="singleInstance" >
+            <intent-filter>
+                <action android:name="com.android.systemui.quicksettings.QuickRecordingsDialog" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <!-- Music Tile Sleep Timer -->
         <activity
             android:name="com.android.systemui.timedialog.MusicTileTimeDialog"
@@ -293,6 +307,19 @@
             android:name="com.android.systemui.shortcuts.Reboot"
             android:label="@string/shortcut_reboot"
             android:icon="@drawable/ic_qs_reboot"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.systemui.SHORTCUT" />
+                <category android:name="com.android.systemui.SHORTCUT_EXTRA" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.android.systemui.shortcuts.ShakeEvents"
+            android:label="@string/shortcut_shakeevent"
+            android:icon="@drawable/ic_qs_shake_events"
             android:theme="@android:style/Theme.NoDisplay"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance" >

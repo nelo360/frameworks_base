@@ -25,6 +25,7 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -34,6 +35,7 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.WindowManager;
 
@@ -104,7 +106,7 @@ public abstract class KeyguardActivityLauncher {
         // after showing lockscreen camera (bug 11063890).
         KeyguardUpdateMonitor.getInstance(getContext()).setAlternateUnlockEnabled(false);
 
-        if (lockPatternUtils.isSecure()) {
+        if (lockPatternUtils.isSecure() && !KeyguardHostView.shakeInsecure()) {
             // Launch the secure version of the camera
             if (wouldLaunchResolverActivity(SECURE_CAMERA_INTENT)) {
                 // TODO: Show disambiguation dialog instead.
@@ -126,8 +128,17 @@ public abstract class KeyguardActivityLauncher {
 
         pickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         pickIntent.putExtra(AppWidgetManager.EXTRA_CUSTOM_SORT, false);
-        pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
-                AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+        if (Settings.Secure.getIntForUser(getContext().getContentResolver(),
+                Settings.Secure.ALLOW_ALL_LOCKSCREEN_WIDGETS,
+                0, UserHandle.USER_CURRENT) != 1) {
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
+                    AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+        } else {
+            // User has chosen to allow all widgets to be placed on the lockscreen
+            pickIntent.putExtra(AppWidgetManager.EXTRA_CATEGORY_FILTER,
+                    AppWidgetProviderInfo.WIDGET_CATEGORY_HOME_SCREEN
+                    | AppWidgetProviderInfo.WIDGET_CATEGORY_KEYGUARD);
+        }
 
         Bundle options = new Bundle();
         options.putInt(AppWidgetManager.OPTION_APPWIDGET_HOST_CATEGORY,
@@ -175,7 +186,7 @@ public abstract class KeyguardActivityLauncher {
                 Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP
                 | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        boolean isSecure = lockPatternUtils.isSecure();
+        boolean isSecure = lockPatternUtils.isSecure() && !KeyguardHostView.shakeInsecure();
         if (!isSecure || showsWhileLocked) {
             if (!isSecure) {
                 getCallback().dismiss(false);
