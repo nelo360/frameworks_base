@@ -319,7 +319,7 @@ public class NotificationPeek implements SensorActivityHandler.SensorChangedCall
         mHandler.removeCallbacksAndMessages(null);
 
         mPeekScreenTimeout = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                        Settings.System.PEEK_SCREEN_TIMEOUT, 0, UserHandle.USER_CURRENT);
+                        Settings.System.PEEK_SCREEN_TIMEOUT, 5000, UserHandle.USER_CURRENT);
 
         // turn on screen task
         mHandler.postDelayed(new Runnable() {
@@ -388,7 +388,7 @@ public class NotificationPeek implements SensorActivityHandler.SensorChangedCall
 
                 mWakeLockHandler.removeCallbacks(mPartialWakeLockRunnable);
                 mPeekPickupTimeout = Settings.Secure.getIntForUser(mContext.getContentResolver(),
-                        Settings.System.PEEK_PICKUP_TIMEOUT, 0, UserHandle.USER_CURRENT);
+                        Settings.System.PEEK_PICKUP_TIMEOUT, 10000, UserHandle.USER_CURRENT);
                 mWakeLockHandler.postDelayed(mPartialWakeLockRunnable, mPeekPickupTimeout);
 
                 mNextNotification = n;
