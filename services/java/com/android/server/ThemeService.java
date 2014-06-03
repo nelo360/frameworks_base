@@ -217,7 +217,7 @@ public class ThemeService extends IThemeService.Stub {
 
         killLaunchers();
 
-        postFinish(true, pkgName);
+        postFinish(true, pkgName, components);
     }
 
     private void doApplyDefaultTheme() {
@@ -617,7 +617,7 @@ public class ThemeService extends IThemeService.Stub {
         mClients.finishBroadcast();
     }
 
-    private void postFinish(boolean isSuccess, String pkgName) {
+    private void postFinish(boolean isSuccess, String pkgName, List<String> components) {
         synchronized(this) {
             mProgress = 0;
             mPkgName = null;
@@ -636,8 +636,21 @@ public class ThemeService extends IThemeService.Stub {
 
         // if successful, broadcast that the theme changed
         if (isSuccess) {
-            mContext.sendBroadcast(new Intent(ThemeUtils.ACTION_THEME_CHANGED));
+            broadcastThemeChange(components);
         }
+    }
+
+    private void broadcastThemeChange(List<String> components) {
+        StringBuilder sb = new StringBuilder();
+        String delimiter = "";
+        for (String comp : components) {
+            sb.append(delimiter);
+            sb.append(comp);
+            delimiter = "|";
+        }
+        final Intent intent = new Intent(ThemeUtils.ACTION_THEME_CHANGED);
+        intent.putExtra("components", sb.toString());
+        mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
     }
 
     private void incrementProgress(int increment, String pkgName) {
