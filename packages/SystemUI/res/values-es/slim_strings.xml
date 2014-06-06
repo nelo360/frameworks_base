@@ -339,4 +339,7 @@
     <string name="status_bar_notification_heads_up_disable_title">Deshabilitar "heads up"</string>
     <string name="heads_up_snooze_message">Heads up deshabilitado durante <xliff:g id="number">%d</xliff:g> minutos.</string>
 
+    <!-- First time run hover -->
+    <string name="hover_cling_text">Hover Está ahora activo.\n\nCuando llegue una nueva notificación, una ventana aparecerá y podras interactuar sin salir de la aplicación actual.</string>
+
 </resources>
