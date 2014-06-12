@@ -298,4 +298,7 @@
     <!-- First time run hover -->
     <string name="hover_cling_text">Hover está ahora activo.\n\nCuando llegue una nueva notificación, una ventana superior aparecerá permitiéndote interactuar sin salir de la app actual.</string>
 
+    <!-- Title shown when app provides no interface -->
+    <string name="status_bar_floating_no_interface">Aplicación sin interfaz</string>
+
 </resources>

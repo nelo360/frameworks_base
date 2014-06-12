@@ -847,8 +847,15 @@ public abstract class BaseStatusBar extends SystemUI implements
                             setIconHiddenByUser(packageNameF, item.isChecked());
                             updateNotificationIcons();
                         } else if (item.getItemId() == R.id.notification_floating_item) {
-                            launchFloating(contentIntent);
-                            animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE);
+                           if (contentIntent == null) {
+                               String text = mContext.getResources().getString(R.string.status_bar_floating_no_interface);
+                               int duration = Toast.LENGTH_SHORT;
+                               animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE);
+                               Toast.makeText(mContext, text, duration).show();
+                           } else {
+                               launchFloating(contentIntent);
+                               animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_NONE);
+                           }
                         } else {
                             return false;
                         }
