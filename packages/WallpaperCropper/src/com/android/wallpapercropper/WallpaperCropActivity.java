@@ -290,6 +290,7 @@ public class WallpaperCropActivity extends Activity {
 
         Point minDims = new Point();
         Point maxDims = new Point();
+
         Display d = getWindowManager().getDefaultDisplay();
         d.getCurrentSizeRange(minDims, maxDims);
 
@@ -324,10 +325,11 @@ public class WallpaperCropActivity extends Activity {
         }
         // Get the crop
         RectF cropRect = mCropView.getCrop();
+
         int cropRotation = mCropView.getImageRotation();
         float cropScale = mCropView.getWidth() / (float) cropRect.width();
 
-        Point inSize = mCropView.getSourceDimensions();
+	Point inSize = mCropView.getSourceDimensions();
         Matrix rotateMatrix = new Matrix();
         rotateMatrix.setRotate(cropRotation);
         float[] rotatedInSize = new float[] { inSize.x, inSize.y };
@@ -532,14 +534,15 @@ public class WallpaperCropActivity extends Activity {
                 Rect roundedTrueCrop = new Rect();
                 Matrix rotateMatrix = new Matrix();
                 Matrix inverseRotateMatrix = new Matrix();
+
                 if (mRotation > 0) {
                     rotateMatrix.setRotate(mRotation);
                     inverseRotateMatrix.setRotate(-mRotation);
 
                     mCropBounds.roundOut(roundedTrueCrop);
                     mCropBounds = new RectF(roundedTrueCrop);
-
-                    Point bounds = getImageBounds();
+		
+		    Point bounds = getImageBounds();
 
                     float[] rotatedBounds = new float[] { bounds.x, bounds.y };
                     rotateMatrix.mapPoints(rotatedBounds);
@@ -726,7 +729,7 @@ public class WallpaperCropActivity extends Activity {
             final WallpaperManager wallpaperManager) {
         final Point defaultWallpaperSize = getDefaultWallpaperSize(res, windowManager);
 
-        new Thread("suggestWallpaperDimension") {
+       new Thread("suggestWallpaperDimension") {
             public void run() {
                 // If we have saved a wallpaper width/height, use that instead
                 int savedWidth = sharedPrefs.getInt(WALLPAPER_WIDTH_KEY, defaultWallpaperSize.x);
