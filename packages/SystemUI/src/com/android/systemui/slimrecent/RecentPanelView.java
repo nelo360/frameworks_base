@@ -299,7 +299,7 @@ public class RecentPanelView {
 
         // Floating app.
         popup.getMenu().add(0, MENU_FLOAT_WINDOW_ID, 0,
-                mContext.getResources().getString(R.string.app_float_item_title));
+                mContext.getResources().getString(R.string.status_bar_recent_floating_item_title));
 
         // Add app detail menu entry.
         popup.getMenu().add(0, MENU_APP_DETAILS_ID, 0,
