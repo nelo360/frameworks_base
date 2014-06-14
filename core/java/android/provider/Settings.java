@@ -4233,13 +4233,7 @@ public final class Settings {
          */
         public static final String STATUS_BAR_NETWORK_ACTIVITY = "status_bar_network_activity";
 
-        /**
-         *  Enable statusbar double tap gesture on to put device to sleep
-         * @hide
-         */
-        public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
-
-		/**
+	/**
          * Whether or not to use the app sidebar
          *
          * @hide
@@ -4721,6 +4715,24 @@ public final class Settings {
         public static final String PROXIMITY_ON_WAKE = "proximity_on_wake";
 
         /**
+         * Swipe recents for floating windows option
+         * @hide
+         */
+        public static final String RECENTS_SWIPE_FLOATING = "recents_swipe_floating";
+
+        /**
+         * Swipe notification for floating window option
+         * @hide
+         */
+        public static final String STATUS_BAR_NOTIFICATION_SWIPE_FLOATING = "status_bar_notification_swipe_floating";
+
+        /**
+         * Enable statusbar double tap gesture on to put device to sleep
+         * @hide
+         */
+        public static final String DOUBLE_TAP_SLEEP_GESTURE = "double_tap_sleep_gesture";
+
+        /**
          * In call dialpad state.
          * 0 = hidden
          * 1 = showing
@@ -4735,6 +4747,20 @@ public final class Settings {
          * @hide
          */
         public static final String HOVER_STATE = "hover_state";
+
+        /**
+         * Hover: Exclude non-clearable notifications, default is 0 (off).
+         *
+         * @hide
+         */
+        public static final String HOVER_EXCLUDE_NON_CLEARABLE = "hover_exclude_non_clearable";
+
+        /**
+         * Hover: Exclude low priority notifications, default is 0 (off).
+         *
+         * @hide
+         */
+        public static final String HOVER_EXCLUDE_LOW_PRIORITY = "hover_exclude_low_priority";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
