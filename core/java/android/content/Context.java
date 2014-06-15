@@ -2468,6 +2468,16 @@ public abstract class Context {
 
     /**
      * Use with {@link #getSystemService} to retrieve a
+     * {@link android.os.BatteryManager} for access battery information.
+     *
+     * @see #getSystemService
+     * @see android.os.BatteryManager
+     * @hide
+     */
+    public static final String BATTERY_SERVICE = "battery";
+
+    /**
+     * Use with {@link #getSystemService} to retrieve a
      * {@link android.content.res.ThemeManager} for accessing theme service.
      *
      * @see #getSystemService
