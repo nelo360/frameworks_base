@@ -61,11 +61,13 @@ import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
 import static com.android.internal.util.slim.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.slim.QSConstants.TILE_BATTERYSAVER;
 import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
+import static com.android.internal.util.slim.QSConstants.TILE_HOVER;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -141,6 +143,8 @@ import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.RebootTile;
 import com.android.systemui.quicksettings.ProfileTile;
+import com.android.systemui.quicksettings.HoverTile;
+
 import com.android.systemui.quicksettings.NetworkSpeedTile;
 import com.android.systemui.quicksettings.Weather;
 import com.android.systemui.statusbar.phone.QuickSettingsContainerView.QSSize;
@@ -330,6 +334,8 @@ public class QuickSettingsController {
                 qs = new CameraTile(mContext, this, mHandler);
             } else if (tile.equals(TILE_BATTERYSAVER)) {
                 qs = new BatterySaverTile(mContext, this);
+            } else if (tile.equals(TILE_HOVER)) {
+                qs = new HoverTile(mContext, this);
             }
 
             if (qs != null) {
