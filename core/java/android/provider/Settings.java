@@ -4447,14 +4447,6 @@ public final class Settings {
         public static final String PEEK_SCREEN_TIMEOUT = "peek_screen_timeout";
 
         /**
-         * Hover, default is 0 (off).
-         * Enable Hover, default is 0 (off).
-         *
-         * @hide
-         */
-        public static final String HOVER_ENABLED = "hover_enabled";
-
-        /**
          * Hover is active, default is 0 (off).
          * 0 = disabled
          * 1 = enabled
