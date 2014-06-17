@@ -52,6 +52,7 @@ public class QSConstants {
         public static final String TILE_SHAKE = "tileShake";
         public static final String TILE_COMPASS = "toggleCompass";
 	public static final String TILE_NETWORKSPEED = "toggleNetworkSpeed";
+        public static final String TILE_HOVER = "toggleHover";
 
         // dynamic tiles
         public static final String TILE_ALARM = "toggleAlarm";

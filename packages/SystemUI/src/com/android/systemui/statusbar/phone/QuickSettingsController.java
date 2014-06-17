@@ -58,11 +58,13 @@ import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
 import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
 import static com.android.internal.util.slim.QSConstants.TILE_NETWORKSPEED;
 import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
+import static com.android.internal.util.slim.QSConstants.TILE_HOVER;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
+
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -125,6 +127,8 @@ import com.android.systemui.quicksettings.RebootTile;
 import com.android.systemui.quicksettings.ProfileTile;
 import com.android.systemui.quicksettings.NetworkSpeedTile;
 import com.android.systemui.quicksettings.Weather;
+import com.android.systemui.quicksettings.HoverTile;
+
 import com.android.systemui.R;
 
 import java.io.File;
@@ -297,6 +301,8 @@ public class QuickSettingsController {
             } else if (tile.equals(TILE_WEATHER)) {
                 qs = new Weather(mContext, this, mHandler);
                 WeatherDialog();
+            } else if (tile.equals(TILE_HOVER)) {
+                qs = new HoverTile(mContext, this);
             }
 
             if (qs != null) {

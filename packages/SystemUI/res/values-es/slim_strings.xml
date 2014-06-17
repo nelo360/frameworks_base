@@ -213,7 +213,7 @@
     <string name="status_bar_notification_hide_icon_packages">Ocultar icono notificación</string>
 
     <!-- Network Speed Tile -->
-    <string name="quick_settings_network_speed_on">Velocidad red on</string>
+    <string name="quick_settings_network_speed_on">Velocidad red</string>
     <string name="quick_settings_network_speed_off">Velocidad red off</string>
 
     <!-- Title shown in recents popup for showing app in floating mode -->
@@ -284,5 +284,8 @@
 
     <!-- Blacklisted app for floating mode -->
     <string name="floating_mode_blacklisted_app">La aplicación actual está en la lista negra y no podrá usarse en modo flotante</string>
+
+    <!-- First time run hover -->
+    <string name="hover_cling_text">Hover está ahora activo.\n\nCuando llegue una nueva notificación, una ventana superior aparecerá permitiéndote interactuar sin salir de la app actual.</string>
 
 </resources>
