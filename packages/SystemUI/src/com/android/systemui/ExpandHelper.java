@@ -76,7 +76,7 @@ public class ExpandHelper implements Gefingerpoken, OnClickListener {
     private int mExpansionStyle = NONE;
     private boolean mWatchingForPull;
     private boolean mHasPopped;
-    private boolean mForcedOneFinger;
+    private boolean mForcedOneFinger = false;
     private View mEventSource;
     private View mCurrView;
     private View mCurrViewTopGlow;
@@ -274,7 +274,7 @@ public class ExpandHelper implements Gefingerpoken, OnClickListener {
 
         if (v == null) {
             if (DEBUG) Log.d(TAG, "isinside null subject");
-            return true;
+            return false;
         }
         if (mEventSource != null) {
             int[] location = new int[2];
@@ -340,6 +340,10 @@ public class ExpandHelper implements Gefingerpoken, OnClickListener {
                 }
             }
         }
+    }
+
+    public void setForceOneFinger(boolean forceOneFinger) {
+        mForcedOneFinger = forceOneFinger;
     }
 
     private void handleGlowVisibility() {
@@ -411,8 +415,7 @@ public class ExpandHelper implements Gefingerpoken, OnClickListener {
             }
 
             case MotionEvent.ACTION_DOWN:
-                final boolean inside = isInside(mScrollView, x, y);
-                mWatchingForPull = (inside || mForcedOneFinger);
+                mWatchingForPull = (isInside(mScrollView, x, y) || mForcedOneFinger);
                 mLastMotionY = y;
                 if (inside) {
                     mInitialTouchY = y;
