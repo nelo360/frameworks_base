@@ -26,6 +26,9 @@ public class NetworkSpeedTile extends QuickSettingsTile {
             public void onClick(View v) {
                 Settings.System.putIntForUser(mContext.getContentResolver(), Settings.System.STATUS_BAR_TRAFFIC_ENABLE,
                         mEnabled ? 0 : 1, UserHandle.USER_CURRENT);
+		if (isFlipTilesEnabled()) {
+                    flipTile(0);
+                }
             }
         };
         qsc.registerObservedContent(Settings.System.getUriFor(Settings.System.STATUS_BAR_TRAFFIC_ENABLE), this);
