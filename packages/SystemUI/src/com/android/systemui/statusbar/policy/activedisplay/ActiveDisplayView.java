@@ -813,6 +813,7 @@ public class ActiveDisplayView extends FrameLayout
     private void unlockKeyguardActivity() {
         hideNotificationView();
         sendUnlockBroadcast();
+	disableProximitySensor();
         try {
              // The intent we are sending is for the application, which
              // won't have permission to immediately start an activity after
@@ -1434,8 +1435,11 @@ public class ActiveDisplayView extends FrameLayout
                      mCurrentNotificationIcon.placeNumber(0, false);
                      mNotification = null;
                  }
-            });
-        }
+		 updateResources();
+                 mGlowPadView.invalidate();
+                 if (updateOthers) updateOtherNotifications();
+            }
+        });
     }
 
     private Drawable getIconDrawable(StatusBarNotification sbn) {
