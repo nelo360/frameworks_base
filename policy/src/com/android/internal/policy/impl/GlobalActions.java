@@ -348,6 +348,28 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                             return true;
                         }
                     });
+	    // next: profile - only shown if enabled, which is true by default
+            } else if (config.getClickAction().equals(PolicyConstants.ACTION_PROFILES)) {
+		if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1) {
+                mItems.add(
+                    new ProfileChooseAction() {
+                        public void onPress() {
+                                createProfileDialog();
+                        }
+                        public boolean onLongPress() {
+                            return true;
+                        }
+
+                        public boolean showDuringKeyguard() {
+                            return false;
+                        }
+
+                        public boolean showBeforeProvisioning() {
+                            return false;
+                        }
+                });
+		}
             // screenshot
             } else if (config.getClickAction().equals(PolicyConstants.ACTION_SCREENSHOT)) {
                 mItems.add(
@@ -430,30 +452,6 @@ class GlobalActions implements DialogInterface.OnDismissListener, DialogInterfac
                         }
                     });
             }
-        }
-
-        // next: profile
-        // only shown if both system profiles and the menu item is enabled, enabled by default
-        //final int mProfile = Settings.System.getInt(mContext.getContentResolver(), Settings.System.POWER_MENU_PROFILES_ENABLED, 1);
-        if ((Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SYSTEM_PROFILES_ENABLED, 1) == 1)) {
-            mItems.add(
-                new ProfileChooseAction() {
-                    public void onPress() {
-                        createProfileDialog();
-                    }
-                    public boolean onLongPress() {
-                        return true;
-                    }
-
-                    public boolean showDuringKeyguard() {
-                        return false;
-                    }
-
-                    public boolean showBeforeProvisioning() {
-                        return false;
-                    }
-                });
         }
 
         // one more thing: optionally add a list of users to switch to
