@@ -206,6 +206,8 @@ public interface IActivityManager extends IInterface {
     public void setProcessForeground(IBinder token, int pid,
             boolean isForeground) throws RemoteException;
 
+    public boolean isHeadsUpEnabledForProcess(int pid) throws RemoteException;
+
     public int checkPermission(String permission, int pid, int uid)
             throws RemoteException;
 
@@ -702,4 +704,5 @@ public interface IActivityManager extends IInterface {
     int GET_ACTIVITY_FOR_TASK_TRANSACTION = IBinder.FIRST_CALL_TRANSACTION+200;
     int NOTIFY_SPLIT_VIEW_LAYOUT_CHANGED = IBinder.FIRST_CALL_TRANSACTION+201;
 
+    int IS_HEADS_UP_ENABLED_TRANSACTION = IBinder.FIRST_CALL_TRANSACTION+184;
 }
