@@ -3325,8 +3325,19 @@ public final class Settings {
          * Pie buttons configuration second layer
          * @hide
          */
-        public static final String PIE_BUTTONS_CONFIG_SECOND_LAYER =
-                "pie_buttons_config_second_layer";
+        public static final String PIE_BUTTONS_CONFIG_SECOND_LAYER = "pie_buttons_config_second_layer";
+
+        /**
+         * Whether lid wakes the device
+         * @hide
+         */
+        public static final String LOCKSCREEN_LID_WAKE = "lockscreen_lid_wake";
+
+        /**
+         * Whether lid puts the device to sleep
+         * @hide
+         */
+        public static final String LOCKSCREEN_LID_SLEEP = "lockscreen_lid_sleep";
 
         /**
          * QuickSettings configuration
