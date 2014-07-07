@@ -70,8 +70,8 @@ public class KeyguardSmartCoverView extends LinearLayout {
     // And onScreenTurnedOff will not get called if power off when keyguard is
     // not started.
     // Set initial value to false to skip the above case.
-    private boolean mEnableRefresh = false;
-    private boolean mFadeInWeather = false;
+    private boolean mEnableRefresh = true;
+    private boolean mFadeInWeather = true;
 
     private TextView mBatteryStatusView;
     private KeyguardUpdateMonitor.BatteryStatus mBatteryStatus;
