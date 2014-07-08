@@ -496,9 +496,9 @@ public class BatteryMeterView extends View implements DemoMode {
                 if (mBatteryStyle == BATTERY_STYLE_PERCENT && (mTracker.level == 100)) {
                     width = metrics.density * 38f + 0.5f;
                 } else if (mBatteryStyle == BATTERY_STYLE_PERCENT && (mTracker.level < 10)) {
-                    width = metrics.density * 18f + 0.5f;
+                    width = metrics.density * 20f + 0.5f;
                 } else if (mBatteryStyle == BATTERY_STYLE_PERCENT) {
-                    width = metrics.density * 28f + 0.5f;
+                    width = metrics.density * 30f + 0.5f;
                 } else if (mBatteryStyle == BATTERY_STYLE_ICON_JBSTYLE_PERCENT) {
                     width = metrics.density * 28f + 0.5f;
                 } else {
