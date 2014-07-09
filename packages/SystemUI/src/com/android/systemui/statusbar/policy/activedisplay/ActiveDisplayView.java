@@ -70,7 +70,6 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.android.internal.util.slim.DeviceUtils;
-import com.android.internal.util.slim.QuietHoursHelper;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.multiwaveview.GlowPadView;
 import com.android.internal.widget.multiwaveview.GlowPadView.OnTriggerListener;
@@ -954,7 +953,8 @@ public class ActiveDisplayView extends FrameLayout
     }
 
     private boolean inQuietHoursDim() {
-        return QuietHoursHelper.inQuietHours(mContext, Settings.System.QUIET_HOURS_DIM);
+        return Settings.System.getIntForUser(mContext.getContentResolver(), Settings.System.QUIET_HOURS_DIM, 
+               0, UserHandle.USER_CURRENT_OR_SELF) == 2; 
     }
 
     private void onScreenTurnedOn() {
