@@ -327,6 +327,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private HeadsUpNotificationView mHeadsUpNotificationView;
     private int mHeadsUpNotificationDecay;
     private boolean mHeadsUpExpandedByDefault;
+    private boolean mHeadsUpNotificationViewAttached;
 
     // on-screen navigation buttons
     private NavigationBarView mNavigationBarView = null;
@@ -1078,10 +1079,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mRibbonQS.setupQuickSettings();
             }
         }
-
-        // Add heads up view.
-        addHeadsUpView();
-
     }
 
     // ================================================================================
@@ -1853,10 +1850,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     private void addHeadsUpView() {
+        if (mHeadsUpNotificationViewAttached) {
+            return;
+        }
+
+        mHeadsUpNotificationViewAttached = true;
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT,
                 WindowManager.LayoutParams.TYPE_STATUS_BAR_PANEL, // above the status bar!
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                         | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM
                         | WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH
                         | WindowManager.LayoutParams.FLAG_SPLIT_TOUCH,
@@ -1874,7 +1876,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     }
 
     private void removeHeadsUpView() {
-        mWindowManager.removeView(mHeadsUpNotificationView);
+        if (mHeadsUpNotificationViewAttached) {
+            mHeadsUpNotificationViewAttached = false;
+            mWindowManager.removeView(mHeadsUpNotificationView);
+        }
     }
 
     public void refreshAllStatusBarIcons() {
@@ -4363,11 +4368,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private void setHeadsUpVisibility(boolean vis) {
         if (DEBUG) Log.v(TAG, (vis ? "showing" : "hiding") + " heads up window");
-        mHeadsUpNotificationView.setVisibility(vis ? View.VISIBLE : View.GONE);
-        if (!vis) {
-            if (DEBUG) Log.d(TAG, "setting heads up entry to null");
-            mInterruptingNotificationEntry = null;
-            mHeadsUpPackageName = null;
+        if (mHeadsUpNotificationViewAttached) {
+            mHeadsUpNotificationView.setVisibility(vis ? View.VISIBLE : View.GONE);
+            if (!vis) {
+                if (DEBUG) Log.d(TAG, "setting heads up entry to null");
+                mInterruptingNotificationEntry = null;
+                mHeadsUpPackageName = null;
+            }
         }
     }
 
@@ -4413,8 +4420,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private void recreateStatusBar(boolean recreateNavigationBar) {
         mRecreating = true;
-        mStatusBarContainer.removeAllViews();
         removeHeadsUpView();
+        mStatusBarContainer.removeAllViews();
+        mStatusBarContainer.clearDisappearingChildren();
 
         // extract icons from the soon-to-be recreated viewgroup.
         int nIcons = mStatusIcons.getChildCount();
@@ -4586,9 +4594,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (mNotificationPanelMinHeightFrac < 0f || mNotificationPanelMinHeightFrac > 1f) {
             mNotificationPanelMinHeightFrac = 0f;
         }
-
-        mHeadsUpNotificationDecay = res.getInteger(R.integer.heads_up_notification_decay);
-        mRowHeight =  res.getDimensionPixelSize(R.dimen.default_notification_row_min_height);
 
         mRowHeight =  res.getDimensionPixelSize(R.dimen.notification_row_min_height);
 

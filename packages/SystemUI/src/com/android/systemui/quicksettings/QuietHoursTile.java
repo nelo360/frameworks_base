@@ -46,7 +46,9 @@ public class QuietHoursTile extends QuickSettingsTile {
         mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+		if (isFlipTilesEnabled()) {
+                    flipTile(0);
+                }
                 mHandler.removeCallbacks(checkDouble);
                 if (mTaps > 0) {
                     // Set to timed mode and get update from controller to
@@ -54,9 +56,6 @@ public class QuietHoursTile extends QuickSettingsTile {
                     Settings.System.putIntForUser(mContext.getContentResolver(),
                             Settings.System.QUIET_HOURS_ENABLED,
                             1, UserHandle.USER_CURRENT);
-		if (isFlipTilesEnabled()) {
-                    flipTile(0);
-                }
                     mTaps = 0;
                 } else {
                     mTaps += 1;

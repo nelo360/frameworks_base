@@ -855,8 +855,7 @@ public abstract class BaseStatusBar extends SystemUI implements
                             : R.string.status_bar_notification_heads_up_enable_title));
                 }
 
-                mNotificationBlamePopup
-                .setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                mNotificationBlamePopup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     public boolean onMenuItemClick(MenuItem item) {
                         if (item.getItemId() == R.id.notification_inspect_item) {
                             startApplicationDetailsActivity(packageNameF);

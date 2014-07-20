@@ -978,7 +978,6 @@ final class Settings {
                     ps.setUserState(userId, enabled, installed, stopped, notLaunched, headsUp, blocked,
                             enabledCaller, enabledComponents, disabledComponents, 
                             protectedComponents, visibleComponents);
-
                 } else if (tagName.equals("preferred-activities")) {
                     readPreferredActivitiesLPw(parser, userId);
                 } else {
