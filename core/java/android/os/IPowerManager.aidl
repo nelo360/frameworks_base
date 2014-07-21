@@ -61,5 +61,4 @@ interface IPowerManager
 
     void setKeyboardVisibility(boolean visible);
 
-    void wakeUpFromKeyEvent(long time);
 }
