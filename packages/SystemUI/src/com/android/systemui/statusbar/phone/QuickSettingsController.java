@@ -61,12 +61,12 @@ import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
 import static com.android.internal.util.slim.QSConstants.TILE_HOVER;
 import static com.android.internal.util.slim.QSConstants.TILE_CAMERA;
 import static com.android.internal.util.slim.QSConstants.TILE_BATTERYSAVER;
+import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.Dialog;
-
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -130,6 +130,7 @@ import com.android.systemui.quicksettings.TorchTile;
 import com.android.systemui.quicksettings.UsbTetherTile;
 import com.android.systemui.quicksettings.UserTile;
 import com.android.systemui.quicksettings.VolumeTile;
+import com.android.systemui.quicksettings.RemoteDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.RebootTile;
@@ -369,6 +370,9 @@ public class QuickSettingsController {
             } else if (tile.equals(TILE_USBTETHER)
                     && DeviceUtils.deviceSupportsUsbTether(mContext)) {
                 qs = new UsbTetherTile(mContext, this);
+            } else if (tile.equals(TILE_REMOTEDISPLAY)
+                    && DeviceUtils.deviceSupportsRemoteDisplay(mContext)) {
+                qs = new RemoteDisplayTile(mContext, this);
             }
 
             if (qs != null) {

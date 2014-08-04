@@ -864,7 +864,10 @@ public class VolumePanel extends Handler implements OnSeekBarChangeListener, Vie
         // If preference is no sound - just exit here
         if (Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1,
-                UserHandle.USER_CURRENT) == 0) {
+                UserHandle.USER_CURRENT) == 0
+                || Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QUIET_HOURS_SYSTEM, 1,
+                UserHandle.USER_CURRENT) == 2) {
              return;
         }
 
@@ -993,7 +996,7 @@ public class VolumePanel extends Handler implements OnSeekBarChangeListener, Vie
 
                 sConfirmSafeVolumeDialog.setOnDismissListener(warning);
                 sConfirmSafeVolumeDialog.getWindow().setType(
-                                                WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+                                                WindowManager.LayoutParams.TYPE_VOLUME_OVERLAY);
                 sConfirmSafeVolumeDialog.show();
             }
             updateStates();
