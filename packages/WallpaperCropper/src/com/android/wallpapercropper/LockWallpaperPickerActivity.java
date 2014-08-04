@@ -241,8 +241,7 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
         }
         @Override
         public void onSave(WallpaperCropActivity a) {
-            boolean finishActivityWhenDone = true;
-            ((LockWallpaperPickerActivity)a).cropImageAndSetWallpaper(mResources, mResId, finishActivityWhenDone);
+            a.cropImageAndSetWallpaper(mResources, mResId, true);
         }
         @Override
         public boolean isSelectable() {
@@ -252,6 +251,33 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
         public boolean isNamelessWallpaper() {
             return true;
         }
+    }
+
+    @Override
+    protected void cropImageAndSetWallpaper(
+            Resources res, int resId, final boolean finishActivityWhenDone) {
+        // crop this image and scale it down to the default wallpaper size for
+        // this device
+        int rotation = getRotationFromExif(res, resId);
+        Point inSize = mCropView.getSourceDimensions();
+        Point outSize = getDefaultWallpaperSize(getResources(),
+                getWindowManager());
+        RectF crop = getMaxCropRect(
+                inSize.x, inSize.y, outSize.x, outSize.y, false);
+        Runnable onEndCrop = new Runnable() {
+            public void run() {
+                // Passing 0, 0 will cause launcher to revert to using the
+                // default wallpaper size
+                updateWallpaperDimensions(0, 0);
+                if (finishActivityWhenDone) {
+                    setResult(Activity.RESULT_OK);
+                    finish();
+                }
+            }
+        };
+        BitmapCropTask cropTask = new BitmapCropTask(this, res, resId,
+                crop, rotation, outSize.x, outSize.y, true, false, onEndCrop);
+        cropTask.execute();
     }
 
     protected void cropImageAndSetWallpaper(String path, String packageName, final boolean legacy,
@@ -896,6 +922,7 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
         // Populate the saved wallpapers
         mSavedImages = new SavedWallpaperImages(this);
         mSavedImages.loadThumbnailsAndImageIdList();
+
         populateWallpapersFromAdapter(mWallpapersView, mSavedImages, true, true);
 
         // Make its background the last photo taken on external storage
