@@ -22,6 +22,83 @@
     <dimen name="notification_shortcuts_spacing_height">88dp</dimen>
     <dimen name="notification_shortcuts_drawer_margin">56dp</dimen>
 
+    <!-- App sidebar -->
+    <dimen name="app_sidebar_item_size">60dp</dimen>
+    <dimen name="app_sidebar_item_padding">2dp</dimen>
+    <dimen name="tab_width">16dp</dimen>
+    <dimen name="tab_height">32dp</dimen>
+
+    <dimen name="drag_item_size">80dp</dimen>
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="item_title_text_size">12sp</dimen>
+    <dimen name="item_above_below_delta">16dp</dimen>
+    <dimen name="folder_padding">0dp</dimen>
+    <dimen name="folder_name_padding">10dp</dimen>
+    <dimen name="folder_width">290dp</dimen>
+    <dimen name="folder_height">480dp</dimen>
+    <dimen name="setup_sidebar_width">90dp</dimen>
+
+    <!-- Notification peek dimens -->
+    <dimen name="item_padding">5dp</dimen>
+    <dimen name="small_notification_icon_size">30dp</dimen>
+    <dimen name="small_notification_icon_padding">2dp</dimen>
+    <dimen name="notification_icon_size">46dp</dimen>
+    <dimen name="notification_text_width">300dp</dimen>
+    <dimen name="clock_padding">10dp</dimen>
+    <dimen name="clock_size">15dp</dimen>
+
+    <!-- Wifi -->
+    <dimen name="wifi_combo_margin_end">-6dp</dimen>
+
+    <!-- Hover dimens -->
+    <dimen name="hover_cling_width">-1px</dimen>
+
+    <!-- Theme Engine overrides to avoid modifications that will affect hover view. -->
+    <dimen name="default_notification_min_height">64dp</dimen>
+    <dimen name="default_notification_max_height">256dp</dimen>
+    <dimen name="default_notification_row_min_height">70dp</dimen>
+    <dimen name="default_notification_row_max_height">260dp</dimen>
+
+    <!-- Quick Settings tile geometry: width and height (ribbon mode) -->
+    <dimen name="qs_ribbon_width_min">40dp</dimen>
+    <dimen name="qs_ribbon_width_max">128dp</dimen>
+    <dimen name="qs_ribbon_width_big">64dp</dimen>
+    <dimen name="qs_ribbon_height_small">40dp</dimen>
+    <dimen name="qs_ribbon_height_big">64dp</dimen>
+    <!-- Quick Settings tile geometry: interior margin, above and below icon (ribbon mode) -->
+    <dimen name="qs_tile_ribbon_icon_margin_small">4dp</dimen>
+    <dimen name="qs_tile_ribbon_icon_margin_big">16dp</dimen>
+
+    <!-- Top margin for overflow notifications container shown in the P.O.R.N. view -->
+    <dimen name="glowpad_overflow_notifications_margin_top">64dp</dimen>
+
+    <!-- Top margin for overflow notifications container shown in the active display view -->
+    <dimen name="ad_clock_margin_bottom">60dp</dimen>
+
+    <!-- left/right margin for extra notifications in ActiveDisplayView -->
+    <dimen name="ad_notification_margin">4dp</dimen>
+
+    <!-- Active display overflow notification icon size -->
+    <dimen name="overflow_icon_size">32dp</dimen>
+
+    <!-- Active display overflow background notification icon size -->
+    <dimen name="overflow_background_icon_size">56dp</dimen>
+
+    <!-- Active display Handle notification icon size -->
+    <dimen name="handle_icon_size">32dp</dimen>
+
+    <!-- Active display overflow notification padding -->
+    <dimen name="overflow_icon_padding">2dp</dimen>
+
+    <!-- Active display clock font size -->
+    <dimen name="ad_clock_font_size">75dp</dimen>
+
+    <!-- Active display date font size -->
+    <dimen name="ad_date_font_size">18dp</dimen>
+
+    <!-- AM/PM size in active display -->
+    <dimen name="ad_ampm_font_size">32dp</dimen>
+
     <!-- Heads up -->
     <dimen name="heads_up_bottom_gap">5dp</dimen>
 

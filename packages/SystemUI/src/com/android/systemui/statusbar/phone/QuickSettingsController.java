@@ -54,7 +54,19 @@ import static com.android.internal.util.slim.QSConstants.TILE_VOLUME;
 import static com.android.internal.util.slim.QSConstants.TILE_WIFI;
 import static com.android.internal.util.slim.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.slim.QSConstants.TILE_REBOOT;
+import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
+import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
+import static com.android.internal.util.slim.QSConstants.TILE_NETWORKSPEED;
+import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
+import static com.android.internal.util.slim.QSConstants.TILE_HOVER;
+import static com.android.internal.util.slim.QSConstants.TILE_CAMERA;
+import static com.android.internal.util.slim.QSConstants.TILE_BATTERYSAVER;
 import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
+
+import android.app.Activity;
+import android.app.ActivityManagerNative;
+import android.app.AlertDialog;
+import android.app.Dialog;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -64,6 +76,15 @@ import android.content.IntentFilter;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.RemoteException;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.os.UserHandle;
@@ -73,13 +94,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 
 import com.android.internal.util.slim.DeviceUtils;
+
+import com.android.internal.util.slim.QSUtils;
+import android.view.WindowManager;
+import android.view.WindowManagerGlobal;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+
+import com.android.internal.util.slim.DeviceUtils;
+import com.android.systemui.R;
 import com.android.systemui.quicksettings.AirplaneModeTile;
 import com.android.systemui.quicksettings.AlarmTile;
 import com.android.systemui.quicksettings.AutoRotateTile;
 import com.android.systemui.quicksettings.BatteryTile;
+import com.android.systemui.quicksettings.BatterySaverTile;
 import com.android.systemui.quicksettings.BluetoothTile;
 import com.android.systemui.quicksettings.BrightnessTile;
 import com.android.systemui.quicksettings.BugReportTile;
+import com.android.systemui.quicksettings.CameraTile;
+import com.android.systemui.quicksettings.CompassTile;
 import com.android.systemui.quicksettings.ContactTile;
 import com.android.systemui.quicksettings.CustomTile;
 import com.android.systemui.quicksettings.ExpandedDesktopTile;
@@ -109,6 +142,15 @@ import com.android.systemui.quicksettings.RemoteDisplayTile;
 import com.android.systemui.quicksettings.WiFiTile;
 import com.android.systemui.quicksettings.WifiAPTile;
 import com.android.systemui.quicksettings.RebootTile;
+import com.android.systemui.quicksettings.ProfileTile;
+import com.android.systemui.quicksettings.NetworkSpeedTile;
+import com.android.systemui.quicksettings.Weather;
+import com.android.systemui.quicksettings.HoverTile;
+import com.android.systemui.statusbar.phone.QuickSettingsContainerView.QSSize;
+
+import com.android.systemui.R;
+
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -137,13 +179,17 @@ public class QuickSettingsController {
     private ContentObserver mObserver;
     public PhoneStatusBar mStatusBarService;
     private final String mSettingsKey;
+    private boolean mHideLiveTiles;
+    private boolean mHideLiveTileLabels;
+
+    private final boolean mRibbonMode;
 
     private InputMethodTile mIMETile;
 
     private static final int MSG_UPDATE_TILES = 1000;
 
     public QuickSettingsController(Context context, QuickSettingsContainerView container,
-            PhoneStatusBar statusBarService, String settingsKey) {
+            PhoneStatusBar statusBarService, String settingsKey, boolean ribbonMode) {
         mContext = context;
         mContainerView = container;
         mHandler = new Handler() {
@@ -161,11 +207,17 @@ public class QuickSettingsController {
         mStatusBarService = statusBarService;
         mQuickSettingsTiles = new ArrayList<QuickSettingsTile>();
         mSettingsKey = settingsKey;
+        mRibbonMode = ribbonMode;
+    }
+
+    public boolean isRibbonMode() {
+        return mRibbonMode;
     }
 
     void loadTiles() {
         // Filter items not compatible with device
         boolean bluetoothSupported = DeviceUtils.deviceSupportsBluetooth();
+        boolean cameraSupported = DeviceUtils.hasCamera(mContext);
         boolean mobileDataSupported = DeviceUtils.deviceSupportsMobileData(mContext);
         boolean lteSupported = DeviceUtils.deviceSupportsLte(mContext);
         boolean torchSupported = DeviceUtils.deviceSupportsTorch(mContext);
@@ -186,6 +238,10 @@ public class QuickSettingsController {
 
         if (!torchSupported) {
             TILES_DEFAULT.remove(TILE_TORCH);
+        }
+
+        if (!cameraSupported) {
+            TILES_DEFAULT.remove(TILE_CAMERA);
         }
 
         // Read the stored list of tiles
@@ -261,6 +317,24 @@ public class QuickSettingsController {
                 qs = new CustomTile(mContext, this, findCustomKey(tile));
             } else if (tile.contains(TILE_CONTACT)) {
                 qs = new ContactTile(mContext, this, findCustomKey(tile));
+            } else if (tile.equals(TILE_PROFILE)) {
+                mTileStatusUris.add(Settings.System.getUriFor(Settings.System.SYSTEM_PROFILES_ENABLED));
+                if (QSUtils.systemProfilesEnabled(resolver)) {
+                    qs = new ProfileTile(mContext, this);
+		}
+	    } else if (tile.equals(TILE_NETWORKSPEED)) {
+                qs = new NetworkSpeedTile(mContext, this, mHandler);
+            } else if (tile.equals(TILE_COMPASS)) {
+                qs = new CompassTile(mContext, this);
+            } else if (tile.equals(TILE_WEATHER)) {
+                qs = new Weather(mContext, this, mHandler);
+                WeatherDialog();
+            } else if (tile.equals(TILE_HOVER)) {
+                qs = new HoverTile(mContext, this);
+            } else if (tile.equals(TILE_CAMERA)) {
+                qs = new CameraTile(mContext, this, mHandler);
+            } else if (tile.equals(TILE_BATTERYSAVER)) {
+                qs = new BatterySaverTile(mContext, this);
             }
 
             if (qs != null) {
@@ -273,6 +347,19 @@ public class QuickSettingsController {
         // These toggles must be the last ones added to the view, as they will show
         // only when they are needed
         // Read the stored list of dynamic tiles
+
+        if (mHideLiveTiles || mRibbonMode) {
+            return;
+        }
+
+        if (mRibbonMode) {
+            return;
+        }
+
+        // Load the dynamic tiles
+        // These toggles must be the last ones added to the view, as they will show
+        // only when they are needed
+
         String dynamicTiles = Settings.System.getStringForUser(resolver,
                 Settings.System.QUICK_SETTINGS_DYNAMIC_TILES,
                 UserHandle.USER_CURRENT);
@@ -339,6 +426,22 @@ public class QuickSettingsController {
         loadTiles();
         setupBroadcastReceiver();
         setupContentObserver();
+
+        if (mHideLiveTileLabels) {
+            for (QuickSettingsTile t : mQuickSettingsTiles) {
+                t.setLabelVisibility(false);
+            }
+        }
+
+        ContentResolver resolver = mContext.getContentResolver();
+        if (mRibbonMode) {
+            for (QuickSettingsTile t : mQuickSettingsTiles) {
+                if (mRibbonMode) {
+                    t.switchToRibbonMode();
+                }
+            }
+        }
+        updateResources();
     }
 
     void setupContentObserver() {
@@ -436,9 +539,88 @@ public class QuickSettingsController {
     }
 
     public void updateResources() {
+        updateSize();
         mContainerView.updateResources();
         for (QuickSettingsTile t : mQuickSettingsTiles) {
             t.updateResources();
+        }
+    }
+
+    public void hideLiveTileLabels(boolean hide) {
+        mHideLiveTileLabels = hide;
+    }
+
+    public void hideLiveTiles(boolean hide) {
+        mHideLiveTiles = hide;
+    }
+
+    private void WeatherDialog() {
+        int check = filecheck("/sdcard/Android/data/weather.txt");
+        if ( check == 0 ) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setPositiveButton(R.string.weather_ok, new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+
+            builder.setNegativeButton(R.string.weather_link, new OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                 Intent intent = new Intent();
+                 intent.setClassName("com.cyanogenmod.lockclock", "com.cyanogenmod.lockclock.preference.Preferences");
+                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                 mContext.startActivity(intent);
+                 }
+            });
+        builder.setMessage(R.string.weather_dialog_msg);
+        builder.setTitle(R.string.weather_notify);
+        builder.setCancelable(true);
+        final Dialog dialog = builder.create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        try {
+            WindowManagerGlobal.getWindowManagerService().dismissKeyguard();
+        } catch (RemoteException e) {
+        }
+        dialog.show();
+        }
+    }
+
+    public  int filecheck(String PATH) {
+        File f = new File(PATH);
+        int isfile;
+        if (f.isFile()) {
+           isfile = 1;
+        return isfile;
+        } else {
+          isfile = 0 ;
+        return isfile;
+        }
+    }
+
+    private void updateSize() {
+        if (mContainerView == null || !mRibbonMode)
+            return;
+
+        QSSize size = mContainerView.getRibbonSize();
+        int height, margin;
+        if (size == QSSize.AutoNarrow || size == QSSize.Narrow) {
+            height = R.dimen.qs_ribbon_height_small;
+            margin = R.dimen.qs_tile_ribbon_icon_margin_small;
+        } else {
+            height = R.dimen.qs_ribbon_height_big;
+            margin = R.dimen.qs_tile_ribbon_icon_margin_big;
+        }
+        Resources res = mContext.getResources();
+        height = res.getDimensionPixelSize(height);
+        margin = res.getDimensionPixelSize(margin);
+
+        View parent = (View) mContainerView.getParent();
+        LayoutParams lp = parent.getLayoutParams();
+        lp.height = height;
+        parent.setLayoutParams(lp);
+        for (QuickSettingsTile t : mQuickSettingsTiles) {
+            t.setImageMargins(margin);
         }
     }
 }

@@ -728,9 +728,8 @@ final class WifiDisplayController implements DumpUtils.Dump {
             return; // wait for asynchronous callback
         }
 
-        // Step 6. Listen for incoming connections.
-        if (mConnectedDevice != null && (mRemoteDisplay == null &&
-                    mExtRemoteDisplay == null)) {
+        // Step 6. Listen for incoming RTSP connection.
+        if (mConnectedDevice != null && mRemoteDisplay == null) {
             Inet4Address addr = getInterfaceAddress(mConnectedDeviceGroupInfo);
             if (addr == null) {
                 Slog.i(TAG, "Failed to get local interface address for communicating "

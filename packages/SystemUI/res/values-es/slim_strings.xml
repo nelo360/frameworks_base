@@ -45,14 +45,15 @@
 
     <!-- Slim Shortcut Actions -->
     <string name="shortcut_picker">Accesos Directos Slim</string>
-    <string name="shortcut_immersive">Int. Modo Immersivo</string>
+    <string name="shortcut_immersive">Modo Inmersivo</string>
     <string name="shortcut_quiethours">Modo descanso (Ignora restricciones de tiempo)</string>
-    <string name="shortcut_rotation">Int. Bloqueo Rotación</string>
-    <string name="shortcut_torch">Int. Linterna</string>
+    <string name="shortcut_rotation">Bloqueo Rotación</string>
+    <string name="shortcut_torch">Linterna</string>
     <string name="shortcut_reboot">Reiniciar</string>
-    <string name="shortcut_recovery">Recovery</string>
-    <string name="shortcut_last_app">Ultima ap.</string>
-    <string name="shortcut_screenshot">Captura Pantalla</string>
+    <string name="shortcut_last_app">Ultima App</string>
+    <string name="shortcut_screenshot">Captura pantalla</string>
+    <string name="shortcut_power_menu">Menú de apagado</string>
+    <string name="shortcut_screensleep">Apagar pantalla</string>
     <string name="shortcut_volume">Volumen</string>
     <string name="shortcut_toggle_title">Acción a realizar</string>
     <string name="shortcut_chamber">Chamber of Secrets</string>
@@ -69,27 +70,27 @@
     <string name="chamber_name_message">Nombre del acceso directo que se mostrará junto al icono.</string>
     <string name="chamber_name_toast">Se usará el nombre predeterminado</string>
 
-
     <!-- Quick Settings -->
     <string name="quick_settings_gps">GPS</string>
     <string name="quick_settings_gps_off">GPS apagado</string>
     <string name="quick_settings_screen_sleep">Apagar pantalla</string>
-    <string name="quick_settings_ringer_on">Sonido activado</string>
-    <string name="quick_settings_ringer_off">Sonido silenciado</string>
-    <string name="quick_settings_vibration_on">Vibración activada</string>
-    <string name="quick_settings_vibration_off">Vibración desactivada</string>
-    <string name="quick_settings_label_enabled">Encendido</string>
-    <string name="quick_settings_label_disabled">Apagado</string>
+    <string name="quick_settings_ringer_on">Sonido on</string>
+    <string name="quick_settings_ringer_off">Sonido off</string>
+    <string name="quick_settings_vibration_on">Vibración on</string>
+    <string name="quick_settings_vibration_off">Vibración off</string>
+    <string name="quick_settings_label_enabled">Activado</string>
+    <string name="quick_settings_label_disabled">Desactivado</string>
     <string name="quick_settings_ringer_normal">Sonido</string>
-    <string name="quick_settings_lockscreen">Bloquear pantalla</string>
+    <string name="quick_settings_lockscreen">Bloqueo pantalla</string>
+    <string name="quick_settings_report_bug">Reportar error</string>
     <string name="quick_settings_network_type">Modo de Red</string>
-    <string name="quick_settings_report_bug">Reportar bug</string>
     <string name="quick_settings_sync">Sincr.</string>
     <string name="quick_settings_sync_off">Sincr. desactivada</string>
     <string name="quick_settings_torch">Linterna</string>
     <string name="quick_settings_torch_off">Linterna apagada</string>
     <string name="quick_settings_nfc">NFC</string>
-    <string name="quick_settings_nfc_off">NFC desactivado</string>
+    <string name="quick_settings_nfc_off">NFC off</string>
+    <string name="quick_settings_screen_timeout_summary" translatable="false">%1$d %2$s</string>
     <string name="quick_settings_screen_timeout">Tiempo de espera</string>
     <string name="quick_settings_screen_timeout_summary_never">Nunca</string>
     <string name="quick_settings_usb_tether_off_label">Desconectado</string>
@@ -114,14 +115,39 @@
     <string name="quick_settings_reboot_recovery">Recovery</string>
     <string name="quick_settings_reboot">Reiniciar</string>
     <string name="quick_settings_theme_switch_dark">Tema oscuro</string>
-    <string name="quick_settings_theme_switch_light">Tema luminoso</string>
-    <string name="quick_settings_quick_record_nofile">Pulsación Larga</string>
+    <string name="quick_settings_theme_switch_light">Tema claro</string>
+    <string name="quick_settings_quick_record_nofile">Manten pulsado</string>
     <string name="quick_settings_quick_record_def">Grabación rápida</string>
     <string name="quick_settings_quick_record_rec">Grabando...</string>
     <string name="quick_settings_quick_record_save">Guardado</string>
     <string name="quick_settings_quick_record_play">Reproduciendo...</string>
     <string name="quick_settings_custom_toggle">Personalizado</string>
     <string name="quick_settings_contact_toggle">Contacto</string>
+
+    <string name="quick_settings_profile_label">Perfil</string>
+    <string name="quick_settings_compass_off">Brújula off</string>
+    <string name="quick_settings_compass_init">Inicializando\u2026</string>
+    <string name="quick_settings_camera_label">Cámara</string>
+    <string name="quick_settings_camera_error_connect">No se puede conectar con la cámara</string>
+    <string name="quick_settings_battery_saver_label">Ahorro energia</string>
+
+    <!-- Battery status in pie controls -->
+    <string name="pie_battery_status_charging">Cargando (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Cargada</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% restante</string>
+
+    <!-- Battery status in pie controls -->
+    <string name="pie_battery_status_charging">Cargando (<xliff:g id="percent">%d</xliff:g>%%)</string>
+    <string name="pie_battery_status_full">Cargado</string>
+    <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% remaining</string>
+
+    <!-- Phone status in pie controls -->
+    <string name="pie_phone_status_no_service">Sin servicio</string>
+    <string name="pie_phone_status_airplane_mode">Modo avión activado</string>
+    <string name="pie_phone_status_emergency_only">Solo llamadas emergencia</string>
+    <string name="pie_phone_status_emergency_only">Sólo llamadas de emergencia</string>
+
+    <!-- Notifications reminder -->
     <string name="quick_settings_reminder">Recordatorio</string>
     <string name="quick_settings_reminder_title">Título:</string>
     <string name="quick_settings_reminder_message">Mensaje:</string>
@@ -141,6 +167,37 @@
     <string name="pie_battery_status_full">Cargado</string>
     <string name="pie_battery_status_discharging"><xliff:g id="percent">%d</xliff:g>%% remaining</string>
 
+    <!-- Content description of the halo button in the notification panel for accessibility (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_halo">Crear notificación Halo</string>
+
+    <!-- HALO -->
+    <string name="halo_dismiss">Descartar notificación</string>
+    <string name="halo_hide">Ocultar</string>
+    <string name="halo_clear_all">Descartar todas las notificaciones</string>
+    <string name="halo_silence">Ocultar &amp; silenciar hasta despertar</string>
+    <string name="halo_tutorial1">Esto es HALO</string>
+    <string name="halo_tutorial2">Para moverme: pulsar 2 veces &amp; arrastrar</string>
+    <string name="halo_tutorial3">Cambiar tarea: arrastra horizontal</string>
+    <string name="halo_battery_plugged">CARGANDO</string>
+    <string name="halo_battery_unplugged">RESTANTE</string>
+    <string name="halo_battery_full">LLENA</string>
+    <string name="halo_aeroplane1">AVIÓN</string>
+    <string name="halo_aeroplane2">MODO</string>
+    <string name="halo_wifi_on">WI-FI ENCENDIDO</string>
+    <string name="halo_wifi_off">WI-FI APAGADO</string>
+    <string name="halo_signal_bars_4">LLENA</string>
+    <string name="halo_signal_bars_3">TRES BARRAS</string>
+    <string name="halo_signal_bars_2">DOS BARRAS</string>
+    <string name="halo_signal_bars_1">UNA BARRA</string>
+    <string name="halo_signal_bars_none">SIN BARRAS</string>
+
+     <!-- Recents Ram Bar -->
+    <string name="memory">RAM</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of background processes -->
+    <string name="service_free_mem"><xliff:g id="memory">%1$s</xliff:g> libre</string>
+    <!-- [CHAR LIMIT=10] Running services, summary of foreground processes -->
+    <string name="service_used_mem"><xliff:g id="memory">%1$s</xliff:g> usada</string>
+
     <!-- Phone status in pie controls -->
     <string name="pie_phone_status_no_service">Sin servicio</string>
     <string name="pie_phone_status_airplane_mode">Modo avión activado</string>
@@ -152,6 +209,139 @@
     <!-- Navigation bar IME navigation -->
     <string name="accessibility_ime_navigation_left">Cursor izquierda</string>
     <string name="accessibility_ime_navigation_right">Cursor derecha</string>
+
+    <!-- Title shown in recents popup for locking an app from being cleared -->
+    <string name="status_bar_recent_lock_item_title">Bloquear a lista recientes</string>
+    <!-- Title shown in recents popup for unlocking an app from being cleared -->
+    <string name="status_bar_recent_unlock_item_title">Desbloquear de lista recientes</string>
+
+    <!-- Development shortcut -->
+    <string name="advanced_dev_option_wipe_app">Borrar datos aplicación</string>
+    <string name="advanced_dev_option_force_stop">Forzar cierre aplicación</string>
+
+    <!-- Hide notification icons -->
+    <string name="status_bar_notification_hide_icon_packages">Ocultar icono notificación</string>
+
+    <!-- Network Speed Tile -->
+    <string name="quick_settings_network_speed_on">Velocidad red</string>
+    <string name="quick_settings_network_speed_off">Velocidad red off</string>
+
+    <!-- Title shown in recents popup for showing app in floating mode -->
+    <string name="status_bar_recent_floating_item_title">Ventana flotante</string>
+
+    <!-- Title shown in notification popup for launching notification in floating mode -->
+    <string name="status_bar_notification_floating_item_title">Ventana flotante</string>
+
+    <!-- App sidebar -->
+    <string name="default_folder_text">Carpeta</string>
+    <string name="title_activity_sidebar_configuration">Configurar contenido de la barra</string>
+    <string name="action_save">Guardar</string>
+    <string name="toast_items_saved">Los elementos han sido guardados</string>
+    <string name="content_setup_instructions">Para agregar elementos a la barra mantenga pulsado un icono y arrástrelo dentro de la zona azul. Para quitarlos, arrástrelos fuera de ella.</string>
+    <string name="content_setup_dismiss">Continuar</string>
+    <string name="toast_not_installed">La aplicación no está instalada</string>
+
+    <!-- Weather tile panel String -->
+    <string name="need_to_update_weather">Pulsa para actualizar</string>
+    <string name="no_weather_file">No se encuentra el fichero del tiempo</string>
+    <string name="weather_notify">Notificación</string>
+    <string name="weather_ok">OK</string>
+    <string name="weather_link">Acceso directo</string>
+    <string name="weather_dialog_msg">Es posible que tengas desactivado el tiempo en el widget cLock o no puedes guardar los datos del tiempo\nNecesitas activar el tiempo en el widget pulsando prolongadamente sobre el tile del tiempo.</string>
+
+    <!-- Weather - Weather codes -->
+    <string name="weather_0">Tornado</string>
+    <string name="weather_1">Torm. tropical</string>
+    <string name="weather_2">Huracán</string>
+    <string name="weather_3">Torm. severas</string>
+    <string name="weather_4">Tormentas</string>
+    <string name="weather_5">Agua y nieve</string>
+    <string name="weather_6">Agua y aguanieve</string>
+    <string name="weather_7">Nieve y aguanieve</string>
+    <string name="weather_8">Llovizna helada</string>
+    <string name="weather_9">Llovizna</string>
+    <string name="weather_10">Lluvia helada</string>
+    <string name="weather_11">Lluvias</string>
+    <string name="weather_12">Lluvias</string>
+    <string name="weather_13">Copos de nieve</string>
+    <string name="weather_14">Nevadas ligeras</string>
+    <string name="weather_15">Chub. de nieve</string>
+    <string name="weather_16">Nieve</string>
+    <string name="weather_17">Granizo</string>
+    <string name="weather_18">Aguanieve</string>
+    <string name="weather_19">Polvo</string>
+    <string name="weather_20">Niebla</string>
+    <string name="weather_21">Neblina</string>
+    <string name="weather_22">Humo</string>
+    <string name="weather_23">Borrascoso</string>
+    <string name="weather_24">Ventoso</string>
+    <string name="weather_25">Frío</string>
+    <string name="weather_26">Nublado</string>
+    <string name="weather_27">May. Nublado</string> <!-- Night -->
+    <string name="weather_28">May. Nublado</string> <!-- Day -->
+    <string name="weather_29">Parc. Nublado</string> <!-- Night -->
+    <string name="weather_30">Parc. Nublado</string> <!-- Day -->
+    <string name="weather_31">Despejado</string> <!-- Night -->
+    <string name="weather_32">Soleado</string>
+    <string name="weather_33">Fair</string> <!-- Night -->
+    <string name="weather_34">Fair</string> <!-- Day -->
+    <string name="weather_35">Lluvia y granizo</string>
+    <string name="weather_36">Caluroso</string>
+    <string name="weather_37">Torm. eléctricas</string>
+    <string name="weather_38">Torm. eléc. aisladas</string>
+    <string name="weather_39">Torm. eléc. aisladas</string>
+    <string name="weather_40">Parc. Nublado</string>
+    <string name="weather_41">Fuertes Nevadas</string>
+    <string name="weather_42">Chub. de nieve</string>
+    <string name="weather_43">Fuertes nevadas</string>
+    <string name="weather_44">Parc. nublado</string>
+    <string name="weather_45">Chaparrones</string>
+    <string name="weather_46">Nieve</string>
+    <string name="weather_47">Chap. aislados</string>
+
+    <!-- Blacklisted app for floating mode -->
+    <string name="floating_mode_blacklisted_app">La aplicación actual está en la lista negra y no podrá usarse en modo flotante</string>
+
+    <!-- First time run hover -->
+    <string name="hover_cling_text">Hover está ahora activo.\n\nCuando llegue una nueva notificación, una ventana superior aparecerá permitiéndote interactuar sin salir de la app actual.</string>
+
+    <!-- Title shown when app provides no interface -->
+    <string name="status_bar_floating_no_interface">Aplicación sin interfaz</string>
+
+    <!-- battery saver mode -->
+    <string name="quick_settings_battery_saver_label">Ahorro energía</string>
+    <string name="quick_settings_network_type">Estado</string>
+    <string name="quick_settings_network_unknown">Desconocido</string>
+    <string name="quick_settings_network_disable">Sin internet</string>
+
+    <!-- Network Strings for battery saver mode -->
+    <string name="network_4G">4G/LTE</string>
+    <string name="network_3G_only">Solo 3G</string>
+    <string name="network_3G_auto">2G/3G Auto</string>
+    <string name="network_3G">2G/3G Pref</string>
+    <string name="network_2G">Solo 2G</string>
+
+    <string name="battery_saver_start">Ahorro energia activo</string>
+    <string name="battery_saver_stop">Ahorro energia inactivo</string>
+    <string name="battery_saver_change">Cambio de red a</string>
+    <string name="battery_saver_network">Red restaurada</string>
+    <string name="battery_saver_data">Datos restaurados</string>
+    <string name="battery_saver_brightness">Brillo pantalla restaurado</string>
+    <string name="battery_saver_bluetooth">Bluetooth restaurado</string>
+    <string name="battery_saver_location">Gps restaurado</string>
+    <string name="battery_saver_wifi">Wi-Fi restaurado</string>
+    <string name="battery_saver_cpu">CPU restaurado</string>
+    <string name="battery_saver_cpu_change">Ahorro energia cambia la freqüéncia de la CPU a</string>
+    <string name="battery_saver_sync">Sincronización restaurada</string>
+    <string name="battery_saver_led">LED restaurado</string>
+    <string name="battery_saver_vibrate">Vibración restaurada</string>
+    <string name="battery_saver_no_changes">Sin cambios</string>
+    <string name="battery_saver_all">Todas la configuraciones han sido restauradas</string>
+    <string name="battery_saver_enable_ticker">Ahorro energia activo...</string>
+    <string name="battery_saver_enable_title">Modo ahorro energia</string>
+    <string name="battery_saver_airplane_ticker">Modo avión activado por el Ahorro de energia</string>
+    <string name="battery_saver_airplane_text">Modo avión activado por el Ahorro de energia porque hace mas de 5 minutos que no hay señal de red</string>
+    <string name="battery_saver_disable">Desactivar</string>
 
     <!-- Heads up -->
     <string name="status_bar_notification_heads_up_enable_title">Habilitar "heads up"</string>

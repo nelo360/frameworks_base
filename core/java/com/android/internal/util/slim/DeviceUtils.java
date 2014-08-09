@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.hardware.SensorManager;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.WifiDisplayStatus;
 import android.net.ConnectivityManager;
@@ -32,6 +33,8 @@ import android.view.WindowManager;
 import android.util.Log;
 
 import com.android.internal.telephony.PhoneConstants;
+import static android.hardware.Sensor.TYPE_LIGHT;
+import static android.hardware.Sensor.TYPE_PROXIMITY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +109,11 @@ public class DeviceUtils {
         return false;
     }
 
+    public static boolean hasCamera(final Context context) {
+        final PackageManager pm = context.getPackageManager();
+        return pm != null && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
+    }
+
     public static FilteredDeviceFeaturesArray filterUnsupportedDeviceFeatures(Context context,
             String[] valuesArray, String[] entriesArray) {
         if (valuesArray == null || entriesArray == null || context == null) {
@@ -162,6 +170,16 @@ public class DeviceUtils {
         } else {
             return DEVICE_TABLET;
         }
+    }
+
+    public static boolean deviceSupportsProximitySensor(Context context) {
+        SensorManager sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        return sm.getDefaultSensor(TYPE_PROXIMITY) != null;
+    }
+
+    public static boolean deviceSupportsLightSensor(Context context) {
+        SensorManager sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        return sm.getDefaultSensor(TYPE_LIGHT) != null;
     }
 
     public static boolean isPhone(Context con) {

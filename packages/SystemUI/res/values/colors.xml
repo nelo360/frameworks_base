@@ -44,6 +44,9 @@
     <drawable name="notification_item_background_color_pressed">#ffaaaaaa</drawable>
     <color name="notification_shortcut_color">#FFFFFFFF</color>
 
+    <!-- Network speed indicator -->
+    <color name="status_bar_traffic_color">#FFFFFFFF</color>
+
     <!-- Navigation bar -->
     <color name="navigationbar_button_default_color">#FFFFFFFF</color>
     <color name="navigationbar_button_glow_default_color">#FFFFFFFF</color>
@@ -54,6 +57,15 @@
     <!-- Quick Settings -->
     <color name="qs_background_color">#FF212121</color>
     <color name="qs_background_pressed_color">#FF161616</color>
+
+    <!-- app sidebar trigger region color -->
+    <color name="trigger_region_color">#8015a0e5</color>
+
+    <!-- app sidebar item text color -->
+    <color name="sidebar_item_text_color">#ffffffff</color>
+
+    <!-- app sidebar item text shadow color -->
+    <color name="sidebar_item_text_shadow_color">#ff000000</color>  
 
     <!-- Pie controls -->
     <color name="pie_overlay_color">#ff000000</color>
@@ -74,6 +86,8 @@
     <color name="card_backgroundExpand">#ffffffff</color>
 
     <color name="card_text_color_header">#ff000000</color>
+
+    <color name="ad_notification_background_color">#3fff</color>
 
     <!-- Used by selector -->
     <color name="card_pressed">#7e3c3c3c</color>

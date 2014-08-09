@@ -389,12 +389,49 @@ final class Session extends IWindowSession.Stub
     }
 
     public void setWallpaperPosition(IBinder window, float x, float y, float xStep, float yStep) {
+        setWallpaperPositionOverscroll(window, x, y, xStep, yStep, -1, -1, -1, -1);
+    }
+
+    /**
+     * @hide
+     */
+    public void setWallpaperPositionOverscroll(IBinder window, float x, float y, float xStep, float yStep,
+            float xOverscroll, float yOverscroll, int xOverscrollMax, int yOverscrollMax) {
         synchronized(mService.mWindowMap) {
             long ident = Binder.clearCallingIdentity();
             try {
                 mService.setWindowWallpaperPositionLocked(
                         mService.windowForClientLocked(this, window, true),
-                        x, y, xStep, yStep);
+                        x, y, xStep, yStep, xOverscroll, yOverscroll,
+                        xOverscrollMax, yOverscrollMax);
+            } finally {
+                Binder.restoreCallingIdentity(ident);
+            }
+        }
+    }
+
+    /**
+     * @hide
+     */
+    public int getLastWallpaperX() {
+        synchronized(mService.mWindowMap) {
+            long ident = Binder.clearCallingIdentity();
+            try {
+                return mService.getLastWallpaperX();
+            } finally {
+                Binder.restoreCallingIdentity(ident);
+            }
+        }
+    }
+
+    /**
+     * @hide
+     */
+    public int getLastWallpaperY() {
+        synchronized(mService.mWindowMap) {
+            long ident = Binder.clearCallingIdentity();
+            try {
+                return mService.getLastWallpaperY();
             } finally {
                 Binder.restoreCallingIdentity(ident);
             }

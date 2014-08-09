@@ -48,4 +48,22 @@ interface INotificationManager
     void cancelAllNotificationsFromListener(in INotificationListener token);
 
     StatusBarNotification[] getActiveNotificationsFromListener(in INotificationListener token);
+
+    void setHaloPolicyBlack(boolean state);
+    void setHaloStatus(String pkg, boolean status);
+    void setHaloBlacklistStatus(String pkg, boolean status);
+    void setHaloWhitelistStatus(String pkg, boolean status);
+    boolean isHaloPolicyBlack();
+    boolean isPackageAllowedForHalo(String pkg);
+
+    void setPeekBlacklistStatus(String pkg, boolean status);
+    void setFloatingModeBlacklistStatus(String pkg, boolean status);
+    void setHoverBlacklistStatus(String pkg, boolean status);
+    boolean isPackageAllowedForPeek(String pkg);
+    boolean isPackageAllowedForFloatingMode(String pkg);
+    boolean isPackageAllowedForHover(String pkg);
+
+    StatusBarNotification[] getActiveNotificationsFromSystemListener(in INotificationListener token);
+    void cancelNotificationFromSystemListener(in INotificationListener token, String pkg, String tag, int id);
+
 }

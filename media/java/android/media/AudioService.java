@@ -42,6 +42,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.ThemeUtils;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
@@ -133,6 +134,8 @@ public class AudioService extends IAudioService.Stub {
 
     /** The UI */
     private VolumePanel mVolumePanel;
+    private Context mUiContext;
+    private Handler mHandler;
 
     // sendMsg() flags
     /** If the msg is already queued, replace it with this one. */
@@ -457,6 +460,8 @@ public class AudioService extends IAudioService.Stub {
 
     private PowerManager.WakeLock mAudioEventWakeLock;
 
+    private TelephonyManager mTelephonyManager;
+
     private final MediaFocusControl mMediaFocusControl;
 
     // Reference to BluetoothA2dp to query for AbsoluteVolume.
@@ -474,12 +479,12 @@ public class AudioService extends IAudioService.Stub {
         mContext = context;
         mContentResolver = context.getContentResolver();
         mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
+        mHandler = new Handler();
         mVoiceCapable = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_voice_capable);
 
         PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
         mAudioEventWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "handleAudioEvent");
-
         Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         mHasVibrator = vibrator == null ? false : vibrator.hasVibrator();
 
@@ -497,6 +502,9 @@ public class AudioService extends IAudioService.Stub {
                 com.android.internal.R.integer.config_soundEffectVolumeDb);
 
         mVolumePanel = new VolumePanel(context, this);
+
+        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
         mForcedUseForComm = AudioSystem.FORCE_NONE;
 
         createAudioSystemThread();
@@ -576,6 +584,13 @@ public class AudioService extends IAudioService.Stub {
         }
 
         context.registerReceiver(mReceiver, intentFilter);
+
+        ThemeUtils.registerThemeChangeReceiver(context, new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mUiContext = null;
+            }
+        });
 
         mUseMasterVolume = context.getResources().getBoolean(
                 com.android.internal.R.bool.config_useMasterVolume);
@@ -1203,7 +1218,7 @@ public class AudioService extends IAudioService.Stub {
             streamType = AudioSystem.STREAM_NOTIFICATION;
         }
 
-        mVolumePanel.postVolumeChanged(streamType, flags);
+        showVolumeChangeUi(streamType, flags);
 
         if ((flags & AudioManager.FLAG_FIXED_VOLUME) == 0) {
             oldIndex = (oldIndex + 5) / 10;
@@ -1616,6 +1631,11 @@ public class AudioService extends IAudioService.Stub {
         synchronized(mSetModeDeathHandlers) {
             if (mode == AudioSystem.MODE_CURRENT) {
                 mode = mMode;
+            }
+
+            if ((mode == AudioSystem.MODE_IN_CALL) &&
+                (mTelephonyManager.getCallState() != TelephonyManager.CALL_STATE_IDLE)) {
+                 AudioSystem.setParameters("in_call=true");
             }
             newModeOwnerPid = setModeInt(mode, cb, Binder.getCallingPid());
         }
@@ -3004,7 +3024,7 @@ public class AudioService extends IAudioService.Stub {
                             device);
         }
 
-        public synchronized boolean setIndex(int index, int device) {
+        public boolean setIndex(int index, int device) {
             int oldIndex = getIndex(device);
             index = getValidIndex(index);
             synchronized (mCameraSoundForced) {
@@ -3012,8 +3032,9 @@ public class AudioService extends IAudioService.Stub {
                     index = mIndexMax;
                 }
             }
-            mIndex.put(device, index);
-
+            synchronized (this) {
+                mIndex.put(device, index);
+            }
             if (oldIndex != index) {
                 // Apply change to all streams using this one as alias
                 // if changing volume of current device, also change volume of current
@@ -4319,6 +4340,25 @@ public class AudioService extends IAudioService.Stub {
             }
         }
 
+    }
+
+    private void showVolumeChangeUi(final int streamType, final int flags) {
+        if (mUiContext != null && mVolumePanel != null) {
+            mVolumePanel.postVolumeChanged(streamType, flags);
+        } else {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mUiContext == null) {
+                        mUiContext = ThemeUtils.createUiContext(mContext);
+                    }
+
+                    final Context context = mUiContext != null ? mUiContext : mContext;
+                    mVolumePanel = new VolumePanel(context, AudioService.this);
+                    mVolumePanel.postVolumeChanged(streamType, flags);
+                }
+            });
+        }
     }
 
     //==========================================================================================

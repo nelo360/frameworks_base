@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.FloatMath;
@@ -183,6 +184,37 @@ public class RecentsVerticalScrollView extends ScrollView
     @Override
     public void removeViewInLayout(final View view) {
         dismissChild(view);
+    }
+
+    @Override
+    public void removeAllViewsInLayout() {
+        smoothScrollTo(0, 0);
+        int count = mLinearLayout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            final View child = mLinearLayout.getChildAt(i);
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismissChild(child);
+                }
+            }, i * 150);
+        }
+    }
+
+    /**
+     * Returns the child count of mLinearLayout
+     * @return
+     */
+    public int getLinearLayoutChildCount() {
+        return mLinearLayout.getChildCount();
+    }
+
+    /**
+     * Returns the child of mLinearLayout at the given index
+     * @return
+     */
+    public View getLinearLayoutChildAt(int index) {
+        return mLinearLayout.getChildAt(index);
     }
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {

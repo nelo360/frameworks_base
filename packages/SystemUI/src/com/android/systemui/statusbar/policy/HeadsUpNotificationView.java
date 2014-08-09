@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
@@ -138,8 +139,8 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
         float pagingTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
         mSwipeHelper = new SwipeHelper(SwipeHelper.X, this, densityScale, pagingTouchSlop);
 
-        int minHeight = getResources().getDimensionPixelSize(R.dimen.notification_row_min_height);
-        int maxHeight = getResources().getDimensionPixelSize(R.dimen.notification_row_max_height);
+        int minHeight = getResources().getDimensionPixelSize(R.dimen.default_notification_row_min_height);
+        int maxHeight = getResources().getDimensionPixelSize(R.dimen.default_notification_row_max_height);
         mExpandHelper = new ExpandHelper(mContext, this, minHeight, maxHeight);
         mExpandHelper.setForceOneFinger(true);
 
@@ -171,6 +172,19 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
         return mSwipeHelper.onInterceptTouchEvent(ev)
                 || mExpandHelper.onInterceptTouchEvent(ev)
                 || super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        boolean down = event.getAction() == KeyEvent.ACTION_DOWN;
+        switch (event.getKeyCode()) {
+        case KeyEvent.KEYCODE_BACK:
+            if (!down) {
+                mBar.hideHeadsUp();
+            }
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     // View methods

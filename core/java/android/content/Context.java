@@ -2067,6 +2067,18 @@ public abstract class Context {
 
     /**
      * Use with {@link #getSystemService} to retrieve a
+     * {@link android.app.ProfileManager} for setting
+     * notification profiles.
+     *
+     * @see #getSystemService
+     * @see android.app.ProfileManager
+     *
+     * @hide
+     */
+    public static final String PROFILE_SERVICE = "profile";
+
+    /**
+     * Use with {@link #getSystemService} to retrieve a
      * {@link android.view.accessibility.AccessibilityManager} for giving the user
      * feedback for UI events through the registered event listeners.
      *
@@ -2462,6 +2474,26 @@ public abstract class Context {
      * @see android.hardware.ConsumerIrManager
      */
     public static final String CONSUMER_IR_SERVICE = "consumer_ir";
+
+    /**
+     * Use with {@link #getSystemService} to retrieve a
+     * {@link android.os.BatteryManager} for access battery information.
+     *
+     * @see #getSystemService
+     * @see android.os.BatteryManager
+     * @hide
+     */
+    public static final String BATTERY_SERVICE = "battery";
+
+    /**
+     * Use with {@link #getSystemService} to retrieve a
+     * {@link android.content.res.ThemeManager} for accessing theme service.
+     *
+     * @see #getSystemService
+     * @see android.content.res.ThemeManager
+     * @hide
+     */
+    public static final String THEME_SERVICE = "themes";
 
     /**
      * Determine whether the given permission is allowed for a particular

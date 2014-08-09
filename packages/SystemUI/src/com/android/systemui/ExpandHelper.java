@@ -528,7 +528,9 @@ public class ExpandHelper implements Gefingerpoken, OnClickListener {
         mCallback.setUserLockedChild(v, true);
         if (DEBUG) Log.d(TAG, "got mOldHeight: " + mOldHeight +
                     " mNaturalHeight: " + mNaturalHeight);
-        v.getParent().requestDisallowInterceptTouchEvent(true);
+        if (v != null && v.getParent() != null) {
+            v.getParent().requestDisallowInterceptTouchEvent(true);
+        }
     }
 
     public float getNaturalHeight() {

@@ -48,7 +48,12 @@ public class QSConstants {
         public static final String TILE_THEME = "toggleTheme";
         public static final String TILE_CUSTOM = "toggleCustom";
         public static final String TILE_CONTACT = "tileContact";
+        public static final String TILE_PROFILE = "toggleProfile";
         public static final String TILE_SHAKE = "tileShake";
+        public static final String TILE_COMPASS = "toggleCompass";
+	public static final String TILE_NETWORKSPEED = "toggleNetworkSpeed";
+        public static final String TILE_HOVER = "toggleHover";
+        public static final String TILE_CAMERA = "toggleCamera";
 
         // dynamic tiles
         public static final String TILE_ALARM = "toggleAlarm";
@@ -60,7 +65,8 @@ public class QSConstants {
         //Key for custom tile additive
         public static final String TILE_CUSTOM_KEY = " Key=";
         public static final String TILE_CUSTOM_DELIMITER = " =action= ";
-
+        public static final String TILE_WEATHER = "toogleweather";
+        public static final String TILE_BATTERYSAVER = "toggleBatterySaver";
         public static final String TILE_DELIMITER = "|";
         public static ArrayList<String> TILES_DEFAULT = new ArrayList<String>();
 
@@ -74,6 +80,8 @@ public class QSConstants {
             TILES_DEFAULT.add(TILE_AIRPLANE);
             TILES_DEFAULT.add(TILE_BLUETOOTH);
             TILES_DEFAULT.add(TILE_LOCATION);
+            TILES_DEFAULT.add(TILE_TORCH);
+            TILES_DEFAULT.add(TILE_NETWORKMODE);
         }
 
         public static ArrayList<String> DYNAMIC_TILES_DEFAULT = new ArrayList<String>();

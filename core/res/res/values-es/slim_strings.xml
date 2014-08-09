@@ -54,9 +54,6 @@
     <!-- label for item that reboots the phone in phone options dialog -->
     <string name="global_action_reboot">Reiniciar</string>
 
-    <!-- label for item that opens the profile choosing dialog -->
-    <string name="global_action_choose_profile">Perfil</string>
-
     <!-- In WiFi AP notification -->
     <string name="notify_turn_wifi_ap_off_title">Desactivar AP Wi-Fi</string>
 
@@ -71,6 +68,57 @@
 
     <!-- stylus gestures support -->
     <string name="stylus_app_not_installed">%s no está instalado</string>
+    
+    <!-- Error description on theme switch with ligtsensor mode enabled -->
+    <string name="theme_auto_switch_mode_error">El cambio automático de condiciones de luz está activado. El cambio manual no se puede usar.</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_preventpower">Prevenir pulsación de botón de encendido</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_preventpower">Permite a una aplicación utilizar el botón de encendido</string>
+
+    <!-- label for item that opens the profile choosing dialog -->
+    <string name="global_action_choose_profile">Perfil</string>
+
+    <!-- The title of the profile picker dialog. -->
+    <string name="profile_picker_title">Perfiles</string>
+
+    <!-- The item label for the no profile selection item. -->
+    <string name="profile_none">Ningún</string>
+
+    <!-- Names of default profiles. -->
+    <string name="profileNameDefault">Normal</string>
+    <string name="profileNameWork">Trabajo</string>
+    <string name="profileNameHome">Casa</string>
+    <string name="profileNameSilent">Silencio</string>
+    <string name="profileNameNight">Noche</string>
+
+    <!-- Names of application groups. -->
+    <string name="profileGroupPhone">Teléfono</string>
+    <string name="profileGroupCalendar">Calendario</string>
+    <string name="profileGroupGmail">Gmail</string>
+    <string name="profileGroupEmail">Email</string>
+    <string name="profileGroupSMS">SMS</string>
+
+    <!-- Name of wildcard profile. -->
+    <string name="wildcardProfile">Otro</string>
+
+    <!-- Title of an application permission, listed so the user can choose whether they want the application to do this. -->
+    <string name="permlab_setKeyguardWallpaper">Asignar fondo pantalla bloqueo</string>
+    <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_setKeyguardWallpaper">Permitir a una app cambiar el fodo de la pantalla de bloqueo</string>
+
+    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_resetBatteryStats">Reiniciar estadísticas batería</string>
+    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_resetBatteryStats">Permitir a una aplicación reiniciar las estadísticas del uso de la batería.</string>
+
+    <!-- Floating Window -->
+    <string name="floating_window_snap_top">Acoplar arriba</string>
+    <string name="floating_window_snap_bottom">Acoplar abajo</string>
+    <string name="floating_window_snap_left">Acoplar izquierda</string>
+    <string name="floating_window_snap_right">Acoplar derecha</string>
+    <string name="floating_window_minimize">Minimizar</string>
 
     <!-- Heads up -->
     <string name="permlab_changeHeadsUpState">habilitar o deshabilitar "heads up"</string>

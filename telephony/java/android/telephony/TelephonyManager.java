@@ -502,6 +502,15 @@ public class TelephonyManager {
     }
 
     /**
+     * {@hide}
+     */
+    public void toggleMobileNetwork(int networkState) {
+        try {
+            getITelephony().toggleMobileNetwork(networkState);
+        } catch (RemoteException e) { }
+    }
+
+    /**
      * The contents of the /proc/cmdline file
      */
     private static String getProcCmdLine()
@@ -673,7 +682,6 @@ public class TelephonyManager {
     public static final int NETWORK_TYPE_GSM = 16;
     /** Current network is TD_SCDMA {@hide} */
     public static final int NETWORK_TYPE_TD_SCDMA = 17;
-
 
     /**
      * @return the NETWORK_TYPE_xxxx for current data connection.

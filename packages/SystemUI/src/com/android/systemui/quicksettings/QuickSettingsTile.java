@@ -18,6 +18,10 @@
 
 package com.android.systemui.quicksettings;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.Animator.AnimatorListener;
 import android.app.ActivityManagerNative;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,6 +32,11 @@ import android.net.Uri;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.os.Handler;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
@@ -65,6 +74,8 @@ public class QuickSettingsTile implements OnClickListener {
     protected QuickSettingsController mQsc;
     protected SharedPreferences mPrefs;
 
+    private Handler mHandler = new Handler();
+
     public QuickSettingsTile(Context context, QuickSettingsController qsc) {
         this(context, qsc, R.layout.quick_settings_tile_basic);
     }
@@ -99,6 +110,55 @@ public class QuickSettingsTile implements OnClickListener {
         mTile.setOnLongClickListener(mOnLongClick);
     }
 
+     public void switchToRibbonMode() {
+        TextView tv = (TextView) mTile.findViewById(R.id.text);
+        if (tv != null) {
+            tv.setVisibility(View.GONE);
+        }
+        View image = mTile.findViewById(R.id.image);
+        if (image != null) {
+            MarginLayoutParams params = (MarginLayoutParams) image.getLayoutParams();
+            int margin = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.qs_tile_ribbon_icon_margin);
+            params.topMargin = params.bottomMargin = margin;
+            image.setLayoutParams(params);
+        }
+    }
+
+    public void setLabelVisibility(boolean visible) {
+        TextView tv = (TextView) mTile.findViewById(R.id.text);
+        if (tv != null) {
+            tv.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+        View sepPadding = mTile.findViewById(R.id.separator_padding);
+        if (sepPadding != null) {
+            sepPadding.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
+
+    public void setImageMargins(int margin) {
+        View image = mTile.findViewById(R.id.image);
+        if (image != null) {
+            MarginLayoutParams params = (MarginLayoutParams) image.getLayoutParams();
+            params.topMargin = params.bottomMargin = margin;
+            image.setLayoutParams(params);
+        }
+    }
+
+    public void switchToSmallIcons() {
+        TextView tv = (TextView) mTile.findViewById(R.id.text);
+        if (tv != null) {
+            tv.setText(mLabel);
+            tv.setTextSize(mTileTextSize);
+            int dpi = mContext.getResources().getDisplayMetrics().densityDpi;
+            if (dpi > DisplayMetrics.DENSITY_HIGH) {
+                tv.setPadding(0, mTileTextPadding, 0, 0);
+            }
+        }
+        setImageMargins(mContext.getResources().getDimensionPixelSize(
+                R.dimen.qs_tile_ribbon_icon_margin_big));
+    }
+
     void onPostCreate() {}
 
     public void onDestroy() {}
@@ -131,6 +191,39 @@ public class QuickSettingsTile implements OnClickListener {
                 image.setImageDrawable(mRealDrawable);
             }
         }
+    }
+
+    public boolean isFlipTilesEnabled() {
+        return (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.QUICK_SETTINGS_TILES_FLIP, 0) == 1);
+    }
+
+    public void flipTile(int delay){
+        final AnimatorSet anim = (AnimatorSet) AnimatorInflater.loadAnimator(
+                mContext, R.anim.flip_right);
+        anim.setTarget(mTile);
+        anim.setDuration(200);
+        anim.addListener(new AnimatorListener(){
+
+            @Override
+            public void onAnimationEnd(Animator animation) {}
+            @Override
+            public void onAnimationStart(Animator animation) {}
+            @Override
+            public void onAnimationCancel(Animator animation) {}
+            @Override
+            public void onAnimationRepeat(Animator animation) {}
+
+        });
+
+        Runnable doAnimation = new Runnable(){
+            @Override
+            public void run() {
+                anim.start();
+            }
+        };
+
+        mHandler.postDelayed(doAnimation, delay);
     }
 
     void startSettingsActivity(String action) {
