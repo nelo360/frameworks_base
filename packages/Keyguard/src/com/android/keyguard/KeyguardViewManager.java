@@ -122,6 +122,7 @@ public class KeyguardViewManager {
             sendToSleep(mContext);
         };
     };
+    private boolean mSmartCoverActivated;
 
     private ViewManagerHost mKeyguardHost;
     private KeyguardHostView mKeyguardView;
@@ -178,6 +179,8 @@ public class KeyguardViewManager {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_NOTIFICATIONS), false, this);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SMART_COVER_ACTIVATED), false, this);
         }
 
         @Override
@@ -196,6 +199,9 @@ public class KeyguardViewManager {
             mNotificationViewManager.unregisterListeners();
             mNotificationViewManager = null;
         }
+
+        mSmartCoverActivated = Settings.System.getBooleanForUser(mContext.getContentResolver(),
+                Settings.System.SMART_COVER_ACTIVATED, false, UserHandle.USER_CURRENT);
     }
 
     /**
@@ -890,6 +896,11 @@ public class KeyguardViewManager {
             return;
         }
 
+        // return if smart cover is disabled by the user
+        if (!mSmartCoverActivated) {
+            return;
+        }
+
         KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
         if (!updateMonitor.isDeviceProvisioned() || !updateMonitor.hasBootCompleted()) {
             // don't start the cover if the device hasn't booted, or completed
@@ -912,6 +923,11 @@ public class KeyguardViewManager {
             return;
         }
 
+        // return if smart cover is disabled by the user
+        if (!mSmartCoverActivated) {
+            return;
+        }
+
         KeyguardUpdateMonitor updateMonitor = KeyguardUpdateMonitor.getInstance(mContext);
         if (!updateMonitor.isDeviceProvisioned() || !updateMonitor.hasBootCompleted()) {
             return;
@@ -931,6 +947,9 @@ public class KeyguardViewManager {
     private void resetSmartCoverState() {
         if(DEBUG) Log.e(TAG, "resetSmartCoverState()");
         if(mSmartCoverCoords == null) return;
+
+        // return if smart cover is disabled by the user
+        if (!mSmartCoverActivated) return;
 
         if(DEBUG) Log.e(TAG, "resetCoverRunnable run()");
         mHandler.removeCallbacks(mSmartCoverTimeout);

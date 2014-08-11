@@ -3327,6 +3327,12 @@ public final class Settings {
         public static final String PIE_BUTTONS_CONFIG_SECOND_LAYER = "pie_buttons_config_second_layer";
 
         /**
+         * Whether the smart cover is activated or not
+         * @hide
+         */
+        public static final String SMART_COVER_ACTIVATED = "smart_cover_activated";
+
+        /**
          * Whether lid wakes the device
          * @hide
          */
