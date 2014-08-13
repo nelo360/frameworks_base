@@ -151,12 +151,6 @@ public class TvStatusBar extends BaseStatusBar {
         return true;
     }
 
-    @Override
-    public boolean isExpandedVisible() {
-        return false;
-    }
-
-    @Override
     public View getStatusBarView() {
         return null;
     }

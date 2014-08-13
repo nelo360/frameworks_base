@@ -118,8 +118,6 @@ public class NotificationManagerService extends INotificationManager.Stub
 
     private static final int MAX_PACKAGE_NOTIFICATIONS = 50;
 
-    private static final int DEFAULT_RESULT = 0;
-
     // message codes
     private static final int MESSAGE_TIMEOUT = 2;
 
@@ -208,14 +206,13 @@ public class NotificationManagerService extends INotificationManager.Stub
     private HashSet<String> mEnabledListenerPackageNames = new HashSet<String>();
 
     // Notification control database. For now just contains disabled packages.
-    private AtomicFile mPolicyFile, mHaloPolicyFile,mPeekPolicyFile, mFloatingModePolicyFile, mHoverPolicyFile;
+    private AtomicFile mPolicyFile, mHaloPolicyFile,mPeekPolicyFile, mFloatingModePolicyFile;
     private HashSet<String> mBlockedPackages = new HashSet<String>();
     private HashSet<String> mHaloBlacklist = new HashSet<String>();
     private HashSet<String> mHaloWhitelist = new HashSet<String>();
     private boolean mHaloPolicyisBlack = true;
     private HashSet<String> mPeekBlacklist = new HashSet<String>();
     private HashSet<String> mFloatingModeBlacklist = new HashSet<String>();
-    private HashSet<String> mHoverBlacklist = new HashSet<String>();
 
     private static final int DB_VERSION = 1;
 
@@ -227,11 +224,9 @@ public class NotificationManagerService extends INotificationManager.Stub
     private static final String TAG_BLOCKED_PKGS = "blocked-packages";
     private static final String TAG_PACKAGE = "package";
     private static final String ATTR_NAME = "name";
-    private static final String NOTIFICATION_POLICY = "notification_policy.xml";
 
     private static final String PEEK_POLICY = "peek_policy.xml";
     private static final String FLOATING_MODE_POLICY = "floating_mode_policy.xml";
-    private static final String HOVER_POLICY = "hover_policy.xml";
 
     private final ArrayList<NotificationScorer> mScorers = new ArrayList<NotificationScorer>();
 
@@ -458,7 +453,7 @@ public class NotificationManagerService extends INotificationManager.Stub
     private void loadBlockDb() {
         synchronized(mBlockedPackages) {
             if (mPolicyFile == null) {
-                mPolicyFile = new AtomicFile(new File(SYSTEM_FOLDER, NOTIFICATION_POLICY));
+                mPolicyFile = new AtomicFile(new File(SYSTEM_FOLDER, "notification_policy.xml"));
                 mBlockedPackages.clear();
                 readPolicy(mPolicyFile, TAG_BLOCKED_PKGS, mBlockedPackages);
             }
@@ -472,8 +467,6 @@ public class NotificationManagerService extends INotificationManager.Stub
             mHaloPolicyisBlack = readPolicy(mHaloPolicyFile, TAG_BLOCKED_PKGS, mHaloBlacklist, ATTR_HALO_POLICY_IS_BLACK, 1) == 1;
             mHaloWhitelist.clear();
             readPolicy(mHaloPolicyFile, TAG_ALLOWED_PKGS, mHaloWhitelist);
-	}
-    }
 
     private void loadPeekBlockDb() {
         synchronized(mPeekBlacklist) {
@@ -491,16 +484,6 @@ public class NotificationManagerService extends INotificationManager.Stub
                 mFloatingModePolicyFile = new AtomicFile(new File(SYSTEM_FOLDER, FLOATING_MODE_POLICY));
                 mFloatingModeBlacklist.clear();
                 readPolicy(mFloatingModePolicyFile, TAG_BLOCKED_PKGS, mFloatingModeBlacklist);
-            }
-        }
-    }
-
-    private void loadHoverBlockDb() {
-        synchronized(mHoverBlacklist) {
-            if (mHoverPolicyFile == null) {
-                mHoverPolicyFile = new AtomicFile(new File(SYSTEM_FOLDER, HOVER_POLICY));
-                mHoverBlacklist.clear();
-                readPolicy(mHoverPolicyFile, TAG_BLOCKED_PKGS, mHoverBlacklist);
             }
         }
     }
@@ -576,10 +559,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         } catch (IOException e) {
             if (outfile != null) {
                 mHaloPolicyFile.failWrite(outfile);
-                
-	    }
-	}
-    }
 
     private void writePeekBlockDb() {
         synchronized(mPeekBlacklist) {
@@ -615,6 +594,7 @@ public class NotificationManagerService extends INotificationManager.Stub
         }
     }
 
+<<<<<<< HEAD
     public void setHaloPolicyBlack(boolean state) {
         mHaloPolicyisBlack = state;
         writeHaloBlockDb();
@@ -656,7 +636,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         } else {
             return mHaloWhitelist.contains(pkg);
         }
-    }
 
     private void writeFloatingModeBlockDb() {
         synchronized(mFloatingModeBlacklist) {
@@ -692,40 +671,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         }
     }
 
-    private void writeHoverBlockDb() {
-        synchronized(mHoverBlacklist) {
-            FileOutputStream outfile = null;
-            try {
-                outfile = mHoverPolicyFile.startWrite();
-
-                XmlSerializer out = new FastXmlSerializer();
-                out.setOutput(outfile, "utf-8");
-
-                out.startDocument(null, true);
-
-                out.startTag(null, TAG_BODY); {
-                    out.attribute(null, ATTR_VERSION, String.valueOf(DB_VERSION));
-                    out.startTag(null, TAG_BLOCKED_PKGS); {
-                        // write all known network policies
-                        for (String pkg : mHoverBlacklist) {
-                            out.startTag(null, TAG_PACKAGE); {
-                                out.attribute(null, ATTR_NAME, pkg);
-                            } out.endTag(null, TAG_PACKAGE);
-                        }
-                    } out.endTag(null, TAG_BLOCKED_PKGS);
-                } out.endTag(null, TAG_BODY);
-
-                out.endDocument();
-
-                mHoverPolicyFile.finishWrite(outfile);
-            } catch (IOException e) {
-                if (outfile != null) {
-                    mHoverPolicyFile.failWrite(outfile);
-                }
-            }
-        }
-    }
-
     public void setPeekBlacklistStatus(String pkg, boolean status) {
         if (status) {
             mPeekBlacklist.add(pkg);
@@ -744,25 +689,12 @@ public class NotificationManagerService extends INotificationManager.Stub
         writeFloatingModeBlockDb();
     }
 
-    public void setHoverBlacklistStatus(String pkg, boolean status) {
-        if (status) {
-            mHoverBlacklist.add(pkg);
-        } else {
-            mHoverBlacklist.remove(pkg);
-        }
-        writeHoverBlockDb();
-    }
-
     public boolean isPackageAllowedForPeek(String pkg) {
         return !mPeekBlacklist.contains(pkg);
     }
 
     public boolean isPackageAllowedForFloatingMode(String pkg) {
         return !mFloatingModeBlacklist.contains(pkg);
-    }
-
-    public boolean isPackageAllowedForHover(String pkg) {
-        return !mHoverBlacklist.contains(pkg);
     }
 
     /**
@@ -802,7 +734,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         writeBlockDb();
         writePeekBlockDb();
         writeFloatingModeBlockDb();
-        writeHoverBlockDb();
     }
 
 
@@ -1875,7 +1806,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         loadHaloBlockDb();
         loadPeekBlockDb();
         loadFloatingModeBlockDb();
-        loadHoverBlockDb();
 
         PackageManager pm = mContext.getPackageManager();
         for (String pkg : mBlockedPackages) {
