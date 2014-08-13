@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2006 The Android Open Source Project
- * This code has been modified. Portions copyright (C) 2014, ParanoidAndroid Project.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -4007,14 +4006,6 @@ public final class Settings {
          */
         public static final String CALL_UI_IN_BACKGROUND = "call_ui_in_background";
 
-	/**
-         * In call dialpad state.
-         * 0 = hidden
-         * 1 = showing
-         * @hide
-         */
-        public static final String DIALPAD_STATE = "dialpad_state";
-
         /**
          * Whether incomming call UI stays in background and shows as heads up notification
          *
@@ -4599,49 +4590,6 @@ public final class Settings {
          * @hide
          */
         public static final String PEEK_SCREEN_TIMEOUT = "peek_screen_timeout";
-
-        /**
-         * Hover is active, default is 0 (off).
-         * 0 = disabled
-         * 1 = enabled
-         * @hide
-         */
-        public static final String HOVER_ACTIVE = "hover_active";
-
-        /**
-         * Hide HOVER-Button is StatusBar, default is 0 (off).
-         *
-         * @hide
-         */
-        public static final String HOVER_HIDE_BUTTON = "hover_hide_button";
-
-        /**
-         * Hover: Exclude non-clearable notifications, default is 0 (off).
-         *
-         * @hide
-         */
-        public static final String HOVER_EXCLUDE_NON_CLEARABLE = "hover_exclude_non_clearable";
-
-        /**
-         * Hover: Exclude low priority notifications, default is 0 (off).
-         *
-         * @hide
-         */
-        public static final String HOVER_EXCLUDE_LOW_PRIORITY = "hover_exclude_low_priority";
-		
-        /**
-         * Hover: Option to exclude topmost app, default is 1 (on).
-         *
-         * @hide
-         */
-        public static final String HOVER_EXCLUDE_TOPMOST = "hover_exclude_topmost";
-
-	/**
-	 * Hover: long fade out delay, default is 5000ms (5s).
-         *
-         * @hide
-         */
-        public static final String HOVER_LONG_FADE_OUT_DELAY = "hover_long_fade_out_delay";
 
         /**
          * Whether to display notifications on screen when screen is off
@@ -6963,9 +6911,6 @@ public final class Settings {
 
         /** @hide */
         public static final String IMMERSIVE_MODE_CONFIRMATIONS = "immersive_mode_confirmations";
-
-        /** @hide */
-        public static final String HOVER_FIRST_TIME = "hover_first_time";
 
         /**
          * This is the query URI for finding a print service to install.
