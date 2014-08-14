@@ -45,7 +45,7 @@ public class HoverTile extends QuickSettingsTile {
                         mEnabled ? 0 : 1);
             }
         };
-        mOnLongClick = new View.OnLongClickListener() {
+        /*mOnLongClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -54,7 +54,7 @@ public class HoverTile extends QuickSettingsTile {
                 startSettingsActivity(intent);
                 return true;
             }
-        };
+        };*/
         qsc.registerObservedContent(Settings.System.getUriFor(
                 Settings.System.HOVER_ACTIVE), this);
     }
