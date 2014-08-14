@@ -467,6 +467,9 @@ public class NotificationManagerService extends INotificationManager.Stub
             mHaloPolicyisBlack = readPolicy(mHaloPolicyFile, TAG_BLOCKED_PKGS, mHaloBlacklist, ATTR_HALO_POLICY_IS_BLACK, 1) == 1;
             mHaloWhitelist.clear();
             readPolicy(mHaloPolicyFile, TAG_ALLOWED_PKGS, mHaloWhitelist);
+        }
+    }
+
 
     private void loadPeekBlockDb() {
         synchronized(mPeekBlacklist) {
@@ -559,6 +562,9 @@ public class NotificationManagerService extends INotificationManager.Stub
         } catch (IOException e) {
             if (outfile != null) {
                 mHaloPolicyFile.failWrite(outfile);
+	    }
+	}
+    }
 
     private void writePeekBlockDb() {
         synchronized(mPeekBlacklist) {
@@ -594,7 +600,6 @@ public class NotificationManagerService extends INotificationManager.Stub
         }
     }
 
-<<<<<<< HEAD
     public void setHaloPolicyBlack(boolean state) {
         mHaloPolicyisBlack = state;
         writeHaloBlockDb();
@@ -636,6 +641,7 @@ public class NotificationManagerService extends INotificationManager.Stub
         } else {
             return mHaloWhitelist.contains(pkg);
         }
+    }
 
     private void writeFloatingModeBlockDb() {
         synchronized(mFloatingModeBlacklist) {
