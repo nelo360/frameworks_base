@@ -24,6 +24,7 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManagerNative;
 import android.app.Notification;
+import android.app.INotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.app.admin.DevicePolicyManager;
@@ -162,6 +163,7 @@ public abstract class BaseStatusBar extends SystemUI implements
     protected CommandQueue mCommandQueue;
     protected IStatusBarService mBarService;
     protected H mHandler = createHandler();
+    protected INotificationManager mNotificationManager;
 
     // all notifications
     protected NotificationData mNotificationData = new NotificationData();
@@ -298,6 +300,10 @@ public abstract class BaseStatusBar extends SystemUI implements
 
     public IStatusBarService getService() {
         return mBarService;
+    }
+
+    public INotificationManager getNotificationManager() {
+         return mNotificationManager;
     }
 
     public NotificationData getNotificationData() {
@@ -639,17 +645,6 @@ public abstract class BaseStatusBar extends SystemUI implements
                 mHalo = null;
             }
         }
-    }
-
-    public Peek getPeekInstance() {
-        if(mPeek == null) mPeek = new Peek(this, mContext);
-        return mPeek;
-    }
-
-    public PowerManager getPowerManagerInstance() {
-        if(mPowerManager == null) mPowerManager
-                = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        return mPowerManager;
     }
 
     private void initPieController() {
@@ -1375,12 +1370,8 @@ public abstract class BaseStatusBar extends SystemUI implements
             } catch (android.os.RemoteException ex) {
                 // System is dead
             }
-                 if (mFloat && !"android".equals(mPkg)) {
-                    Intent transparent = new Intent(mContext, com.android.systemui.Transparent.class);
-                    transparent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_FLOATING_WINDOW);
-                    mContext.startActivity(transparent);
-                }
 
+	    if (mPendingIntent != null) {
                 int[] pos = new int[2];
                 v.getLocationOnScreen(pos);
                 Intent overlay = new Intent();
