@@ -181,10 +181,6 @@ public class HoverLayout extends RelativeLayout implements ExpandHelper.Callback
     // SwipeHelper.Callback methods
 
         @Override
-        public void onChildTriggered(View v) {
-        }
-
-        @Override
         public View getChildAtPosition(MotionEvent ev) {
             return getChildContentView(null);
         }
@@ -200,7 +196,7 @@ public class HoverLayout extends RelativeLayout implements ExpandHelper.Callback
         }
 
         @Override
-        public void onChildDismissed(View v) {
+        public void onChildDismissed(View v, boolean direction) {
             mHover.clearHandlerCallbacks();
             mHover.setAnimatingVisibility(false);
             mHover.setLocked(false);

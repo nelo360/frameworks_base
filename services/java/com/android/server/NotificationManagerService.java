@@ -214,8 +214,6 @@ public class NotificationManagerService extends INotificationManager.Stub
     private HashSet<String> mHaloBlacklist = new HashSet<String>();
     private HashSet<String> mHaloWhitelist = new HashSet<String>();
     private boolean mHaloPolicyisBlack = true;
-    private HashSet<String> mPeekBlacklist = new HashSet<String>();
-    private HashSet<String> mFloatingModeBlacklist = new HashSet<String>();
 
     private static final int DB_VERSION = 1;
 
