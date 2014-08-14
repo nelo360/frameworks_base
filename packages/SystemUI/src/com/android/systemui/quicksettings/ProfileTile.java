@@ -53,14 +53,14 @@ public class ProfileTile extends QuickSettingsTile {
                 createProfileDialog();
             }
         };
-        mOnLongClick = new View.OnLongClickListener() {
+        /*mOnLongClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent("android.settings.PROFILES_SETTINGS");
                 startSettingsActivity(intent);
                 return true;
             }
-        };
+        };*/
     }
 
     @Override
