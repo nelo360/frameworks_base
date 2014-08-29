@@ -34,7 +34,6 @@ import android.widget.LinearLayout;
 import com.android.systemui.ExpandHelper;
 import com.android.systemui.R;
 import com.android.systemui.SwipeHelper;
-import com.android.systemui.statusbar.notification.NotificationHelper;
 import com.android.systemui.statusbar.BaseStatusBar;
 import com.android.systemui.statusbar.NotificationData;
 
@@ -60,9 +59,6 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
     private boolean mHeadsUpIsExpanded;
     private boolean mSnoozeButtonVisibility;
 
-    // Notification helper
-    protected NotificationHelper mNotificationHelper;
-
     public HeadsUpNotificationView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
@@ -84,10 +80,6 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
         }
     }
 
-    public void setNotificationHelper(NotificationHelper notificationHelper) {
-        mNotificationHelper = notificationHelper;
-    }
-
     public ViewGroup getHolder() {
         return mContentHolder;
     }
@@ -96,7 +88,6 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
         mHeadsUp = headsUp;
         mHeadsUpIsExpanded = isExpanded;
         mHeadsUp.row.setExpanded(isExpanded && mHeadsUp.row.isExpandable());
-        mHeadsUp.content.setOnClickListener(mNotificationHelper.getNotificationClickListener(headsUp, true));
         if (mContentHolder == null) {
             // too soon!
             return false;
@@ -148,8 +139,8 @@ public class HeadsUpNotificationView extends FrameLayout implements SwipeHelper.
         float pagingTouchSlop = ViewConfiguration.get(getContext()).getScaledPagingTouchSlop();
         mSwipeHelper = new SwipeHelper(SwipeHelper.X, this, densityScale, pagingTouchSlop);
 
-        int minHeight = getResources().getDimensionPixelSize(R.dimen.default_notification_row_min_height);
-        int maxHeight = getResources().getDimensionPixelSize(R.dimen.default_notification_row_max_height);
+        int minHeight = getResources().getDimensionPixelSize(R.dimen.notification_row_min_height);
+        int maxHeight = getResources().getDimensionPixelSize(R.dimen.notification_row_max_height);
         mExpandHelper = new ExpandHelper(mContext, this, minHeight, maxHeight);
         mExpandHelper.setForceOneFinger(true);
 

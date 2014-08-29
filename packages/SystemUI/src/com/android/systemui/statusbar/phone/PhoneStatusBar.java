@@ -1086,14 +1086,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         addNavigationBar();
 
+        // status bar brightness control observer
+        SettingsObserver observer = new SettingsObserver(mHandler);
+        observer.observe();
+
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext);
 
-	// Add heads up view.
+        // Add heads up view.
         addHeadsUpView();
 
-        SettingsObserver observer = new SettingsObserver(mHandler);
-        observer.observe();
+
     }
 
     private void cleanupBrightnessSlider() {
@@ -1467,6 +1470,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         // set the inital view visibility
         setAreThereNotifications();
 
+        // Other icons
         final SignalClusterView signalCluster =
                 (SignalClusterView)mStatusBarView.findViewById(R.id.signal_cluster);
 
@@ -4845,8 +4849,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mNotificationPanelMinHeightFrac = 0f;
         }
 
-        mHeadsUpNotificationDecay = res.getInteger(R.integer.heads_up_notification_decay);
-        mRowHeight =  res.getDimensionPixelSize(R.dimen.default_notification_row_min_height);
+        mRowHeight =  res.getDimensionPixelSize(R.dimen.notification_row_min_height);
 
         if (false) Log.v(TAG, "updateResources");
     }
