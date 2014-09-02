@@ -188,7 +188,7 @@ public class AppOpsManager {
     /** @hide */
     public static final int OP_BLUETOOTH_CHANGE = 43;
     /** @hide */
-    public static final int NUM_OP = 44;
+    public static final int _NUM_OP = 44;
 
     /** Access to coarse location information. */
     public static final String OPSTR_COARSE_LOCATION =
