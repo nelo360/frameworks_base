@@ -368,7 +368,7 @@ class ServerThread {
         StatusBarManagerService statusBar = null;
         InputMethodManagerService imm = null;
         AppWidgetService appWidget = null;
-	ProfileManagerService profile = null;
+        ProfileManagerService profile = null;
         NotificationManagerService notification = null;
         WallpaperManagerService wallpaper = null;
         LocationManagerService location = null;
@@ -475,6 +475,15 @@ class ServerThread {
                             new ClipboardService(context));
                 } catch (Throwable e) {
                     reportWtf("starting Clipboard Service", e);
+                }
+            }
+
+            if (!disableNonCoreServices) {
+                try {
+                    Slog.i(TAG, "TorchService");
+                    ServiceManager.addService(Context.TORCH_SERVICE, new TorchService(context));
+                } catch (Throwable e) {
+                    reportWtf("starting Torch Service", e);
                 }
             }
 
