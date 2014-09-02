@@ -187,6 +187,8 @@ public class AppOpsManager {
     public static final int OP_MONITOR_HIGH_POWER_LOCATION = 42;
     /** @hide */
     public static final int _NUM_OP = 43;
+    /** @hide */
+    public static final int OP_BLUETOOTH_CHANGE = 44;
 
     /** Access to coarse location information. */
     public static final String OPSTR_COARSE_LOCATION =
@@ -253,6 +255,7 @@ public class AppOpsManager {
             OP_WAKE_LOCK,
             OP_COARSE_LOCATION,
             OP_COARSE_LOCATION,
+            OP_BLUETOOTH_CHANGE,
     };
 
     /**
@@ -447,7 +450,7 @@ public class AppOpsManager {
             OP_NONE,
             OP_NONE,
             OP_NONE,
-            OP_NONE,
+            OP_BLUETOOTH_CHANGE,
             OP_NONE,
             OP_NONE,
             OP_NONE,

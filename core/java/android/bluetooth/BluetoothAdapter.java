@@ -20,6 +20,7 @@ package android.bluetooth;
 
 import android.annotation.SdkConstant;
 import android.annotation.SdkConstant.SdkConstantType;
+import android.app.ActivityThread;
 import android.content.Context;
 import android.os.Binder;
 import android.os.Handler;
@@ -681,7 +682,7 @@ public final class BluetoothAdapter {
             return true;
         }
         try {
-            return mManagerService.enable();
+            return mManagerService.enable(ActivityThread.currentPackageName());
         } catch (RemoteException e) {Log.e(TAG, "", e);}
         return false;
     }
@@ -711,10 +712,7 @@ public final class BluetoothAdapter {
      *         immediate error
      */
     public boolean disable() {
-        try {
-            return mManagerService.disable(true);
-        } catch (RemoteException e) {Log.e(TAG, "", e);}
-        return false;
+        return disable(true);
     }
 
     /**
@@ -730,7 +728,7 @@ public final class BluetoothAdapter {
     public boolean disable(boolean persist) {
 
         try {
-            return mManagerService.disable(persist);
+            return mManagerService.disable(ActivityThread.currentPackageName(), persist);
         } catch (RemoteException e) {Log.e(TAG, "", e);}
         return false;
     }
