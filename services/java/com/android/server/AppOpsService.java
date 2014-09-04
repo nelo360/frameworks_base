@@ -71,6 +71,7 @@ public class AppOpsService extends IAppOpsService.Stub {
     final AtomicFile mFile;
     final Handler mHandler;
 
+
     boolean mWriteScheduled;
     final Runnable mWriteRunner = new Runnable() {
         public void run() {
@@ -1145,6 +1146,7 @@ public class AppOpsService extends IAppOpsService.Stub {
                 }
             }
         }
+
 
         // get privacy guard state
         if (!privacyGuardOps.isEmpty()

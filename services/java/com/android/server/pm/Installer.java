@@ -345,7 +345,12 @@ public final class Installer {
 
     public int idmap(String targetApkPath, String overlayApkPath, String redirectionsPath, int uid,
                      int targetHash, int overlayHash) {
-        StringBuilder builder = new StringBuilder("idmap");
+        StringBuilder builder = new StringBuilder();
+        if (TextUtils.isEmpty(redirectionsPath)) {
+            builder.append("idmap");
+        } else {
+            builder.append("idmap_with_redirs");
+        }
         builder.append(' ');
         builder.append(targetApkPath);
         builder.append(' ');
@@ -356,7 +361,7 @@ public final class Installer {
         builder.append(targetHash);
         builder.append(' ');
         builder.append(overlayHash);
-        if (redirectionsPath != null) {
+        if (!TextUtils.isEmpty(redirectionsPath)) {
             builder.append(' ');
             builder.append(redirectionsPath);
         }
@@ -445,7 +450,7 @@ public final class Installer {
         return execute(builder.toString());
     }
 
-    public int createUserData(String name, int uid, int userId) {
+    public int createUserData(String name, int uid, int userId, String seinfo) {
         StringBuilder builder = new StringBuilder("mkuserdata");
         builder.append(' ');
         builder.append(name);
@@ -453,6 +458,8 @@ public final class Installer {
         builder.append(uid);
         builder.append(' ');
         builder.append(userId);
+        builder.append(' ');
+        builder.append(seinfo != null ? seinfo : "!");
         return execute(builder.toString());
     }
 
@@ -549,5 +556,9 @@ public final class Installer {
         builder.append(userId);
 
         return execute(builder.toString());
+    }
+
+    public boolean restoreconData() {
+        return (execute("restorecondata") == 0);
     }
 }
