@@ -4849,13 +4849,6 @@ public final class Settings {
         public static final String HOVER_LONG_FADE_OUT_DELAY = "hover_long_fade_out_delay";
 
         /**
-         * Recent panel background color
-         *
-         * @hide
-         */
-        public static final String RECENT_PANEL_BG_COLOR = "recent_panel_bg_color";
-
-        /**
          * Show brightness slider in notification panel
          * @hide
          */
