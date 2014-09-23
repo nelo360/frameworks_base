@@ -4854,6 +4854,19 @@ public final class Settings {
          */
         public static final String NOTIFICATION_BRIGHTNESS_SLIDER = "notification_brightness_slider";
 
+        /**
+         * Recent card background color
+         *
+         * @hide
+         */
+        public static final String RECENT_CARD_BG_COLOR = "recent_card_bg_color";
+
+        /**
+         * Recent card text color
+         *
+         * @hide
+         */
+        public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
