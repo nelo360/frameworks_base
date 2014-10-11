@@ -197,6 +197,11 @@ public final class BluetoothSocket implements Closeable {
             throw new IOException("bt socket acept failed");
         }
         as.mSocket = new LocalSocket(fds[0]);
+        try {
+            as.mSocket.closeExternalFd();
+        } catch (IOException e) {
+            Log.e(TAG, "closeExternalFd failed");
+        }
         as.mSocketIS = as.mSocket.getInputStream();
         as.mSocketOS = as.mSocket.getOutputStream();
         as.mAddress = RemoteAddr;
@@ -478,9 +483,15 @@ public final class BluetoothSocket implements Closeable {
     }
 
     /*package*/ int read(byte[] b, int offset, int length) throws IOException {
-
+            int ret = -1;
             if (VDBG) Log.d(TAG, "read in:  " + mSocketIS + " len: " + length);
-            int ret = mSocketIS.read(b, offset, length);
+            if(mSocketIS != null) {
+                try {
+                    ret = mSocketIS.read(b, offset, length);
+                } catch (IOException e) {
+                    Log.e(TAG, "IOException while reading the InputStream");
+                }
+            }
             if(ret < 0)
                 throw new IOException("bt socket closed, read return: " + ret);
             if (VDBG) Log.d(TAG, "read out:  " + mSocketIS + " ret: " + ret);
@@ -518,7 +529,6 @@ public final class BluetoothSocket implements Closeable {
                     mSocket = null;
                 }
                 if(mPfd != null) {
-                    mPfd.detachFd();
                     mPfd.close();
                     mPfd = null;
                 }

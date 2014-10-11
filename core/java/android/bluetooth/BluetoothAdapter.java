@@ -1155,7 +1155,15 @@ public final class BluetoothAdapter {
      */
     public BluetoothServerSocket listenUsingRfcommWithServiceRecord(String name, UUID uuid)
             throws IOException {
-        return createNewRfcommSocketAndRecord(name, uuid, true, true);
+        return createNewRfcommSocketAndRecord(name, -1, uuid, true, true);
+    }
+
+    /**
+     * @hide
+     */
+    public BluetoothServerSocket listenUsingRfcommWithServiceRecordOn(String name, int port, UUID uuid)
+            throws IOException {
+        return createNewRfcommSocketAndRecord(name, port, uuid, true, true);
     }
 
     /**
@@ -1186,7 +1194,7 @@ public final class BluetoothAdapter {
      */
     public BluetoothServerSocket listenUsingInsecureRfcommWithServiceRecord(String name, UUID uuid)
             throws IOException {
-        return createNewRfcommSocketAndRecord(name, uuid, false, false);
+        return createNewRfcommSocketAndRecord(name, -1, uuid, false, false);
     }
 
      /**
@@ -1224,15 +1232,15 @@ public final class BluetoothAdapter {
      */
     public BluetoothServerSocket listenUsingEncryptedRfcommWithServiceRecord(
             String name, UUID uuid) throws IOException {
-        return createNewRfcommSocketAndRecord(name, uuid, false, true);
+        return createNewRfcommSocketAndRecord(name, -1, uuid, false, true);
     }
 
 
-    private BluetoothServerSocket createNewRfcommSocketAndRecord(String name, UUID uuid,
+    private BluetoothServerSocket createNewRfcommSocketAndRecord(String name, int port, UUID uuid,
             boolean auth, boolean encrypt) throws IOException {
         BluetoothServerSocket socket;
         socket = new BluetoothServerSocket(BluetoothSocket.TYPE_RFCOMM, auth,
-                        encrypt, new ParcelUuid(uuid));
+                        encrypt, port, new ParcelUuid(uuid));
         socket.setServiceName(name);
         int errno = socket.mSocket.bindListen();
         if (errno != 0) {
@@ -1386,6 +1394,9 @@ public final class BluetoothAdapter {
         } else if (profile == BluetoothProfile.HANDSFREE_CLIENT) {
             BluetoothHandsfreeClient hfpclient = new BluetoothHandsfreeClient(context, listener);
             return true;
+        } else if (profile == BluetoothProfile.HID_DEVICE) {
+            BluetoothHidDevice hidd = new BluetoothHidDevice(context, listener);
+            return true;
         } else {
             return false;
         }
@@ -1449,6 +1460,10 @@ public final class BluetoothAdapter {
             case BluetoothProfile.HANDSFREE_CLIENT:
                 BluetoothHandsfreeClient hfpclient = (BluetoothHandsfreeClient)proxy;
                 hfpclient.close();
+                break;
+            case BluetoothProfile.HID_DEVICE:
+                BluetoothHidDevice hidd = (BluetoothHidDevice) proxy;
+                hidd.close();
                 break;
         }
     }
@@ -1676,6 +1691,7 @@ public final class BluetoothAdapter {
      * @return true, if the scan was started successfully
      */
     public boolean startLeScan(LeScanCallback callback) {
+        if (getState() != STATE_ON) return false;
         return startLeScan(null, callback);
     }
 
@@ -1737,6 +1753,7 @@ public final class BluetoothAdapter {
      */
     public void stopLeScan(LeScanCallback callback) {
         if (DBG) Log.d(TAG, "stopLeScan()");
+        if (getState() != STATE_ON) return;
         GattCallbackWrapper wrapper;
         synchronized(mLeScanClients) {
             wrapper = mLeScanClients.remove(callback);
