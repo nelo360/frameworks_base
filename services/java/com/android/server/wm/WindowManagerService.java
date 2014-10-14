@@ -11721,13 +11721,4 @@ public class WindowManagerService extends IWindowManager.Stub
             return new Rect(0, 0, (int)(appWidth * 0.9f) , (int)(appHeight * 0.7f));
         }
     }
-
-    private void moveTaskAndActivityToFront(int taskId) {
-        try {
-            moveTaskToTop(taskId);
-            mActivityManager.moveTaskToFront(taskId, 0, null);
-        } catch (RemoteException e) {
-            Log.e(TAG, "Cannot move the activity to front", e);
-        }
-    }
 }
