@@ -904,6 +904,11 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
         setWallpaperItemPaddingToZero(clearImageTile);
         masterWallpaperList.addView(clearImageTile, 0);
 
+        // Populate the built-in wallpapers
+        ArrayList<ResourceWallpaperInfo> wallpapers = findBundledWallpapers();
+        BuiltInWallpapersAdapter ia = new BuiltInWallpapersAdapter(this, wallpapers);
+        populateWallpapersFromAdapter(mWallpapersView, ia, false, true);
+
         // Populate the saved wallpapers
         mSavedImages = new SavedWallpaperImages(this);
         mSavedImages.loadThumbnailsAndImageIdList();
@@ -921,7 +926,7 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
                                                  themeLockWallpaperInfos) {
                 ThemeLockWallpapersAdapter tla = new ThemeLockWallpapersAdapter(
                         LockWallpaperPickerActivity.this, themeLockWallpaperInfos);
-                populateWallpapersFromAdapter(mWallpapersView, tla, false, true);
+                populateWallpapersFromAdapter(mWallpapersView, tla, false, false);
             }
         }.execute((Void) null);
 
@@ -1558,4 +1563,5 @@ public class LockWallpaperPickerActivity extends WallpaperCropActivity {
 
         return view;
     }
+
 }

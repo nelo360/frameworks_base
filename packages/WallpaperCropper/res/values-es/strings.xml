@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="crop_wallpaper">Обрезка изображения</string>
-  <string name="wallpaper_instructions">Установить обои</string>
-  <string name="wallpaper_load_fail">Не удалось загрузить изображение</string>
+  <string name="crop_wallpaper">Recortar fondo de pantalla</string>
+  <string name="wallpaper_instructions">Establecer fondo de pantalla</string>
+  <string name="wallpaper_load_fail">No se puede cargar esta imagen como fondo de pantalla</string>
 </resources>

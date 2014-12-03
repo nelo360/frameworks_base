@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="crop_wallpaper">Обрезка изображения</string>
-  <string name="wallpaper_instructions">Установить обои</string>
-  <string name="wallpaper_load_fail">Не удалось загрузить изображение</string>
+  <string name="crop_wallpaper">배경화면 자르기</string>
+  <string name="wallpaper_instructions">배경화면 설정</string>
+  <string name="wallpaper_load_fail">배경화면 이미지를 불러올 수 없습니다.</string>
 </resources>
