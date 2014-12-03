@@ -502,7 +502,7 @@ public class KeyguardViewManager {
             mWindowLayoutParams = lp;
             mViewManager.addView(mKeyguardHost, lp);
 
-            KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mBackgroundChanger);
+            KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mUpdateMonitorCallback);
             mKeyguardHost.postDelayed(new Runnable() {
                 @Override
                 public void run() {
