@@ -270,6 +270,7 @@ public class QuickSettingsController {
                 mTileStatusUris.add(Settings.Global.getUriFor(Settings.Global.ADB_ENABLED));
                 if (DeviceUtils.adbEnabled(resolver)) {
                     qs = new NetworkAdbTile(mContext, this);
+		}
             } else if (tile.equals(TILE_PROFILE)) {
                 mTileStatusUris.add(Settings.System.getUriFor(Settings.System.SYSTEM_PROFILES_ENABLED));
                 if (QSUtils.systemProfilesEnabled(resolver)) {
