@@ -659,19 +659,15 @@ public class PackageParser {
 
         try {
             final ZipFile privateZip = new ZipFile(originalFile.getPath());
-            try {
-                final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
-                while (privateZipEntries.hasMoreElements()) {
-                    final ZipEntry zipEntry = privateZipEntries.nextElement();
-                    final String zipEntryName = zipEntry.getName();
+            final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
+            while (privateZipEntries.hasMoreElements()) {
+                final ZipEntry zipEntry = privateZipEntries.nextElement();
+                final String zipEntryName = zipEntry.getName();
 
-                    if (zipEntryName.startsWith(OVERLAY_PATH) && zipEntryName.length() > 16) {
-                        String[] subdirs = zipEntryName.split("/");
-                        overlayTargets.add(subdirs[2]);
-                    }
+                if (zipEntryName.startsWith(OVERLAY_PATH) && zipEntryName.length() > 16) {
+                    String[] subdirs = zipEntryName.split("/");
+                    overlayTargets.add(subdirs[2]);
                 }
-            } finally {
-                privateZip.close();
             }
         } catch(Exception e) {
             e.printStackTrace();
@@ -686,19 +682,14 @@ public class PackageParser {
     private boolean packageHasIconPack(File originalFile) {
         try {
             final ZipFile privateZip = new ZipFile(originalFile.getPath());
-            try {
-                final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
-                while (privateZipEntries.hasMoreElements()) {
-                    final ZipEntry zipEntry = privateZipEntries.nextElement();
-                    final String zipEntryName = zipEntry.getName();
+            final Enumeration<? extends ZipEntry> privateZipEntries = privateZip.entries();
+            while (privateZipEntries.hasMoreElements()) {
+                final ZipEntry zipEntry = privateZipEntries.nextElement();
+                final String zipEntryName = zipEntry.getName();
 
-                    if (zipEntryName.startsWith(ICON_PATH)
-                            && zipEntryName.length() > ICON_PATH.length()) {
-                        return true;
-                    }
+                if (zipEntryName.startsWith(ICON_PATH) && zipEntryName.length() > ICON_PATH.length()) {
+                    return true;
                 }
-            } finally {
-                privateZip.close();
             }
         } catch(Exception e) {
             Log.e(TAG, "Could not read zip entries while checking if apk has icon pack", e);
@@ -807,6 +798,7 @@ public class PackageParser {
      * @return True if the asset was successfully processed
      */
     private Map<String, String> getResourceRedirections(String name, String pkg, Resources themeResources, String themePkgName) {
+        AssetManager am = themeResources.getAssets();
         if (!name.startsWith("res/"))
             name = "res/" + name;
         if (!name.endsWith(".xml"))
@@ -947,7 +939,7 @@ public class PackageParser {
         }
 
         try {
-            JarFile jarFile = new JarFile(mArchiveSourcePath, true, true);
+            JarFile jarFile = new JarFile(mArchiveSourcePath);
 
             Certificate[] certs = null;
 
