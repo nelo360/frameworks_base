@@ -57,12 +57,9 @@ import static com.android.internal.util.slim.QSConstants.TILE_WIFIAP;
 import static com.android.internal.util.slim.QSConstants.TILE_REBOOT;
 import static com.android.internal.util.slim.QSConstants.TILE_REMOTEDISPLAY;
 import static com.android.internal.util.slim.QSConstants.TILE_PROFILE;
-<<<<<<< HEAD
 import static com.android.internal.util.slim.QSConstants.TILE_WEATHER;
 import static com.android.internal.util.slim.QSConstants.TILE_BATTERYSAVER;
-=======
 import static com.android.internal.util.slim.QSConstants.TILE_COMPASS;
->>>>>>> 07236b9... framework: Add compass tile (1/2)
 
 import android.app.Activity;
 import android.app.ActivityManagerNative;
