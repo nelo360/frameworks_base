@@ -394,7 +394,7 @@ public class Peek implements SensorActivityHandler.SensorChangedCallback {
                 }
 
                 mWakeLockHandler.removeCallbacks(mPartialWakeLockRunnable);
-                mPeekPickupTimeout = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                mPeekPickupTimeout = Settings.System.getIntForUser(mContext.getContentResolver(),
                         Settings.System.PEEK_PICKUP_TIMEOUT, 10000, UserHandle.USER_CURRENT);
                 mWakeLockHandler.postDelayed(mPartialWakeLockRunnable, mPeekPickupTimeout);
 
@@ -502,6 +502,21 @@ public class Peek implements SensorActivityHandler.SensorChangedCallback {
                 dismissNotification();
             }
         }
+
+      class SettingsObserver extends ContentObserver {
+          SettingsObserver(Handler handler) {
+              super(handler);
+          }
+
+          void observe() {
+              ContentResolver resolver = mContext.getContentResolver();
+              resolver.registerContentObserver(Settings.Secure.getUriFor(
+                      Settings.System.PEEK_PICKUP_TIMEOUT), false, this,
+                      UserHandle.USER_ALL);
+          }
+
+          @Override public void onChange(boolean selfChange) {}
+      }
     }
 
     private void updateSelection(StatusBarNotification n) {
