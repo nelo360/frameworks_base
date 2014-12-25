@@ -62,8 +62,8 @@
     <string name="weather_30">Parc. Nublado</string> <!-- Day -->
     <string name="weather_31">Despejado</string> <!-- Night -->
     <string name="weather_32">Soleado</string>
-    <string name="weather_33">Fair</string> <!-- Night -->
-    <string name="weather_34">Fair</string> <!-- Day -->
+    <string name="weather_33">Claro</string> <!-- Night -->
+    <string name="weather_34">Claro</string> <!-- Day -->
     <string name="weather_35">Lluvia y granizo</string>
     <string name="weather_36">Caluroso</string>
     <string name="weather_37">Torm. eléctricas</string>
