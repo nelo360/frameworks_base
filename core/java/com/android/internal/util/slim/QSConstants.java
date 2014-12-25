@@ -79,7 +79,7 @@ public class QSConstants {
             TILES_DEFAULT.add(TILE_BLUETOOTH);
             TILES_DEFAULT.add(TILE_LOCATION);
 	    TILES_DEFAULT.add(TILE_TORCH);
-	    TILES_DEFAULT.add(NETWORKMODE);
+	    TILES_DEFAULT.add(TILE_NETWORKMODE);
 	    TILES_DEFAULT.add(TILE_RINGER);
         }
 
